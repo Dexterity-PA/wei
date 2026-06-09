@@ -42,3 +42,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Local browser-verification scratch (curated shots live in .pr-assets/)
+.playwright-mcp/
+/hero-*.png
+/about-hero-*.png
+/contact-hero-*.png
