@@ -13,7 +13,10 @@ export function Hero() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_50%_at_12%_-5%,color-mix(in_srgb,var(--color-wei-emerald)_9%,transparent),transparent_68%)]"
       />
-      <Container className="py-wei-section-lg">
+      {/* Hero keeps its own tighter vertical rhythm (not the shared section-lg)
+          so the full split — headline + subcopy + CTAs alongside the chart —
+          fits within one desktop viewport down to 800px tall. */}
+      <Container className="pt-[clamp(2.25rem,1.5rem+1.8vw,2.75rem)] pb-wei-section">
         <div className="grid items-center gap-x-wei-gutter gap-y-14 lg:grid-cols-12">
           {/* Left-weighted headline column */}
           <div className="lg:col-span-6">
@@ -37,7 +40,7 @@ export function Hero() {
               </span>
             </Reveal>
 
-            <Reveal delay={0.18} className="mt-9 flex flex-wrap items-center gap-4">
+            <Reveal delay={0.18} className="mt-8 flex flex-wrap items-center gap-4">
               <CtaLink href="/tools">Explore the toolkit</CtaLink>
               <CtaLink href="/about" variant="secondary">
                 Why we exist

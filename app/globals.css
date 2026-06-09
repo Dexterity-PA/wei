@@ -65,8 +65,10 @@
   --text-wei-display: clamp(2.5rem, 1.75rem + 3.1vw, 4.25rem);
   --text-wei-display--line-height: 1;
   --text-wei-display--letter-spacing: -0.028em;
-  /* Hero display: large and tight */
-  --text-wei-hero: clamp(3.25rem, 1rem + 8.4vw, 6.5rem);
+  /* Hero display: large and tight. Capped so the full home headline fits one
+     viewport at desktop (1280-1536) without clipping; mobile floor unchanged.
+     Used only by the home Hero — inner-page heros use --text-wei-display/3xl. */
+  --text-wei-hero: clamp(3.25rem, 0.9rem + 5.4vw, 4.5rem);
   --text-wei-hero--line-height: 0.94;
   --text-wei-hero--letter-spacing: -0.038em;
   /* Mono label/eyebrow size */
