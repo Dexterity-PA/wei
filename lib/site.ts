@@ -118,6 +118,7 @@ const pages = {
 export const nav: NavLink[] = [
   pages.home,
   pages.about,
+  pages.impact,
   pages.tools,
   pages.learn,
   pages.glossary,
