@@ -28,10 +28,10 @@ export type Stat = {
  */
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://wealthequityinitiative.org";
+  "https://wealthequityinitiative.com";
 
 /** Placeholder contact address. Replace when the org mailbox is live. */
-export const contactEmail = "hello@wealthequityinitiative.org";
+export const contactEmail = "hello@wealthequityinitiative.com";
 
 export const nav: NavLink[] = [
   { label: "Home", href: "/", description: "Wealth Equity Initiative" },
