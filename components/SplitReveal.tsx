@@ -10,6 +10,7 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "@/lib/animation/motion";
+import { prefersReducedMotion } from "@/lib/animation/reduced-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -69,7 +70,7 @@ export function SplitReveal({
     if (!el) return;
 
     // Reduced motion: leave the server-rendered heading exactly as it is.
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion()) return;
 
     const originalHTML = el.innerHTML;
     // Hide before paint so the full heading never flashes before the split.
@@ -85,7 +86,12 @@ export function SplitReveal({
       gsap.set(node, { clearProps: "opacity,visibility" });
     };
 
+    // Guard so the font gate below can only ever start the reveal once, even
+    // when the timeout and document.fonts.ready resolve in the same tick.
+    let started = false;
     const run = () => {
+      if (started) return;
+      started = true;
       const node = ref.current;
       if (cancelled || !node) return;
 
@@ -155,9 +161,17 @@ export function SplitReveal({
 
     // Measuring before the display webfont swaps in would group lines by the
     // fallback metrics. Wait for fonts when we can; the heading is already
-    // hidden, so the brief wait costs no visible flash.
+    // hidden, so the brief wait costs no visible flash. But if font loading
+    // stalls, document.fonts.ready may never resolve and the heading would be
+    // left hidden forever, so race the wait against a short timeout. Whichever
+    // wins, run() fires (and its run-once guard ignores the loser). mount mode
+    // still reveals immediately after this gate, never via a scroll trigger.
     if (typeof document !== "undefined" && document.fonts?.ready) {
-      document.fonts.ready.then(run);
+      const FONT_TIMEOUT_MS = 1000;
+      const timeout = new Promise<void>((resolve) => {
+        window.setTimeout(resolve, FONT_TIMEOUT_MS);
+      });
+      Promise.race([document.fonts.ready, timeout]).then(run);
     } else {
       run();
     }
