@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
-import type { ReactNode } from "react";
+import { useEffect, useRef, type PointerEvent, type ReactNode } from "react";
+import gsap from "gsap";
 
 type Variant = "primary" | "secondary";
 type Tone = "light" | "dark";
@@ -31,6 +34,10 @@ const styles: Record<Tone, Record<Variant, string>> = {
   },
 };
 
+// How far the button leans toward the pointer, and the hard cap on that lean.
+const MAGNET_STRENGTH = 0.25;
+const MAGNET_CAP = 6;
+
 export function CtaLink({
   href,
   children,
@@ -40,9 +47,57 @@ export function CtaLink({
   className = "",
 }: CtaLinkProps) {
   const showArrow = arrow ?? variant === "primary";
+  const ref = useRef<HTMLAnchorElement | null>(null);
+  const xTo = useRef<((value: number) => void) | null>(null);
+  const yTo = useRef<((value: number) => void) | null>(null);
+
+  // The magnetic pull is reserved for the primary CTA and only on fine pointers
+  // with motion allowed. quickTo gives a smooth, interruptible follow with no
+  // per-event tween churn. Everything degrades to a plain link otherwise.
+  const magnetic = variant === "primary";
+  useEffect(() => {
+    if (!magnetic) return;
+    const el = ref.current;
+    if (!el) return;
+    if (!window.matchMedia("(pointer: fine)").matches) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      xTo.current = gsap.quickTo(el, "x", { duration: 0.4, ease: "power3.out" });
+      yTo.current = gsap.quickTo(el, "y", { duration: 0.4, ease: "power3.out" });
+    }, el);
+
+    return () => {
+      ctx.revert();
+      xTo.current = null;
+      yTo.current = null;
+    };
+  }, [magnetic]);
+
+  const onMove = (event: PointerEvent<HTMLAnchorElement>) => {
+    const el = ref.current;
+    if (!el || !xTo.current || !yTo.current) return;
+    const rect = el.getBoundingClientRect();
+    const relX = event.clientX - (rect.left + rect.width / 2);
+    const relY = event.clientY - (rect.top + rect.height / 2);
+    const clamp = (n: number) => Math.max(-MAGNET_CAP, Math.min(MAGNET_CAP, n));
+    xTo.current(clamp(relX * MAGNET_STRENGTH));
+    yTo.current(clamp(relY * MAGNET_STRENGTH));
+  };
+
+  const onLeave = () => {
+    xTo.current?.(0);
+    yTo.current?.(0);
+  };
 
   return (
-    <Link href={href} className={`${base} ${styles[tone][variant]} ${className}`}>
+    <Link
+      ref={ref}
+      href={href}
+      onPointerMove={magnetic ? onMove : undefined}
+      onPointerLeave={magnetic ? onLeave : undefined}
+      className={`${base} ${styles[tone][variant]} ${className}`}
+    >
       {children}
       {showArrow ? (
         <span

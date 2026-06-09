@@ -36,7 +36,7 @@ export function Reveal({
   children,
   trigger = "mount",
   delay = 0,
-  y = 24,
+  y = 12,
   once = true,
   className,
   as = "div",

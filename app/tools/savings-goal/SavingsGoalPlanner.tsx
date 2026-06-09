@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useMemo, useState } from "react";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 /*
   Savings goal planner.
@@ -293,6 +294,8 @@ export function SavingsGoalPlanner() {
               <Result
                 label="Monthly needed"
                 value={usdCents(solvedMonthly)}
+                animatedValue={solvedMonthly}
+                format={usdCents}
                 note={`Save this each month for ${months} ${
                   months === 1 ? "month" : "months"
                 }${useGrowth ? ` at ${rate}% a year` : ""} to reach ${usd(
@@ -336,6 +339,8 @@ export function SavingsGoalPlanner() {
               <MiniStat
                 label="Still to go"
                 value={usd(need)}
+                animatedValue={need}
+                format={usd}
                 accent={need > 0}
               />
             </div>
@@ -353,11 +358,16 @@ export function SavingsGoalPlanner() {
 function Result({
   label,
   value,
+  animatedValue,
+  format,
   note,
   tone = "default",
 }: {
   label: string;
   value: string;
+  /** When set (with `format`), the headline figure settles to this number. */
+  animatedValue?: number;
+  format?: (n: number) => string;
   note: string;
   tone?: "default" | "warn" | "good";
 }) {
@@ -370,11 +380,20 @@ function Result({
   return (
     <div>
       <span className="wei-eyebrow block text-wei-ink/50">{label}</span>
-      <p
-        className={`wei-num mt-2 text-wei-3xl font-medium ${valueColor}`}
-      >
-        {value}
-      </p>
+      {animatedValue !== undefined && format ? (
+        <AnimatedNumber
+          as="p"
+          value={animatedValue}
+          format={format}
+          className={`wei-num mt-2 text-wei-3xl font-medium ${valueColor}`}
+        />
+      ) : (
+        <p
+          className={`wei-num mt-2 text-wei-3xl font-medium ${valueColor}`}
+        >
+          {value}
+        </p>
+      )}
       <p className="mt-3 max-w-md text-wei-sm text-wei-ink/65">{note}</p>
     </div>
   );
@@ -383,22 +402,37 @@ function Result({
 function MiniStat({
   label,
   value,
+  animatedValue,
+  format,
   accent = false,
 }: {
   label: string;
   value: string;
+  /** When set (with `format`), the figure settles to this number. */
+  animatedValue?: number;
+  format?: (n: number) => string;
   accent?: boolean;
 }) {
   return (
     <div className="bg-wei-paper px-3 py-3">
       <span className="wei-eyebrow block text-wei-ink/45">{label}</span>
-      <span
-        className={`wei-num mt-1.5 block text-wei-lg font-medium ${
-          accent ? "text-wei-emerald-deep" : "text-wei-ink"
-        }`}
-      >
-        {value}
-      </span>
+      {animatedValue !== undefined && format ? (
+        <AnimatedNumber
+          value={animatedValue}
+          format={format}
+          className={`wei-num mt-1.5 block text-wei-lg font-medium ${
+            accent ? "text-wei-emerald-deep" : "text-wei-ink"
+          }`}
+        />
+      ) : (
+        <span
+          className={`wei-num mt-1.5 block text-wei-lg font-medium ${
+            accent ? "text-wei-emerald-deep" : "text-wei-ink"
+          }`}
+        >
+          {value}
+        </span>
+      )}
     </div>
   );
 }

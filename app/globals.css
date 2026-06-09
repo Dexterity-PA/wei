@@ -112,6 +112,10 @@
   --duration-wei-base: 600ms;
   --duration-wei-slow: 900ms;
 
+  /* Sequenced-entrance cadence, mirrored in lib/animation/motion.ts (stagger). */
+  --stagger-wei-line: 60ms;
+  --stagger-wei-item: 80ms;
+
   --z-wei-base: 0;
   --z-wei-raised: 10;
   --z-wei-sticky: 30;
@@ -194,6 +198,24 @@
   }
 
   /*
+    Underline-draw link. A 1px rule grows from the leading edge on hover/focus
+    using background-size (paint only, no layout shift, no reflow). currentColor
+    keeps it tied to the text colour. Reduced motion collapses the transition
+    duration globally below, so it simply appears.
+  */
+  .wei-link {
+    background-image: linear-gradient(currentColor, currentColor);
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    background-size: 0% 1px;
+    transition: background-size var(--duration-wei-fast) var(--ease-wei-out);
+  }
+  .wei-link:hover,
+  .wei-link:focus-visible {
+    background-size: 100% 1px;
+  }
+
+  /*
     Hairline-bordered grid. Children sit in a bordered grid sharing edges
     instead of floating with soft shadows. The wrapper paints its own top and
     left hairline; each cell paints its right and bottom, so internal rules
@@ -214,6 +236,30 @@
   .wei-hairgrid-ink > * {
     border-color: var(--color-wei-line-ink);
   }
+}
+
+/*
+  Route entrance. app/template.tsx remounts on every navigation, so this brief
+  fade-and-rise plays as each page composes in. Lenis lives in the layout above
+  the template, so it is untouched by the remount. CSS-only, so it is SSR-safe;
+  transform/opacity only, so no layout shift. Reduced motion collapses the
+  duration below, leaving content visible immediately.
+*/
+@keyframes wei-route-enter {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.wei-route-enter {
+  /* `backwards` applies the from-state before the first frame (no flash) but
+     leaves no transform behind once finished, so the wrapper never becomes a
+     containing block for any fixed/sticky descendants. */
+  animation: wei-route-enter var(--duration-wei-base) var(--ease-wei-out) backwards;
 }
 
 @media (prefers-reduced-motion: reduce) {

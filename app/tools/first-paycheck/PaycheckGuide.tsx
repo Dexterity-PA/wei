@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useMemo, useState } from "react";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 /*
   A light, step-based walkthrough for a first paycheck. The core is the guided
@@ -400,19 +401,19 @@ function SplitAllocator() {
             swatch="bg-wei-ink"
             label="Spend"
             pct={spendPct}
-            amount={usd(amounts.spend)}
+            amount={amounts.spend}
           />
           <SplitCell
             swatch="bg-wei-emerald"
             label="Save"
             pct={savePct}
-            amount={usd(amounts.save)}
+            amount={amounts.save}
           />
           <SplitCell
             swatch="bg-wei-amber"
             label="Give"
             pct={givePct}
-            amount={usd(amounts.give)}
+            amount={amounts.give}
           />
         </div>
 
@@ -446,7 +447,7 @@ function SplitCell({
   swatch: string;
   label: string;
   pct: number;
-  amount: string;
+  amount: number;
 }) {
   return (
     <div className="px-4 py-3">
@@ -454,9 +455,12 @@ function SplitCell({
         <span aria-hidden className={`h-2.5 w-2.5 rounded-wei-sm ${swatch}`} />
         <span className="wei-eyebrow text-wei-ink/50">{label}</span>
       </span>
-      <p className="wei-num mt-2 text-wei-lg font-medium text-wei-ink">
-        {amount}
-      </p>
+      <AnimatedNumber
+        value={amount}
+        format={usd}
+        as="p"
+        className="wei-num mt-2 text-wei-lg font-medium text-wei-ink"
+      />
       <span className="wei-eyebrow mt-1 block text-wei-ink/40">{pct}%</span>
     </div>
   );

@@ -8,6 +8,7 @@ import {
   type StrategyResult,
 } from "./amortize";
 import { PayoffChart } from "./PayoffChart";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 type DebtRow = {
   id: string;
@@ -285,9 +286,11 @@ export function DebtPayoffTool() {
                   {avalancheCheaper ? "avalanche" : "snowball"}
                 </span>{" "}
                 method pays about{" "}
-                <span className="wei-num font-semibold text-wei-emerald-deep">
-                  {usd0.format(interestSaved)}
-                </span>{" "}
+                <AnimatedNumber
+                  value={interestSaved}
+                  format={(n) => usd0.format(n)}
+                  className="wei-num font-semibold text-wei-emerald-deep"
+                />{" "}
                 less in interest. The snowball method may still suit you if
                 clearing a whole debt sooner helps you keep going.
               </p>
@@ -355,10 +358,15 @@ function StrategyCard({
         <Stat label="Time to debt-free" value={monthsToText(result.months)} />
         <Stat
           label="Total interest"
-          value={usd0.format(result.totalInterest)}
+          animatedValue={result.totalInterest}
+          format={(n) => usd0.format(n)}
           accentClass={accentText}
         />
-        <Stat label="Total paid" value={usd0.format(result.totalPaid)} />
+        <Stat
+          label="Total paid"
+          animatedValue={result.totalPaid}
+          format={(n) => usd0.format(n)}
+        />
         <Stat
           label="Debts cleared"
           value={`${result.order.length}`}
@@ -393,18 +401,29 @@ function StrategyCard({
 function Stat({
   label,
   value,
+  animatedValue,
+  format,
   accentClass = "text-wei-ink",
 }: {
   label: string;
-  value: string;
+  value?: string;
+  animatedValue?: number;
+  format?: (n: number) => string;
   accentClass?: string;
 }) {
+  const spanClass = `wei-num mt-1.5 block text-wei-lg font-medium ${accentClass}`;
+  if (animatedValue !== undefined && format) {
+    return (
+      <div className="px-5 py-4">
+        <span className="wei-eyebrow block text-wei-ink/45">{label}</span>
+        <AnimatedNumber value={animatedValue} format={format} className={spanClass} />
+      </div>
+    );
+  }
   return (
     <div className="px-5 py-4">
       <span className="wei-eyebrow block text-wei-ink/45">{label}</span>
-      <span className={`wei-num mt-1.5 block text-wei-lg font-medium ${accentClass}`}>
-        {value}
-      </span>
+      <span className={spanClass}>{value}</span>
     </div>
   );
 }

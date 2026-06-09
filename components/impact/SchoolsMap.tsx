@@ -1,6 +1,9 @@
 "use client";
 
-import { useId } from "react";
+import { useEffect, useId, useLayoutEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { motion } from "@/lib/animation/motion";
 import { schools } from "./schools";
 import {
   MAIN_VIEW,
@@ -12,6 +15,13 @@ import {
   clusterBox,
   geoPins,
 } from "./india-geo";
+
+gsap.registerPlugin(ScrollTrigger);
+
+// useLayoutEffect on the client so pins are hidden before paint (no flash of
+// the fully-resolved map); useEffect on the server to avoid the SSR warning.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 /**
  * The supporting map for the Impact section. It is decorative: the schools list
@@ -26,8 +36,12 @@ import {
  *     leader to an evenly spaced index marker on the left or right rail. No two
  *     markers can overlap, and the indices cross-reference the numbered list.
  *
- * Nothing depends on motion: everything renders in place and only the selected
- * state changes color and weight, so it reads correctly under reduced motion.
+ * Showpiece motion: as the map scrolls into view the pins resolve in sequence
+ * grouped by region (a quiet scale-and-fade, leaders fading with their dots),
+ * which reads as the work landing region by region. Tied to scroll position via
+ * ScrollTrigger so it reverses cleanly when scrolled back past. Nothing depends
+ * on motion: everything renders in place under reduced motion and no JS, and
+ * only the selected state changes color and weight.
  */
 
 type SchoolPin = (typeof geoPins)[number] & {
@@ -81,6 +95,15 @@ function layoutChips(): Chip[] {
 const chips = layoutChips();
 const pad2 = (n: number) => String(n).padStart(2, "0");
 
+// Region groups in first-appearance order; a pin's group index sets how late in
+// the entrance it resolves, so the map fills one region at a time.
+const regionOrder = (() => {
+  const seen: string[] = [];
+  for (const s of schools) if (!seen.includes(s.region)) seen.push(s.region);
+  return seen;
+})();
+const regionIndex = (region: string) => Math.max(0, regionOrder.indexOf(region));
+
 type MapProps = {
   selected: number | null;
   onSelect: (n: number | null) => void;
@@ -88,10 +111,47 @@ type MapProps = {
 
 export function SchoolsMap({ selected, onSelect }: MapProps) {
   const uid = useId();
+  const rootRef = useRef<HTMLElement | null>(null);
   const active = pins.find((p) => p.n === selected) ?? null;
 
+  useIsomorphicLayoutEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const groups = gsap.utils.toArray<SVGGElement>("g[data-pin]", root);
+    const leaders = gsap.utils.toArray<SVGLineElement>("line[data-pin]", root);
+    if (!groups.length) return;
+
+    const byRegion = (_i: number, el: Element) =>
+      Number((el as HTMLElement).dataset.region ?? 0) * 0.18;
+
+    const ctx = gsap.context(() => {
+      // Hidden before paint; dots scale up around their own centre, leaders just
+      // fade. No clearProps, so a scroll-back reverses the whole sequence.
+      gsap.set(groups, { opacity: 0, scale: 0.85, transformOrigin: "center" });
+      gsap.set(leaders, { opacity: 0 });
+      const tl = gsap.timeline({
+        defaults: { duration: motion.duration.base, ease: motion.gsapEase.emphasis },
+        scrollTrigger: {
+          trigger: root,
+          start: "top 80%",
+          toggleActions: "play none none reverse",
+        },
+      });
+      tl.to(groups, { opacity: 1, scale: 1, stagger: byRegion }, 0);
+      tl.to(leaders, { opacity: 1, stagger: byRegion }, 0.1);
+    }, root);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
-    <figure className="m-0 border border-wei-line bg-wei-paper" aria-hidden="true">
+    <figure
+      ref={rootRef}
+      className="m-0 border border-wei-line bg-wei-paper"
+      aria-hidden="true"
+    >
       {/* Readout header, echoing the instrument panels used elsewhere on the site. */}
       <div className="flex items-stretch justify-between border-b border-wei-line">
         <div className="px-4 py-3">
@@ -154,14 +214,16 @@ export function SchoolsMap({ selected, onSelect }: MapProps) {
             </text>
 
             {/* Lone southern pin (Nagercoil) */}
-            <Pin
-              x={southPin.mainX}
-              y={southPin.mainY}
-              active={selected === southPin.n}
-              dim={selected !== null && selected !== southPin.n}
-              r={4.5}
-              onClick={() => onSelect(selected === southPin.n ? null : southPin.n)}
-            />
+            <g data-pin="" data-region={regionIndex(southPin.region)}>
+              <Pin
+                x={southPin.mainX}
+                y={southPin.mainY}
+                active={selected === southPin.n}
+                dim={selected !== null && selected !== southPin.n}
+                r={4.5}
+                onClick={() => onSelect(selected === southPin.n ? null : southPin.n)}
+              />
+            </g>
             {selected === southPin.n ? (
               <g>
                 <line
@@ -221,6 +283,8 @@ export function SchoolsMap({ selected, onSelect }: MapProps) {
               return (
                 <line
                   key={`l-${c.n}`}
+                  data-pin=""
+                  data-region={regionIndex(c.region)}
                   x1={c.insetX!}
                   y1={c.insetY!}
                   x2={anchorX}
@@ -237,6 +301,8 @@ export function SchoolsMap({ selected, onSelect }: MapProps) {
               return (
                 <g
                   key={`p-${c.n}`}
+                  data-pin=""
+                  data-region={regionIndex(c.region)}
                   className="cursor-pointer"
                   onClick={() => onSelect(isActive ? null : c.n)}
                 >

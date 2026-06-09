@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useMemo, useState } from "react";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 import { computeNetPrice, repaymentShape } from "./netprice";
 import { StickerGapChart } from "./StickerGapChart";
 
@@ -106,24 +107,46 @@ export function NetPriceTool() {
             <span className="wei-eyebrow text-wei-paper/60">
               Net price (what you actually pay this year)
             </span>
-            <p className="wei-num mt-3 text-wei-3xl font-semibold text-wei-paper">
-              {usd0.format(result.netPrice)}
-            </p>
+            <AnimatedNumber
+              value={result.netPrice}
+              format={(n) => usd0.format(n)}
+              as="p"
+              className="wei-num mt-3 text-wei-3xl font-semibold text-wei-paper"
+            />
             <p className="mt-2 text-wei-sm text-wei-paper/70">
               The sticker price is{" "}
-              <span className="wei-num">{usd0.format(result.sticker)}</span>.
-              Grants and scholarships of{" "}
-              <span className="wei-num">{usd0.format(result.giftAid)}</span> come
-              off the top, about{" "}
-              <span className="wei-num">{Math.round(result.discountPercent)}%</span>{" "}
+              <AnimatedNumber
+                value={result.sticker}
+                format={(n) => usd0.format(n)}
+                className="wei-num"
+              />
+              . Grants and scholarships of{" "}
+              <AnimatedNumber
+                value={result.giftAid}
+                format={(n) => usd0.format(n)}
+                className="wei-num"
+              />{" "}
+              come off the top, about{" "}
+              <span className="wei-num">
+                <AnimatedNumber
+                  value={result.discountPercent}
+                  format={(n) => String(Math.round(n))}
+                />
+                %
+              </span>{" "}
               of the sticker. The sticker price is not the real price.
             </p>
 
             <div className="wei-hairgrid wei-hairgrid-ink mt-6 grid grid-cols-2">
-              <DarkStat label="Sticker price" value={usd0.format(result.sticker)} />
+              <DarkStat
+                label="Sticker price"
+                value={result.sticker}
+                format={(n) => usd0.format(n)}
+              />
               <DarkStat
                 label="Net price"
-                value={usd0.format(result.netPrice)}
+                value={result.netPrice}
+                format={(n) => usd0.format(n)}
                 accent
               />
             </div>
@@ -150,18 +173,22 @@ export function NetPriceTool() {
           {result.remainingGap > 0 ? (
             <p>
               After gift aid, family contribution, and loans, about{" "}
-              <span className="wei-num font-semibold">
-                {usd0.format(result.remainingGap)}
-              </span>{" "}
+              <AnimatedNumber
+                value={result.remainingGap}
+                format={(n) => usd0.format(n)}
+                className="wei-num font-semibold"
+              />{" "}
               of this year is still unpaid. That gap usually has to be closed with
               more aid, more savings, or more borrowing.
             </p>
           ) : (
             <p>
               Your family contribution and loans add up to about{" "}
-              <span className="wei-num font-semibold">
-                {usd0.format(-result.remainingGap)}
-              </span>{" "}
+              <AnimatedNumber
+                value={-result.remainingGap}
+                format={(n) => usd0.format(n)}
+                className="wei-num font-semibold"
+              />{" "}
               more than the net price for this year. You may not need to borrow or
               pay that much.
             </p>
@@ -183,23 +210,37 @@ export function NetPriceTool() {
         {result.loans > 0 ? (
           <>
             <div className="wei-hairgrid grid grid-cols-2 sm:grid-cols-4">
-              <Stat label="Amount borrowed" value={usd0.format(repay.principal)} />
+              <Stat
+                label="Amount borrowed"
+                value={repay.principal}
+                format={(n) => usd0.format(n)}
+              />
               <Stat
                 label="Monthly payment"
-                value={usd.format(repay.monthlyPayment)}
+                value={repay.monthlyPayment}
+                format={(n) => usd.format(n)}
                 accentClass="text-wei-emerald-deep"
               />
-              <Stat label="Total repaid" value={usd0.format(repay.totalPaid)} />
+              <Stat
+                label="Total repaid"
+                value={repay.totalPaid}
+                format={(n) => usd0.format(n)}
+              />
               <Stat
                 label="Interest paid"
-                value={usd0.format(repay.totalInterest)}
+                value={repay.totalInterest}
+                format={(n) => usd0.format(n)}
                 accentClass="text-wei-amber"
               />
             </div>
             <p className="px-4 py-4 text-wei-sm text-wei-ink/70">
               This is the shape for borrowing{" "}
-              <span className="wei-num">{usd0.format(repay.principal)}</span> for
-              one year of school and repaying it over {REPAY_YEARS} years at a
+              <AnimatedNumber
+                value={repay.principal}
+                format={(n) => usd0.format(n)}
+                className="wei-num"
+              />{" "}
+              for one year of school and repaying it over {REPAY_YEARS} years at a
               fixed {REPAY_RATE_PERCENT}% rate. Borrowing the same each year for a
               full degree would multiply these numbers. Real student loan rates and
               terms vary; this is a rough illustration.
@@ -262,22 +303,24 @@ function Field({
 function DarkStat({
   label,
   value,
+  format,
   accent = false,
 }: {
   label: string;
-  value: string;
+  value: number;
+  format: (n: number) => string;
   accent?: boolean;
 }) {
   return (
     <div className="px-5 py-4">
       <span className="wei-eyebrow block text-wei-paper/55">{label}</span>
-      <span
+      <AnimatedNumber
+        value={value}
+        format={format}
         className={`wei-num mt-1.5 block text-wei-lg font-medium ${
           accent ? "text-wei-emerald" : "text-wei-paper"
         }`}
-      >
-        {value}
-      </span>
+      />
     </div>
   );
 }
@@ -285,18 +328,22 @@ function DarkStat({
 function Stat({
   label,
   value,
+  format,
   accentClass = "text-wei-ink",
 }: {
   label: string;
-  value: string;
+  value: number;
+  format: (n: number) => string;
   accentClass?: string;
 }) {
   return (
     <div className="px-5 py-4">
       <span className="wei-eyebrow block text-wei-ink/45">{label}</span>
-      <span className={`wei-num mt-1.5 block text-wei-lg font-medium ${accentClass}`}>
-        {value}
-      </span>
+      <AnimatedNumber
+        value={value}
+        format={format}
+        className={`wei-num mt-1.5 block text-wei-lg font-medium ${accentClass}`}
+      />
     </div>
   );
 }

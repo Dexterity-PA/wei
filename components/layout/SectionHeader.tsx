@@ -1,5 +1,8 @@
 import type { ElementType, ReactNode } from "react";
 import { Eyebrow } from "./Eyebrow";
+import { Reveal } from "@/components/Reveal";
+import { SplitReveal } from "@/components/SplitReveal";
+import { motion } from "@/lib/animation/motion";
 
 type Tone = "default" | "ink";
 
@@ -8,6 +11,11 @@ type Tone = "default" | "ink";
  * the mono index + eyebrow in the margin, a wider right column holds the
  * heading and optional intro. This is the repeating structural motif that makes
  * the site read as a designed document rather than stacked centered blocks.
+ *
+ * Entrance choreography lives here so it is consistent everywhere the header is
+ * used: the eyebrow settles first, the heading rises a beat later under the
+ * shared per-line mask treatment, then the intro. A string title gets the
+ * line-rise; a non-string title falls back to a single quiet reveal.
  */
 export function SectionHeader({
   index,
@@ -34,16 +42,34 @@ export function SectionHeader({
   return (
     <div className={`grid gap-x-wei-gutter gap-y-6 md:grid-cols-12 ${className}`}>
       <div className="md:col-span-4 lg:col-span-3">
-        <Eyebrow index={index} tone={tone}>
-          {eyebrow}
-        </Eyebrow>
+        <Reveal trigger="scroll">
+          <Eyebrow index={index} tone={tone}>
+            {eyebrow}
+          </Eyebrow>
+        </Reveal>
       </div>
       <div className="md:col-span-8 md:max-w-3xl">
-        <Heading id={headingId} className={`text-wei-display ${titleColor}`}>
-          {title}
-        </Heading>
+        {typeof title === "string" ? (
+          <SplitReveal
+            as={Heading}
+            id={headingId}
+            trigger="scroll"
+            delay={motion.stagger.item}
+            className={`text-wei-display ${titleColor}`}
+          >
+            {title}
+          </SplitReveal>
+        ) : (
+          <Reveal trigger="scroll" delay={motion.stagger.item}>
+            <Heading id={headingId} className={`text-wei-display ${titleColor}`}>
+              {title}
+            </Heading>
+          </Reveal>
+        )}
         {intro ? (
-          <p className={`mt-5 text-wei-lg ${introColor}`}>{intro}</p>
+          <Reveal trigger="scroll" delay={motion.stagger.item * 2}>
+            <p className={`mt-5 text-wei-lg ${introColor}`}>{intro}</p>
+          </Reveal>
         ) : null}
       </div>
     </div>

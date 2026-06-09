@@ -9,6 +9,7 @@ import {
   type ReactNode,
 } from "react";
 import gsap from "gsap";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 /*
   Compound interest visualizer.
@@ -251,12 +252,13 @@ export function CompoundInterestVisualizer() {
         <dl className="mt-8 grid grid-cols-1 gap-px overflow-hidden rounded-wei-md border border-wei-line bg-wei-line">
           <Stat
             label="Final balance"
-            value={usdCents(finalBalance)}
+            value={finalBalance}
+            format={usdCents}
             accent
           />
           <div className="grid grid-cols-2 gap-px bg-wei-line">
-            <Stat label="You put in" value={usd(totalContributed)} small />
-            <Stat label="Growth earned" value={usd(interestEarned)} small />
+            <Stat label="You put in" value={totalContributed} format={usd} small />
+            <Stat label="Growth earned" value={interestEarned} format={usd} small />
           </div>
         </dl>
       </form>
@@ -471,24 +473,26 @@ function NumberField({
 function Stat({
   label,
   value,
+  format,
   accent = false,
   small = false,
 }: {
   label: string;
-  value: string;
+  value: number;
+  format: (n: number) => string;
   accent?: boolean;
   small?: boolean;
 }) {
   return (
     <div className="bg-wei-paper px-4 py-4">
       <span className="wei-eyebrow block text-wei-ink/50">{label}</span>
-      <span
+      <AnimatedNumber
+        value={value}
+        format={format}
         className={`wei-num mt-2 block font-medium ${
           small ? "text-wei-lg" : "text-wei-3xl"
         } ${accent ? "text-wei-emerald-deep" : "text-wei-ink"}`}
-      >
-        {value}
-      </span>
+      />
     </div>
   );
 }
