@@ -88,7 +88,7 @@ export function GlossaryBrowser() {
           onChange={(event) => setQuery(event.target.value)}
           placeholder="Search terms or definitions"
           autoComplete="off"
-          className="w-full rounded-wei-md border border-wei-line bg-wei-paper px-4 py-3 text-wei-base text-wei-ink placeholder:text-wei-ink/40"
+          className="w-full rounded-wei-sm border border-wei-line bg-wei-paper px-4 py-3 text-wei-base text-wei-ink outline-none transition-colors placeholder:text-wei-ink/40 focus-visible:border-wei-emerald-deep"
         />
       </label>
 
@@ -106,10 +106,10 @@ export function GlossaryBrowser() {
               type="button"
               aria-pressed={active}
               onClick={() => setCategory(option)}
-              className={`rounded-wei-pill border px-3.5 py-1.5 text-wei-sm font-medium transition-colors ${
+              className={`wei-eyebrow rounded-wei-sm border px-3 py-2 transition-colors ${
                 active
-                  ? "border-wei-emerald bg-wei-emerald text-wei-paper"
-                  : "border-wei-line text-wei-ink/70 hover:border-wei-emerald hover:text-wei-emerald-deep"
+                  ? "border-wei-emerald-deep bg-wei-emerald-deep text-wei-paper"
+                  : "border-wei-line text-wei-ink/65 hover:border-wei-emerald-deep hover:text-wei-emerald-deep"
               }`}
             >
               {option}
@@ -131,7 +131,7 @@ export function GlossaryBrowser() {
               <span
                 key={key}
                 aria-disabled="true"
-                className="grid h-8 w-8 place-items-center rounded-wei-sm text-wei-sm text-wei-ink/25"
+                className="wei-num grid h-8 w-8 place-items-center rounded-wei-sm text-wei-sm text-wei-ink/25"
               >
                 {key}
               </span>
@@ -142,7 +142,7 @@ export function GlossaryBrowser() {
               key={key}
               href={`#${sectionId(key)}`}
               aria-label={`Jump to ${label}`}
-              className="grid h-8 w-8 place-items-center rounded-wei-sm text-wei-sm font-semibold text-wei-emerald-deep transition-colors hover:bg-wei-emerald hover:text-wei-paper"
+              className="wei-num grid h-8 w-8 place-items-center rounded-wei-sm text-wei-sm font-semibold text-wei-emerald-deep transition-colors hover:bg-wei-emerald hover:text-wei-paper"
             >
               {key}
             </a>
@@ -152,7 +152,8 @@ export function GlossaryBrowser() {
 
       {/* Result count */}
       <p className="mt-5 text-wei-sm text-wei-ink/60" aria-live="polite">
-        {filtered.length} {filtered.length === 1 ? "term" : "terms"}
+        <span className="wei-num text-wei-ink/75">{filtered.length}</span>{" "}
+        {filtered.length === 1 ? "term" : "terms"}
         {category !== "All" ? ` in ${category}` : ""}
         {normalizedQuery ? ` matching “${query.trim()}”` : ""}
       </p>
@@ -167,7 +168,7 @@ export function GlossaryBrowser() {
               aria-label={key === "#" ? "Numbers" : `Letter ${key}`}
               className="scroll-mt-24 pt-8"
             >
-              <h2 className="font-wei-display text-wei-2xl font-semibold text-wei-emerald-deep">
+              <h2 className="wei-num text-wei-2xl font-semibold text-wei-emerald-deep">
                 {key}
               </h2>
               <dl className="mt-2">
@@ -182,7 +183,7 @@ export function GlossaryBrowser() {
                       <span className="text-wei-base font-semibold text-wei-ink">
                         {term.term}
                       </span>
-                      <span className="text-wei-xs uppercase tracking-[0.12em] text-wei-ink/45">
+                      <span className="wei-eyebrow text-wei-ink/45">
                         {term.category}
                       </span>
                     </dt>

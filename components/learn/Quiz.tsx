@@ -42,14 +42,14 @@ export function Quiz({ questions }: QuizProps) {
   return (
     <section
       aria-label="Check your understanding"
-      className="rounded-wei-lg border border-wei-line bg-wei-paper-dim p-6 sm:p-8"
+      className="border border-wei-line bg-wei-paper-dim p-6 sm:p-8"
     >
-      <div className="flex flex-wrap items-baseline justify-between gap-2">
+      <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-wei-line pb-4">
         <h2 className="font-wei-display text-wei-xl font-semibold text-wei-ink">
           Check your understanding
         </h2>
-        <p className="text-wei-sm text-wei-ink/60" aria-live="polite">
-          {answeredCount} of {questions.length} answered
+        <p className="wei-eyebrow text-wei-ink/55" aria-live="polite">
+          {answeredCount} / {questions.length} answered
         </p>
       </div>
 
@@ -63,7 +63,10 @@ export function Quiz({ questions }: QuizProps) {
             <li key={question.id}>
               <fieldset>
                 <legend className="text-wei-base font-semibold text-wei-ink">
-                  {questionIndex + 1}. {question.prompt}
+                  <span className="wei-num mr-2 text-wei-ink/40">
+                    {String(questionIndex + 1).padStart(2, "0")}
+                  </span>
+                  {question.prompt}
                 </legend>
 
                 <div className="mt-3 space-y-2">
@@ -142,12 +145,14 @@ export function Quiz({ questions }: QuizProps) {
           className="mt-8 flex flex-wrap items-center justify-between gap-3 border-t border-wei-line pt-6"
         >
           <p className="text-wei-base font-semibold text-wei-ink">
-            You got {correctCount} of {questions.length}.
+            You got{" "}
+            <span className="wei-num text-wei-emerald-deep">{correctCount}</span>{" "}
+            of <span className="wei-num">{questions.length}</span>.
           </p>
           <button
             type="button"
             onClick={reset}
-            className="rounded-wei-pill border border-wei-emerald px-4 py-2 text-wei-sm font-medium text-wei-emerald-deep transition-colors hover:bg-wei-emerald hover:text-wei-paper"
+            className="wei-eyebrow rounded-wei-pill border border-wei-emerald px-4 py-2 text-wei-emerald-deep transition-colors hover:bg-wei-emerald hover:text-wei-paper"
           >
             Try again
           </button>

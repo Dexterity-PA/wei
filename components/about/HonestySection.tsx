@@ -1,4 +1,6 @@
 import { Reveal } from "@/components/Reveal";
+import { Container } from "@/components/layout/Container";
+import { Eyebrow } from "@/components/layout/Eyebrow";
 
 /**
  * What WEI is not. States the education-only boundary plainly. This does the
@@ -7,13 +9,11 @@ import { Reveal } from "@/components/Reveal";
  */
 export function HonestySection() {
   return (
-    <section className="mx-auto max-w-6xl px-wei-gutter py-wei-section">
+    <Container as="section" className="py-wei-section">
       <Reveal>
-        <div className="max-w-3xl rounded-wei-lg border border-wei-line border-l-4 border-l-wei-emerald bg-wei-paper px-7 py-8 shadow-wei-soft md:px-10 md:py-10">
-          <p className="text-wei-sm font-semibold uppercase tracking-[0.18em] text-wei-emerald-deep">
-            Where we draw the line
-          </p>
-          <h2 className="mt-4 font-wei-display text-wei-2xl font-semibold text-wei-ink text-balance">
+        <div className="max-w-3xl border border-wei-line border-l-2 border-l-wei-emerald bg-wei-paper px-7 py-8 md:px-10 md:py-10">
+          <Eyebrow index="05">Where we draw the line</Eyebrow>
+          <h2 className="mt-5 font-wei-display text-wei-2xl font-semibold text-balance text-wei-ink">
             We teach. We do not stand in for a professional.
           </h2>
           <div className="mt-5 space-y-5 text-wei-base text-wei-ink/80">
@@ -27,12 +27,12 @@ export function HonestySection() {
               We do not tell any individual what to do with their money, and we
               are not a substitute for a licensed professional. We hold that line
               on purpose. Teaching people to think clearly about money is more
-              useful, and more honest, than handing them an answer and asking
-              them to trust it.
+              useful, and more honest, than handing them an answer and asking them
+              to trust it.
             </p>
           </div>
         </div>
       </Reveal>
-    </section>
+    </Container>
   );
 }

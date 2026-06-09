@@ -1,5 +1,7 @@
 import type { ReactNode } from "react";
 import { Reveal } from "@/components/Reveal";
+import { Container } from "@/components/layout/Container";
+import { PageHero } from "@/components/layout/PageHero";
 
 type PlaceholderPageProps = {
   title: string;
@@ -8,31 +10,27 @@ type PlaceholderPageProps = {
 };
 
 /**
- * Minimal scaffold for Phase 0 routes so the nav never 404s. Real content for
- * each section arrives in a later phase. Uses the mount reveal by default.
+ * Minimal scaffold for routes whose full content arrives in a later phase, so
+ * the nav never 404s. Uses the shared page hero and the mount reveal.
  */
 export function PlaceholderPage({ title, lead, children }: PlaceholderPageProps) {
   return (
-    <section className="mx-auto max-w-6xl px-wei-gutter py-wei-section-lg">
-      <Reveal>
-        <h1 className="font-wei-display text-wei-3xl font-semibold text-wei-ink">
-          {title}
-        </h1>
-      </Reveal>
-      <Reveal delay={0.05}>
-        <p className="mt-5 max-w-2xl text-wei-lg text-wei-ink/80">{lead}</p>
-      </Reveal>
+    <Container as="section" className="py-wei-section-lg">
+      <PageHero eyebrow={title} title={title} intro={lead} />
       {children ? (
-        <Reveal delay={0.1}>
-          <div className="mt-8">{children}</div>
+        <Reveal delay={0.15} className="mt-10">
+          {children}
         </Reveal>
       ) : (
-        <Reveal delay={0.1}>
-          <p className="mt-8 text-wei-sm text-wei-ink/60">
-            This section is being built. Check back soon.
-          </p>
+        <Reveal delay={0.15}>
+          <div className="mt-10 flex items-center gap-3 border-t border-wei-line pt-6">
+            <span className="wei-eyebrow text-wei-emerald-deep">In build</span>
+            <span className="text-wei-sm text-wei-ink/60">
+              This section is being built. Check back soon.
+            </span>
+          </div>
         </Reveal>
       )}
-    </section>
+    </Container>
   );
 }

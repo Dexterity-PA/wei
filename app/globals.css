@@ -26,43 +26,68 @@
   --color-wei-paper-dim: #efeadf;
   --color-wei-ink-soft: #16302b;
   --color-wei-line: #dcd6c8;
+  /* Hairline structure. line-strong for emphasis rules on paper; line-ink for
+     hairlines drawn on the dark ink bands. Hairlines replace soft shadows. */
+  --color-wei-line-strong: #c8bda7;
+  --color-wei-line-ink: rgba(246, 243, 236, 0.14);
 
-  /* Fonts (next/font sets --font-bricolage and --font-inter on <html>) */
+  /* Fonts (next/font sets --font-bricolage, --font-inter, --font-plex-mono on <html>) */
   --font-wei-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
   --font-wei-body: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
     "Segoe UI", Roboto, sans-serif;
+  /* Monospace for eyebrows, labels, stats, readouts, metadata. The fintech signal. */
+  --font-wei-mono: var(--font-plex-mono), ui-monospace, "SF Mono", "SFMono-Regular",
+    "Menlo", "Consolas", monospace;
 
-  /* Fluid type scale (clamp: min, preferred, max) */
+  /*
+    Fluid type scale (clamp: min, preferred, max).
+    Hierarchy is built on a WIDE gap: quiet, small body against a large, tight
+    display/hero. Body stays ~1rem with generous leading; the display tiers run
+    big with negative tracking and sub-1.0 line-height. Push the extremes.
+  */
   --text-wei-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
   --text-wei-xs--line-height: 1.5;
   --text-wei-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
-  --text-wei-sm--line-height: 1.5;
-  --text-wei-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
-  --text-wei-base--line-height: 1.65;
+  --text-wei-sm--line-height: 1.55;
+  --text-wei-base: clamp(1rem, 0.97rem + 0.18vw, 1.0625rem);
+  --text-wei-base--line-height: 1.7;
   --text-wei-lg: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);
   --text-wei-lg--line-height: 1.55;
   --text-wei-xl: clamp(1.375rem, 1.25rem + 0.6vw, 1.625rem);
   --text-wei-xl--line-height: 1.4;
-  --text-wei-2xl: clamp(1.75rem, 1.5rem + 1.1vw, 2.25rem);
-  --text-wei-2xl--line-height: 1.2;
-  --text-wei-3xl: clamp(2.25rem, 1.85rem + 1.8vw, 3.25rem);
-  --text-wei-3xl--line-height: 1.1;
-  --text-wei-display: clamp(2.75rem, 2rem + 3.6vw, 4.75rem);
-  --text-wei-display--line-height: 1.02;
-  --text-wei-display--letter-spacing: -0.02em;
+  --text-wei-2xl: clamp(1.75rem, 1.45rem + 1.3vw, 2.4rem);
+  --text-wei-2xl--line-height: 1.15;
+  --text-wei-2xl--letter-spacing: -0.015em;
+  --text-wei-3xl: clamp(2.25rem, 1.7rem + 2.3vw, 3.5rem);
+  --text-wei-3xl--line-height: 1.05;
+  --text-wei-3xl--letter-spacing: -0.022em;
+  /* Section headings */
+  --text-wei-display: clamp(2.5rem, 1.75rem + 3.1vw, 4.25rem);
+  --text-wei-display--line-height: 1;
+  --text-wei-display--letter-spacing: -0.028em;
+  /* Hero display: large and tight */
+  --text-wei-hero: clamp(3.25rem, 1rem + 8.4vw, 6.5rem);
+  --text-wei-hero--line-height: 0.94;
+  --text-wei-hero--letter-spacing: -0.038em;
+  /* Mono label/eyebrow size */
+  --text-wei-label: 0.75rem;
+  --text-wei-label--line-height: 1;
+  --text-wei-label--letter-spacing: 0.14em;
 
-  /* Section-rhythm spacing */
+  /* Section-rhythm spacing. Dense and deliberate, not airy: a consistent
+     vertical beat across every section rather than large blank stretches. */
   --spacing-wei-gutter: clamp(1rem, 0.7rem + 1.4vw, 2rem);
-  --spacing-wei-section: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
-  --spacing-wei-section-lg: clamp(5rem, 3.5rem + 6vw, 9rem);
+  --spacing-wei-section: clamp(3rem, 2.2rem + 3.2vw, 5rem);
+  --spacing-wei-section-lg: clamp(4rem, 2.8rem + 4.8vw, 6.5rem);
 
-  /* Tight radii */
-  --radius-wei-sm: 0.25rem;
-  --radius-wei-md: 0.5rem;
-  --radius-wei-lg: 0.875rem;
+  /* Near-square structural radii. Pills stay only where intentional. */
+  --radius-wei-sm: 0.125rem;
+  --radius-wei-md: 0.25rem;
+  --radius-wei-lg: 0.4375rem;
   --radius-wei-pill: 999px;
 
-  /* Soft shadows */
+  /* Soft shadows retained for rare lifts, but hairline borders are the default
+     structural signal across the site now. */
   --shadow-wei-soft: 0 1px 2px rgba(11, 31, 28, 0.04),
     0 8px 24px -12px rgba(11, 31, 28, 0.12);
   --shadow-wei-lift: 0 2px 6px rgba(11, 31, 28, 0.06),
@@ -140,6 +165,52 @@
 
   .lenis.lenis-stopped {
     overflow: clip;
+  }
+}
+
+/*
+  Editorial primitives. Mono labels, tabular numbers, and hairline-bordered
+  grids are the core fintech/reference signals used across every page.
+*/
+@layer components {
+  /* Mono uppercase tracked label for eyebrows, metadata, tool readouts. */
+  .wei-eyebrow {
+    font-family: var(--font-wei-mono);
+    font-size: var(--text-wei-label);
+    line-height: 1;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-weight: 500;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Tabular mono numerals for stats, counts, and tool outputs. */
+  .wei-num {
+    font-family: var(--font-wei-mono);
+    font-variant-numeric: tabular-nums lining-nums;
+    letter-spacing: -0.01em;
+  }
+
+  /*
+    Hairline-bordered grid. Children sit in a bordered grid sharing edges
+    instead of floating with soft shadows. The wrapper paints its own top and
+    left hairline; each cell paints its right and bottom, so internal rules
+    render as single 1px lines and the outer frame stays closed at any wrap.
+  */
+  .wei-hairgrid {
+    border-top: 1px solid var(--color-wei-line);
+    border-left: 1px solid var(--color-wei-line);
+  }
+  .wei-hairgrid > * {
+    border-right: 1px solid var(--color-wei-line);
+    border-bottom: 1px solid var(--color-wei-line);
+  }
+  /* On the dark ink bands, hairlines switch to the ink line color. */
+  .wei-hairgrid-ink {
+    border-color: var(--color-wei-line-ink);
+  }
+  .wei-hairgrid-ink > * {
+    border-color: var(--color-wei-line-ink);
   }
 }
 

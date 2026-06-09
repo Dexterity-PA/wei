@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Reveal } from "@/components/Reveal";
+import { Eyebrow } from "@/components/layout/Eyebrow";
 import { ContactPaths } from "@/components/contact/ContactPaths";
 import { ContactForm } from "@/components/contact/ContactForm";
 import { paths, type Role } from "@/components/contact/content";
@@ -25,28 +26,28 @@ export function ContactExperience() {
   }
 
   return (
-    <div className="mt-16 space-y-12">
-      <div className="space-y-6">
+    <div className="mt-14 space-y-12">
+      <div>
         <Reveal>
-          <h2 className="font-wei-display text-wei-2xl font-semibold text-wei-ink">
-            Two ways in
-          </h2>
+          <Eyebrow index="01">Two ways in</Eyebrow>
         </Reveal>
-        <Reveal delay={0.05}>
+        <Reveal delay={0.05} className="mt-6">
           <ContactPaths active={role} onSelect={selectPath} />
         </Reveal>
       </div>
 
-      <Reveal delay={0.1}>
-        <div className="rounded-wei-lg border border-wei-line bg-wei-paper p-6 shadow-wei-soft sm:p-9">
-          <h2 className="font-wei-display text-wei-2xl font-semibold text-wei-ink">
-            Send us a message
-          </h2>
-          <div className="mt-6 max-w-xl">
-            <ContactForm role={role} onRoleChange={setRole} intro={intro} />
+      <div>
+        <Reveal>
+          <Eyebrow index="02">Send us a message</Eyebrow>
+        </Reveal>
+        <Reveal delay={0.05} className="mt-6">
+          <div className="border border-wei-line bg-wei-paper p-6 sm:p-9">
+            <div className="max-w-xl">
+              <ContactForm role={role} onRoleChange={setRole} intro={intro} />
+            </div>
           </div>
-        </div>
-      </Reveal>
+        </Reveal>
+      </div>
     </div>
   );
 }

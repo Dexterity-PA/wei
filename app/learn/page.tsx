@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Reveal } from "@/components/Reveal";
+import { Container } from "@/components/layout/Container";
+import { PageHero } from "@/components/layout/PageHero";
 import { ModuleCard } from "@/components/learn/ModuleCard";
 import { learnModules } from "@/lib/learn";
 
@@ -11,28 +13,15 @@ export const metadata: Metadata = {
 
 export default function LearnPage() {
   return (
-    <section className="mx-auto max-w-5xl px-wei-gutter py-wei-section-lg">
-      <Reveal>
-        <p className="text-wei-sm font-semibold uppercase tracking-[0.18em] text-wei-emerald-deep">
-          Learn
-        </p>
-      </Reveal>
-
-      <Reveal delay={0.05}>
-        <h1 className="mt-5 font-wei-display text-wei-3xl font-semibold text-wei-ink">
-          Short lessons that build real money skills.
-        </h1>
-      </Reveal>
-
-      <Reveal delay={0.1}>
-        <p className="mt-5 max-w-2xl text-wei-lg text-wei-ink/80">
-          Each module is a quick read built for your phone, with a short quiz at
-          the end to check what stuck. Start anywhere that looks useful.
-        </p>
-      </Reveal>
+    <Container as="section" className="py-wei-section-lg">
+      <PageHero
+        eyebrow="Learn"
+        title="Short lessons that build real money skills."
+        intro="Each module is a quick read built for your phone, with a short quiz at the end to check what stuck. Start anywhere that looks useful."
+      />
 
       <Reveal delay={0.15}>
-        <div className="mt-10 grid gap-5 sm:grid-cols-2">
+        <div className="wei-hairgrid mt-12 grid grid-cols-1 sm:grid-cols-2">
           {learnModules.map((mod) => (
             <ModuleCard key={mod.slug} module={mod} />
           ))}
@@ -40,10 +29,10 @@ export default function LearnPage() {
       </Reveal>
 
       <Reveal delay={0.2}>
-        <p className="mt-8 text-wei-sm text-wei-ink/60">
+        <p className="mt-6 text-wei-sm text-wei-ink/60">
           More modules are on the way. New lessons land here as they are written.
         </p>
       </Reveal>
-    </section>
+    </Container>
   );
 }

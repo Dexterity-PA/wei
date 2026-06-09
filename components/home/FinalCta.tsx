@@ -1,4 +1,6 @@
 import { Reveal } from "@/components/Reveal";
+import { Container } from "@/components/layout/Container";
+import { Eyebrow } from "@/components/layout/Eyebrow";
 import { CtaLink } from "./CtaLink";
 
 const paths = [
@@ -17,27 +19,41 @@ const paths = [
 export function FinalCta() {
   return (
     <section className="bg-wei-ink text-wei-paper">
-      <div className="mx-auto max-w-6xl px-wei-gutter py-wei-section-lg">
-        <div className="max-w-3xl">
-          <Reveal as="h2" className="font-wei-display text-wei-3xl font-semibold text-wei-paper">
-            Financial equity is built by people who show up.
-          </Reveal>
-          <Reveal delay={0.06} className="mt-5 max-w-2xl">
-            <p className="text-wei-lg text-wei-paper/75">
-              Whether you teach, lead a program, or are a student who wants in,
-              there is a way to help close the gap.
-            </p>
-          </Reveal>
+      <Container className="py-wei-section-lg">
+        <div className="grid gap-x-wei-gutter gap-y-6 md:grid-cols-12">
+          <div className="md:col-span-3">
+            <Reveal>
+              <Eyebrow index="06" tone="ink">
+                Get involved
+              </Eyebrow>
+            </Reveal>
+          </div>
+          <div className="md:col-span-9 md:max-w-2xl">
+            <Reveal>
+              <h2 className="text-wei-3xl font-semibold text-wei-paper">
+                Financial equity is built by people who show up.
+              </h2>
+            </Reveal>
+            <Reveal delay={0.06} className="mt-5 max-w-xl">
+              <p className="text-wei-base text-wei-paper/70">
+                Whether you teach, lead a program, or are a student who wants in,
+                there is a way to help close the gap.
+              </p>
+            </Reveal>
+          </div>
         </div>
 
-        <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="wei-hairgrid wei-hairgrid-ink mt-12 grid grid-cols-1 md:grid-cols-2">
           {paths.map((path, index) => (
             <Reveal
               key={path.title}
               delay={0.1 + index * 0.08}
-              className="flex flex-col rounded-wei-lg border border-wei-paper/15 bg-wei-paper/5 p-7"
+              className="flex flex-col p-7"
             >
-              <h3 className="font-wei-display text-wei-xl font-semibold text-wei-paper">
+              <span className="wei-num text-wei-sm text-wei-paper/35">
+                {`0${index + 1}`}
+              </span>
+              <h3 className="mt-5 font-wei-display text-wei-xl font-semibold text-wei-paper">
                 {path.title}
               </h3>
               <p className="mt-3 text-wei-base text-wei-paper/70">{path.body}</p>
@@ -49,7 +65,7 @@ export function FinalCta() {
             </Reveal>
           ))}
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

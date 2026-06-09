@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Bricolage_Grotesque, Inter } from "next/font/google";
+import { Bricolage_Grotesque, IBM_Plex_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { site, siteUrl } from "@/lib/site";
 import { SmoothScrollProvider } from "@/components/providers/SmoothScrollProvider";
@@ -15,6 +15,15 @@ const bricolage = Bricolage_Grotesque({
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
+});
+
+// Monospace face for eyebrows, labels, stats, and tool readouts. Loaded at the
+// weights used for mono labels (medium) and the few mono headings (semibold).
+const plexMono = IBM_Plex_Mono({
+  variable: "--font-plex-mono",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   display: "swap",
 });
 
@@ -63,7 +72,10 @@ export default function RootLayout({
   // Note: no h-full on <html>. The body owns min-height via min-h-svh so the
   // Lenis ResizeObserver stays in sync with font-swap reflow.
   return (
-    <html lang="en" className={`${bricolage.variable} ${inter.variable}`}>
+    <html
+      lang="en"
+      className={`${bricolage.variable} ${inter.variable} ${plexMono.variable}`}
+    >
       <body className="flex min-h-svh flex-col bg-wei-paper text-wei-ink antialiased">
         <SmoothScrollProvider>
           <Nav />

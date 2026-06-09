@@ -19,7 +19,7 @@ export function ContactPaths({ active, onSelect }: ContactPathsProps) {
     <div
       role="radiogroup"
       aria-label="How would you like to get involved?"
-      className="grid gap-5 sm:grid-cols-2"
+      className="wei-hairgrid grid sm:grid-cols-2"
     >
       {paths.map((path) => {
         const selected = active === path.role;
@@ -30,13 +30,13 @@ export function ContactPaths({ active, onSelect }: ContactPathsProps) {
             role="radio"
             aria-checked={selected}
             onClick={() => onSelect(path.role)}
-            className={`group flex h-full flex-col rounded-wei-lg border p-6 text-left shadow-wei-soft outline-none transition-colors sm:p-7 ${
+            className={`group flex h-full flex-col p-6 text-left outline-none transition-colors sm:p-7 ${
               selected
-                ? "border-wei-emerald-deep bg-wei-paper-dim"
-                : "border-wei-line bg-wei-paper hover:border-wei-emerald-deep/50"
+                ? "bg-wei-paper-dim ring-1 ring-inset ring-wei-emerald-deep"
+                : "bg-wei-paper hover:bg-wei-paper-dim/60"
             }`}
           >
-            <span className="text-wei-xs font-semibold uppercase tracking-[0.18em] text-wei-emerald-deep">
+            <span className="wei-eyebrow text-wei-emerald-deep">
               {path.eyebrow}
             </span>
             <span className="mt-3 font-wei-display text-wei-xl font-semibold text-wei-ink">
@@ -59,8 +59,8 @@ export function ContactPaths({ active, onSelect }: ContactPathsProps) {
             </ul>
             <span
               aria-hidden="true"
-              className={`mt-6 inline-flex items-center gap-1 text-wei-sm font-semibold ${
-                selected ? "text-wei-emerald-deep" : "text-wei-ink/60"
+              className={`wei-eyebrow mt-6 inline-flex items-center gap-1 ${
+                selected ? "text-wei-emerald-deep" : "text-wei-ink/50"
               }`}
             >
               {selected ? "Selected" : "Choose this"}

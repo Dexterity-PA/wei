@@ -1,47 +1,61 @@
 import { Reveal } from "@/components/Reveal";
+import { Container } from "@/components/layout/Container";
+import { Eyebrow } from "@/components/layout/Eyebrow";
 import { site } from "@/lib/site";
 import { CtaLink } from "./CtaLink";
+import { OpportunityGapChart } from "./OpportunityGapChart";
 
 export function Hero() {
   return (
     <section className="relative overflow-hidden border-b border-wei-line bg-wei-paper">
-      {/* Soft editorial wash behind the headline. Decorative only. */}
+      {/* Restrained editorial wash behind the headline. Decorative only. */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(60%_55%_at_18%_0%,color-mix(in_srgb,var(--color-wei-emerald)_12%,transparent),transparent_70%)]"
+        className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(55%_50%_at_12%_-5%,color-mix(in_srgb,var(--color-wei-emerald)_9%,transparent),transparent_68%)]"
       />
-      <div className="mx-auto max-w-6xl px-wei-gutter py-wei-section-lg">
-        <div className="max-w-3xl">
-          <Reveal as="p" className="flex items-center gap-3">
-            <span className="h-px w-8 bg-wei-emerald-deep" aria-hidden="true" />
-            <span className="text-wei-sm font-semibold uppercase tracking-[0.18em] text-wei-emerald-deep">
-              {site.name}
-            </span>
-          </Reveal>
+      <Container className="py-wei-section-lg">
+        <div className="grid items-center gap-x-wei-gutter gap-y-14 lg:grid-cols-12">
+          {/* Left-weighted headline column */}
+          <div className="lg:col-span-6">
+            <Reveal as="div" className="flex items-center gap-3">
+              <span className="h-px w-8 bg-wei-emerald-deep" aria-hidden="true" />
+              <Eyebrow>{site.name}</Eyebrow>
+            </Reveal>
 
-          <Reveal as="h1" delay={0.05} className="mt-6">
-            <span className="font-wei-display text-wei-display font-semibold text-wei-ink">
-              Money knowledge belongs to every student, not just a lucky few.
-            </span>
-          </Reveal>
+            <Reveal as="h1" delay={0.05} className="mt-7">
+              <span className="text-wei-hero font-semibold text-wei-ink">
+                Money knowledge belongs to every student, not just a lucky few.
+              </span>
+            </Reveal>
 
-          <Reveal as="p" delay={0.12} className="mt-7 max-w-2xl">
-            <span className="block text-wei-lg text-wei-ink/80">
-              The Wealth Equity Initiative is a student-founded nonprofit bringing
-              practical financial literacy to the classrooms that have gone
-              without it. Free tools, plain-language lessons, built by students
-              for students.
-            </span>
-          </Reveal>
+            <Reveal as="p" delay={0.12} className="mt-7 max-w-xl">
+              <span className="block text-wei-base text-wei-ink/75">
+                The Wealth Equity Initiative is a student-founded nonprofit
+                bringing practical financial literacy to the classrooms that have
+                gone without it. Free tools, plain-language lessons, built by
+                students for students.
+              </span>
+            </Reveal>
 
-          <Reveal delay={0.18} className="mt-10 flex flex-wrap items-center gap-4">
-            <CtaLink href="/tools">Explore the toolkit</CtaLink>
-            <CtaLink href="/about" variant="secondary">
-              Why we exist
-            </CtaLink>
+            <Reveal delay={0.18} className="mt-9 flex flex-wrap items-center gap-4">
+              <CtaLink href="/tools">Explore the toolkit</CtaLink>
+              <CtaLink href="/about" variant="secondary">
+                Why we exist
+              </CtaLink>
+            </Reveal>
+          </div>
+
+          {/* Mission-carrying graphic */}
+          <Reveal delay={0.1} className="lg:col-span-6">
+            <OpportunityGapChart />
+            <p className="mt-4 max-w-md text-wei-sm text-wei-ink/60">
+              The same starting line, ten years apart. A student who learns how
+              money works early keeps pulling ahead of one who never got the
+              chance. Closing that gap is the whole point.
+            </p>
           </Reveal>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

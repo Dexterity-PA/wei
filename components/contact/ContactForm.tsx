@@ -128,7 +128,7 @@ export function ContactForm({ role, onRoleChange, intro }: ContactFormProps) {
   if (submitted) {
     return (
       <div
-        className="rounded-wei-lg border border-wei-line bg-wei-paper-dim p-7 shadow-wei-soft sm:p-9"
+        className="border border-wei-line border-l-2 border-l-wei-emerald bg-wei-paper-dim p-7 sm:p-9"
         role="status"
       >
         <h3 className="font-wei-display text-wei-2xl font-semibold text-wei-ink">
@@ -168,7 +168,7 @@ export function ContactForm({ role, onRoleChange, intro }: ContactFormProps) {
 
   const labelClass = "block text-wei-sm font-semibold text-wei-ink";
   const inputClass =
-    "mt-2 block w-full rounded-wei-md border border-wei-line bg-wei-paper px-4 py-3 text-wei-base text-wei-ink shadow-wei-soft outline-none transition-colors placeholder:text-wei-ink/40 focus-visible:border-wei-emerald-deep aria-[invalid=true]:border-wei-amber";
+    "mt-2 block w-full rounded-wei-sm border border-wei-line bg-wei-paper px-4 py-3 text-wei-base text-wei-ink outline-none transition-colors placeholder:text-wei-ink/40 focus-visible:border-wei-emerald-deep aria-[invalid=true]:border-wei-amber";
   const fieldErrorClass = "mt-2 text-wei-sm text-wei-emerald-deep";
 
   return (
@@ -324,7 +324,7 @@ export function ContactForm({ role, onRoleChange, intro }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === "sending"}
-        className="inline-flex items-center justify-center rounded-wei-pill bg-wei-emerald-deep px-7 py-3 text-wei-base font-semibold text-wei-paper shadow-wei-soft transition-colors hover:bg-wei-emerald focus-visible:bg-wei-emerald disabled:cursor-not-allowed disabled:opacity-70"
+        className="inline-flex items-center justify-center rounded-wei-pill bg-wei-emerald-deep px-7 py-3 text-wei-sm font-semibold text-wei-paper transition-colors hover:bg-wei-emerald focus-visible:bg-wei-emerald disabled:cursor-not-allowed disabled:opacity-70"
       >
         {status === "sending" ? "Sending..." : "Send message"}
       </button>
