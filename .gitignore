@@ -36,6 +36,9 @@ yarn-error.log*
 # vercel
 .vercel
 
+# claude code tooling and worktrees (carry their own lockfiles/node_modules)
+.claude/
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

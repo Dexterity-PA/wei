@@ -30,8 +30,8 @@ export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
   "https://wealthequityinitiative.com";
 
-/** Placeholder contact address. Replace when the org mailbox is live. */
-export const contactEmail = "hello@wealthequityinitiative.com";
+/** Active contact address. Also the delivery target for the contact form. */
+export const contactEmail = "praneeth.a2027@gmail.com";
 
 export const nav: NavLink[] = [
   { label: "Home", href: "/", description: "Wealth Equity Initiative" },
