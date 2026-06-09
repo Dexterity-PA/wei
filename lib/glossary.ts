@@ -2061,6 +2061,1230 @@ export const glossaryTerms: GlossaryTerm[] = [
       "The company that handles your loan after you get it, taking your payments and answering questions. You may never deal with the original lender, only the servicer.",
     related: ["student-loan", "loan", "private-student-loan"],
   },
+  // ============================================================
+  // Glossary expansion: ~150 net-new terms (deeper layer per category)
+  // ============================================================
+
+  //                                                         Banking
+  {
+    term: "Clearinghouse",
+    slug: "clearinghouse",
+    category: "Banking",
+    definition:
+      "An institution that sits between banks to confirm and settle payments, making sure money actually moves from one account to another. The Automated Clearing House network is one example.",
+    related: ["ach-transfer", "wire-transfer"],
+  },
+  {
+    term: "Float",
+    slug: "float",
+    category: "Banking",
+    definition:
+      "The short window when a payment has left one account but has not yet arrived in another, so the same money can briefly appear in two places. Float shrinks as electronic payments settle faster.",
+    related: ["pending-transaction", "available-balance", "ach-transfer"],
+  },
+  {
+    term: "Ledger Balance",
+    slug: "ledger-balance",
+    category: "Banking",
+    definition:
+      "The total in your account at the start of the day, before any holds or new deposits are applied. It can be higher than your available balance when some funds are still on hold.",
+    related: ["available-balance", "pending-transaction", "statement"],
+  },
+  {
+    term: "Payable on Death (POD)",
+    slug: "payable-on-death",
+    category: "Banking",
+    definition:
+      "A simple instruction on a bank account naming who receives the money if the owner dies, without going through court. It is sometimes called a POD designation.",
+    related: ["beneficiary", "joint-account"],
+  },
+  {
+    term: "Dormant Account",
+    slug: "dormant-account",
+    category: "Banking",
+    definition:
+      "A bank account with no customer activity for a long stretch, often a year or more. Banks may charge fees on it or eventually turn the balance over to the state.",
+    related: ["savings-account", "statement"],
+  },
+  {
+    term: "Stop Payment",
+    slug: "stop-payment",
+    category: "Banking",
+    definition:
+      "A request asking your bank not to pay a specific check or transfer you already sent. Banks usually charge a fee, and it must be placed before the item clears.",
+    related: ["cashiers-check", "money-order"],
+  },
+  {
+    term: "Sweep Account",
+    slug: "sweep-account",
+    category: "Banking",
+    definition:
+      "An account setup that automatically moves extra cash into a savings or investment option at the end of each day, then back when needed. It keeps idle money earning a return.",
+    related: ["savings-account", "money-market-account"],
+  },
+  {
+    term: "Deposit Hold",
+    slug: "deposit-hold",
+    category: "Banking",
+    definition:
+      "A short delay before all of a deposited check is available to spend, while the bank confirms the money is good. Part of the deposit may be released right away.",
+    related: ["available-balance", "pending-transaction", "mobile-deposit"],
+  },
+  {
+    term: "Certified Check",
+    slug: "certified-check",
+    category: "Banking",
+    definition:
+      "A personal check the bank marks as guaranteed, setting aside the funds so it will not bounce. It differs from a cashier's check, which is drawn on the bank's own account.",
+    related: ["cashiers-check", "money-order"],
+  },
+  {
+    term: "Electronic Funds Transfer (EFT)",
+    slug: "electronic-funds-transfer",
+    category: "Banking",
+    definition:
+      "Any movement of money between accounts done by computer rather than paper, including ACH payments, wires, and card transactions. It is often shortened to EFT.",
+    related: ["ach-transfer", "wire-transfer", "direct-deposit"],
+  },
+  {
+    term: "Demand Deposit",
+    slug: "demand-deposit",
+    category: "Banking",
+    definition:
+      "Money in an account you can withdraw at any time without notice, like a checking account. The bank must give it to you on demand.",
+    related: ["checking-account", "savings-account"],
+  },
+  {
+    term: "Direct Debit",
+    slug: "direct-debit",
+    category: "Banking",
+    definition:
+      "A standing arrangement that lets a company pull a payment from your account on a schedule, such as for a gym or utility. You authorize it in advance.",
+    related: ["autopay", "ach-transfer", "recurring-expense"],
+  },
+  {
+    term: "Check Register",
+    slug: "check-register",
+    category: "Banking",
+    definition:
+      "A running personal record of the checks, deposits, and withdrawals in your account, used to track your balance. It helps you spot fees or fraud.",
+    related: ["statement", "available-balance", "ledger-balance"],
+  },
+  {
+    term: "Linked Account",
+    slug: "linked-account",
+    category: "Banking",
+    definition:
+      "Two accounts connected so money can move between them easily, or so one can cover the other. People often link checking to savings for overdraft protection.",
+    related: ["overdraft-protection", "savings-account", "checking-account"],
+  },
+  {
+    term: "Micro-Deposit",
+    slug: "micro-deposit",
+    category: "Banking",
+    definition:
+      "Tiny test deposits, often a few cents, that a service sends to confirm you own a bank account before linking it. You report the amounts back to verify.",
+    related: ["ach-transfer", "peer-to-peer-payment", "account-number"],
+  },
+  {
+    term: "Account Alert",
+    slug: "account-alert",
+    category: "Banking",
+    definition:
+      "An automatic text or email a bank sends about account activity, such as a low balance or a large charge. Alerts help you catch fraud and avoid fees.",
+    related: ["mobile-banking", "overdraft-fee", "available-balance"],
+  },
+  {
+    term: "Neobank",
+    slug: "neobank",
+    category: "Banking",
+    definition:
+      "An online-only bank with no branches, usually run through an app. It often has lower fees but partners with a traditional bank to provide deposit insurance.",
+    related: ["online-banking", "mobile-banking", "fdic"],
+  },
+
+  //                                                          Saving
+  {
+    term: "CD Ladder",
+    slug: "cd-ladder",
+    category: "Saving",
+    definition:
+      "A savings approach that splits money across several certificates of deposit with different end dates, so one matures regularly. It balances higher rates with steady access to cash.",
+    related: ["certificate-of-deposit", "maturity", "liquidity"],
+  },
+  {
+    term: "Compounding Frequency",
+    slug: "compounding-frequency",
+    category: "Saving",
+    definition:
+      "How often earned interest is added to your balance, such as daily, monthly, or yearly. More frequent compounding slightly increases what you earn over time.",
+    related: ["compound-interest", "apy", "interest"],
+  },
+  {
+    term: "Real Return",
+    slug: "real-return",
+    category: "Saving",
+    definition:
+      "The return on savings or investments after subtracting inflation, showing the change in real buying power. A 4 percent return with 3 percent inflation is about a 1 percent real return.",
+    related: ["nominal-return", "inflation", "return"],
+  },
+  {
+    term: "Nominal Return",
+    slug: "nominal-return",
+    category: "Saving",
+    definition:
+      "The stated return on savings or an investment before accounting for inflation. It looks larger than the real return when prices are rising.",
+    related: ["real-return", "inflation", "return"],
+  },
+  {
+    term: "Round-Up Savings",
+    slug: "round-up-savings",
+    category: "Saving",
+    definition:
+      "A feature that rounds each purchase up to the next dollar and moves the spare change into savings. Small amounts add up over many transactions.",
+    related: ["automatic-savings", "savings-account"],
+  },
+  {
+    term: "Savings Rate",
+    slug: "savings-rate",
+    category: "Saving",
+    definition:
+      "The share of your income you set aside instead of spending, usually written as a percentage. A higher savings rate builds funds faster.",
+    related: ["pay-yourself-first", "emergency-fund", "automatic-savings"],
+  },
+  {
+    term: "Inflation-Adjusted",
+    slug: "inflation-adjusted",
+    category: "Saving",
+    definition:
+      "A number that has been changed to remove the effect of rising prices, so amounts from different years can be compared fairly. It is also called a figure in real terms.",
+    related: ["inflation", "real-return", "cost-of-living"],
+  },
+  {
+    term: "Goal-Based Saving",
+    slug: "goal-based-saving",
+    category: "Saving",
+    definition:
+      "Saving toward a specific target, like a trip or a deposit, often in a separate account so the money is not mixed with everyday spending.",
+    related: ["sinking-fund", "savings-account", "automatic-savings"],
+  },
+  {
+    term: "Windfall",
+    slug: "windfall",
+    category: "Saving",
+    definition:
+      "A sudden, unexpected sum of money, such as a gift, bonus, or tax refund. How you handle a windfall can have a lasting effect on your finances.",
+    related: ["tax-refund", "bonus", "emergency-fund"],
+  },
+  {
+    term: "Nest Egg",
+    slug: "nest-egg",
+    category: "Saving",
+    definition:
+      "A common name for the pool of money saved for a big future goal, especially retirement. It usually grows over many years.",
+    related: ["retirement", "emergency-fund", "compound-growth"],
+  },
+
+  //                                                       Budgeting
+  {
+    term: "Burn Rate",
+    slug: "burn-rate",
+    category: "Budgeting",
+    definition:
+      "How quickly you are spending down savings or cash on hand, often measured per month. Knowing your burn rate shows how long your money will last.",
+    related: ["cash-flow", "emergency-fund", "budget"],
+  },
+  {
+    term: "One-Time Expense",
+    slug: "one-time-expense",
+    category: "Budgeting",
+    definition:
+      "A cost that happens once rather than repeating, like a car repair or a deposit. Setting money aside for these keeps them from breaking a budget.",
+    related: ["recurring-expense", "sinking-fund", "variable-expense"],
+  },
+  {
+    term: "Budget Surplus",
+    slug: "budget-surplus",
+    category: "Budgeting",
+    definition:
+      "When your income for a period is more than what you spend, leaving money left over. The extra can go toward savings or paying down debt.",
+    related: ["budget", "cash-flow", "budget-deficit"],
+  },
+  {
+    term: "Budget Deficit",
+    slug: "budget-deficit",
+    category: "Budgeting",
+    definition:
+      "When you spend more than you take in over a period, so you dip into savings or take on debt to cover the gap.",
+    related: ["budget", "cash-flow", "budget-surplus"],
+  },
+  {
+    term: "Baseline Budget",
+    slug: "baseline-budget",
+    category: "Budgeting",
+    definition:
+      "A budget built from your most basic, must-pay costs, showing the minimum income you need to get by. It helps you see how much room is left for everything else.",
+    related: ["fixed-expense", "needs-vs-wants", "budget"],
+  },
+  {
+    term: "Discretionary Income",
+    slug: "discretionary-income",
+    category: "Budgeting",
+    definition:
+      "The money left after taxes and necessities are paid, available for non-essential spending or saving. Some student loan plans use it to set payments.",
+    related: ["disposable-income", "discretionary-spending", "income-driven-repayment"],
+  },
+  {
+    term: "Annual Expense",
+    slug: "annual-expense",
+    category: "Budgeting",
+    definition:
+      "A cost that comes once a year, like an insurance premium or a membership. Spreading it across monthly savings keeps it from being a shock.",
+    related: ["sinking-fund", "recurring-expense", "one-time-expense"],
+  },
+  {
+    term: "Impulse Purchase",
+    slug: "impulse-purchase",
+    category: "Budgeting",
+    definition:
+      "An unplanned buy made on the spur of the moment, not part of your budget. Tracking these helps you see where money leaks out.",
+    related: ["discretionary-spending", "needs-vs-wants", "budget"],
+  },
+  {
+    term: "Line Item",
+    slug: "line-item",
+    category: "Budgeting",
+    definition:
+      "A single named entry in a budget, such as groceries or rent. Breaking spending into line items shows where the money goes.",
+    related: ["budget", "fixed-expense", "variable-expense"],
+  },
+
+  //                                                          Credit
+  {
+    term: "Credit Mix",
+    slug: "credit-mix",
+    category: "Credit",
+    definition:
+      "The variety of credit types you have, such as cards, a car loan, and a student loan. A healthy mix can modestly help a credit score.",
+    related: ["credit-score", "fico-score", "revolving-debt", "installment-loan"],
+  },
+  {
+    term: "Fraud Alert",
+    slug: "fraud-alert",
+    category: "Credit",
+    definition:
+      "A free notice you place on your credit file telling lenders to take extra steps to confirm your identity before opening new credit. It helps if your information may be stolen.",
+    related: ["credit-freeze", "credit-report", "credit-monitoring"],
+  },
+  {
+    term: "Credit Monitoring",
+    slug: "credit-monitoring",
+    category: "Credit",
+    definition:
+      "A service that watches your credit reports and alerts you to new accounts, inquiries, or score changes. It helps you catch errors or fraud early.",
+    related: ["credit-report", "fraud-alert", "credit-freeze"],
+  },
+  {
+    term: "VantageScore",
+    slug: "vantagescore",
+    category: "Credit",
+    definition:
+      "A credit score model created jointly by the three major credit bureaus, used alongside the better-known FICO score. The two can give slightly different numbers.",
+    related: ["fico-score", "credit-score", "credit-bureau"],
+  },
+  {
+    term: "Current Balance",
+    slug: "current-balance",
+    category: "Credit",
+    definition:
+      "The total you owe on a credit card right now, including recent charges since your last statement. It can be higher than the statement balance you must pay.",
+    related: ["statement-balance", "credit-card", "billing-cycle"],
+  },
+  {
+    term: "Credit-Builder Loan",
+    slug: "credit-builder-loan",
+    category: "Credit",
+    definition:
+      "A small loan made to help build credit, where the amount borrowed is held in savings and released to you after you finish the payments. Your on-time payments are reported to the bureaus.",
+    related: ["credit-score", "secured-credit-card", "installment-loan"],
+  },
+  {
+    term: "Charge Card",
+    slug: "charge-card",
+    category: "Credit",
+    definition:
+      "A card that must be paid in full every month and usually has no preset spending limit. Unlike a credit card, it does not let you carry a balance.",
+    related: ["credit-card", "statement-balance", "annual-fee"],
+  },
+  {
+    term: "Available Credit",
+    slug: "available-credit",
+    category: "Credit",
+    definition:
+      "The part of your credit limit you have not used yet, equal to the limit minus your current balance. Keeping it high helps your credit utilization.",
+    related: ["credit-limit", "credit-utilization", "current-balance"],
+  },
+  {
+    term: "Credit Counseling",
+    slug: "credit-counseling",
+    category: "Credit",
+    definition:
+      "A service, often from a nonprofit, that helps you review debts and build a repayment plan, sometimes through a debt management plan. Reputable counseling is educational, not a loan.",
+    related: ["debt-consolidation", "debt", "collections"],
+  },
+  {
+    term: "Store Credit Card",
+    slug: "store-credit-card",
+    category: "Credit",
+    definition:
+      "A credit card tied to one store or brand, often easier to get but carrying a high interest rate. Its rewards usually work only at that retailer.",
+    related: ["credit-card", "annual-fee", "apr"],
+  },
+  {
+    term: "Penalty APR",
+    slug: "penalty-apr",
+    category: "Credit",
+    definition:
+      "A much higher interest rate a card issuer can charge after you miss payments. It can apply to your existing balance, not just new charges.",
+    related: ["apr", "late-fee", "introductory-apr"],
+  },
+  {
+    term: "Credit Line Increase",
+    slug: "credit-line-increase",
+    category: "Credit",
+    definition:
+      "A raise in the spending limit on a credit card, which you can request or the issuer may grant. A higher limit can lower your credit utilization.",
+    related: ["credit-limit", "credit-utilization", "available-credit"],
+  },
+  {
+    term: "Chargeback",
+    slug: "chargeback",
+    category: "Credit",
+    definition:
+      "A reversal of a card payment that your bank forces when you dispute a charge, such as for fraud or an item that never arrived.",
+    related: ["credit-card", "fraud-alert", "billing-cycle"],
+  },
+  {
+    term: "Deferred Interest",
+    slug: "deferred-interest",
+    category: "Credit",
+    definition:
+      "A store financing offer where interest is waived only if you pay the full balance by a deadline. Miss it, and interest is charged back to the original purchase date.",
+    related: ["introductory-apr", "apr", "store-credit-card"],
+  },
+
+  //                                                            Debt
+  {
+    term: "Balloon Payment",
+    slug: "balloon-payment",
+    category: "Debt",
+    definition:
+      "A large final payment due at the end of some loans after smaller earlier payments. It can be a surprise if you did not plan for it.",
+    related: ["amortization", "loan-term", "loan"],
+  },
+  {
+    term: "Chapter 7 Bankruptcy",
+    slug: "chapter-7-bankruptcy",
+    category: "Debt",
+    definition:
+      "A form of bankruptcy that erases many unsecured debts by selling off certain assets, giving a faster fresh start. Some property is protected, and some debts cannot be erased.",
+    related: ["bankruptcy", "chapter-13-bankruptcy", "unsecured-loan"],
+  },
+  {
+    term: "Chapter 13 Bankruptcy",
+    slug: "chapter-13-bankruptcy",
+    category: "Debt",
+    definition:
+      "A form of bankruptcy that sets up a court-approved plan to repay debts over three to five years, letting you keep more property. It suits people with steady income.",
+    related: ["bankruptcy", "chapter-7-bankruptcy", "default"],
+  },
+  {
+    term: "Debt Settlement",
+    slug: "debt-settlement",
+    category: "Debt",
+    definition:
+      "Negotiating with a lender to accept less than the full amount owed to close out a debt. It can hurt your credit, and any forgiven amount may be taxed.",
+    related: ["debt", "collections", "charge-off"],
+  },
+  {
+    term: "Loan Term",
+    slug: "loan-term",
+    category: "Debt",
+    definition:
+      "The length of time you have to repay a loan, such as 36 months or 30 years. A longer term lowers the monthly payment but usually raises total interest.",
+    related: ["loan", "amortization", "interest-rate"],
+  },
+  {
+    term: "Fixed-Rate Loan",
+    slug: "fixed-rate-loan",
+    category: "Debt",
+    definition:
+      "A loan whose interest rate stays the same for the whole term, so the payment is predictable. It does not change when market rates move.",
+    related: ["variable-rate-loan", "interest-rate", "loan"],
+  },
+  {
+    term: "Variable-Rate Loan",
+    slug: "variable-rate-loan",
+    category: "Debt",
+    definition:
+      "A loan whose interest rate can rise or fall over time based on a benchmark rate, so the payment can change. It may start lower than a fixed rate.",
+    related: ["fixed-rate-loan", "interest-rate", "loan"],
+  },
+  {
+    term: "Cosigner Release",
+    slug: "cosigner-release",
+    category: "Debt",
+    definition:
+      "A feature on some loans that lets the cosigner be removed after the main borrower makes a set number of on-time payments and qualifies on their own.",
+    related: ["cosigner", "loan", "promissory-note"],
+  },
+  {
+    term: "Principal Balance",
+    slug: "principal-balance",
+    category: "Debt",
+    definition:
+      "The amount of a loan you still owe, not counting future interest. Extra payments that go toward principal lower the total interest you pay.",
+    related: ["principal", "amortization", "loan"],
+  },
+  {
+    term: "Interest-Only Loan",
+    slug: "interest-only-loan",
+    category: "Debt",
+    definition:
+      "A loan that for a time lets you pay only the interest, so the balance does not shrink. Payments jump later when principal is added.",
+    related: ["principal-balance", "amortization", "loan"],
+  },
+  {
+    term: "Mortgage",
+    slug: "mortgage",
+    category: "Debt",
+    definition:
+      "A loan used to buy a home, with the home itself as collateral. If payments stop, the lender can take the home through foreclosure.",
+    related: ["collateral", "secured-loan", "foreclosure", "principal-balance"],
+  },
+  {
+    term: "Foreclosure",
+    slug: "foreclosure",
+    category: "Debt",
+    definition:
+      "The legal process a lender uses to take and sell a home when the mortgage is not paid. It seriously damages credit.",
+    related: ["mortgage", "repossession", "default"],
+  },
+  {
+    term: "Auto Loan",
+    slug: "auto-loan",
+    category: "Debt",
+    definition:
+      "A loan used to buy a vehicle, with the vehicle as collateral. Missing payments can lead to repossession.",
+    related: ["secured-loan", "collateral", "repossession"],
+  },
+  {
+    term: "Personal Loan",
+    slug: "personal-loan",
+    category: "Debt",
+    definition:
+      "A loan you can use for almost any purpose, often unsecured and repaid in fixed monthly installments. The rate depends on your credit.",
+    related: ["unsecured-loan", "installment-loan", "loan"],
+  },
+  {
+    term: "Line of Credit",
+    slug: "line-of-credit",
+    category: "Debt",
+    definition:
+      "A set amount you can borrow from as needed, repay, and borrow again, paying interest only on what you use. A credit card is one common form.",
+    related: ["revolving-debt", "credit-limit", "loan"],
+  },
+  {
+    term: "Judgment",
+    slug: "judgment",
+    category: "Debt",
+    definition:
+      "A court's official ruling that you owe a debt, which a creditor can use to pursue collection through steps like wage garnishment.",
+    related: ["garnishment", "collections", "lien"],
+  },
+  {
+    term: "Statute of Limitations",
+    slug: "statute-of-limitations",
+    category: "Debt",
+    definition:
+      "The legal time limit a creditor has to sue over an unpaid debt. After it passes, the debt still exists but is much harder to enforce.",
+    related: ["collections", "delinquency", "debt"],
+  },
+  {
+    term: "Escrow",
+    slug: "escrow",
+    category: "Debt",
+    definition:
+      "Money or a document held by a neutral third party until the terms of a deal are met, common with home purchases and property taxes. The holder releases it when conditions are satisfied.",
+    related: ["property-tax", "lien", "mortgage"],
+  },
+
+  //                                                       Investing
+  {
+    term: "Compound Annual Growth Rate (CAGR)",
+    slug: "compound-annual-growth-rate",
+    category: "Investing",
+    definition:
+      "The steady yearly rate that would take an investment from its starting value to its ending value over several years. It smooths out the ups and downs along the way.",
+    related: ["compound-growth", "return", "dollar-cost-averaging"],
+  },
+  {
+    term: "Market Capitalization",
+    slug: "market-capitalization",
+    category: "Investing",
+    definition:
+      "The total value of a company's shares, found by multiplying the share price by the number of shares. It shows a company's size, from small-cap to large-cap.",
+    related: ["stock", "share", "stock-exchange"],
+  },
+  {
+    term: "Target-Date Fund",
+    slug: "target-date-fund",
+    category: "Investing",
+    definition:
+      "A fund that automatically shifts from more stocks to more bonds as a chosen year approaches, such as a retirement date. It is built to need little hands-on management.",
+    related: ["mutual-fund", "asset-allocation", "retirement", "rebalancing"],
+  },
+  {
+    term: "Traditional IRA",
+    slug: "traditional-ira",
+    category: "Investing",
+    definition:
+      "A retirement account where contributions may be deducted from taxes now and withdrawals are taxed later. It contrasts with a Roth IRA, which is taxed the other way around.",
+    related: ["ira", "roth-ira", "retirement", "tax-deferred"],
+  },
+  {
+    term: "Restricted Stock Unit (RSU)",
+    slug: "restricted-stock-unit",
+    category: "Investing",
+    definition:
+      "Company shares an employer promises to give an employee, which become theirs only after meeting time or performance conditions. It is often shortened to RSU.",
+    related: ["vesting", "stock", "share", "employer-match"],
+  },
+  {
+    term: "Treasury Security",
+    slug: "treasury-security",
+    category: "Investing",
+    definition:
+      "A loan you make to the U.S. government that pays interest and is considered very low risk. Treasury bills, notes, and bonds differ mainly by how long until they are repaid.",
+    related: ["bond", "return", "liquidity"],
+  },
+  {
+    term: "Municipal Bond",
+    slug: "municipal-bond",
+    category: "Investing",
+    definition:
+      "A bond issued by a state or local government, often to fund public projects. Its interest is frequently free from federal income tax.",
+    related: ["bond", "corporate-bond", "interest"],
+  },
+  {
+    term: "Corporate Bond",
+    slug: "corporate-bond",
+    category: "Investing",
+    definition:
+      "A bond issued by a company to raise money, which pays interest to lenders. It usually offers higher interest than a government bond because the risk is greater.",
+    related: ["bond", "municipal-bond", "treasury-security"],
+  },
+  {
+    term: "Money Market Fund",
+    slug: "money-market-fund",
+    category: "Investing",
+    definition:
+      "A mutual fund that holds very short-term, low-risk investments and aims to keep a stable value. It is different from a bank money market account.",
+    related: ["mutual-fund", "money-market-account", "liquidity"],
+  },
+  {
+    term: "Cost Basis",
+    slug: "cost-basis",
+    category: "Investing",
+    definition:
+      "The original amount you paid for an investment, used to figure your gain or loss when you sell. A higher basis means a smaller taxable gain.",
+    related: ["capital-gain", "capital-loss", "stock"],
+  },
+  {
+    term: "Unrealized Gain",
+    slug: "unrealized-gain",
+    category: "Investing",
+    definition:
+      "An increase in the value of an investment you still own, which becomes real only when you sell. It is sometimes called a paper gain.",
+    related: ["capital-gain", "capital-loss", "portfolio"],
+  },
+  {
+    term: "Realized Gain",
+    slug: "realized-gain",
+    category: "Investing",
+    definition:
+      "The profit locked in when you actually sell an investment for more than you paid. Unlike an unrealized gain, it can be taxed.",
+    related: ["unrealized-gain", "capital-gain", "capital-gains-tax"],
+  },
+  {
+    term: "Dividend Reinvestment",
+    slug: "dividend-reinvestment",
+    category: "Investing",
+    definition:
+      "Using the dividends an investment pays to automatically buy more shares instead of taking the cash. It can speed up compound growth.",
+    related: ["dividend", "compound-growth", "share"],
+  },
+  {
+    term: "Stock Split",
+    slug: "stock-split",
+    category: "Investing",
+    definition:
+      "When a company divides its existing shares into more shares, lowering the price of each while keeping the total value the same. Owners simply hold more shares at a lower price.",
+    related: ["stock", "share", "market-capitalization"],
+  },
+  {
+    term: "Price-to-Earnings Ratio",
+    slug: "price-to-earnings-ratio",
+    category: "Investing",
+    definition:
+      "A measure comparing a stock's price to the company's yearly profit per share. A high ratio can mean investors expect strong growth, or that the stock is pricey.",
+    related: ["stock", "share", "dividend"],
+  },
+  {
+    term: "Blue-Chip Stock",
+    slug: "blue-chip-stock",
+    category: "Investing",
+    definition:
+      "Shares of a large, well-known company with a long record of stable performance. They are seen as steadier but slower-growing than smaller companies.",
+    related: ["stock", "market-capitalization", "volatility"],
+  },
+  {
+    term: "Securities",
+    slug: "securities",
+    category: "Investing",
+    definition:
+      "A general term for tradable financial assets such as stocks and bonds. Buying a security means buying a small ownership stake or a loan.",
+    related: ["stock", "bond", "brokerage-account"],
+  },
+  {
+    term: "Asset Class",
+    slug: "asset-class",
+    category: "Investing",
+    definition:
+      "A group of investments that behave alike and follow similar rules, such as stocks, bonds, or cash. Spreading money across classes is a core part of diversification.",
+    related: ["asset-allocation", "diversification", "asset"],
+  },
+  {
+    term: "Annuity",
+    slug: "annuity",
+    category: "Investing",
+    definition:
+      "A contract, often with an insurer, that pays you a stream of income for a set time or for life in exchange for money paid up front or over time.",
+    related: ["retirement", "life-insurance", "return"],
+  },
+  {
+    term: "Mutual Fund Load",
+    slug: "mutual-fund-load",
+    category: "Investing",
+    definition:
+      "A sales fee charged when you buy or sell shares of some mutual funds. Funds without this fee are called no-load funds.",
+    related: ["mutual-fund", "expense-ratio", "brokerage-account"],
+  },
+  {
+    term: "Market Order",
+    slug: "market-order",
+    category: "Investing",
+    definition:
+      "An instruction to buy or sell an investment right away at the best current price. It fills fast, but the exact price is not guaranteed.",
+    related: ["limit-order", "brokerage-account", "stock"],
+  },
+  {
+    term: "Limit Order",
+    slug: "limit-order",
+    category: "Investing",
+    definition:
+      "An instruction to buy or sell only at a set price or better. It controls the price but may not fill if the market never reaches it.",
+    related: ["market-order", "brokerage-account", "stock"],
+  },
+  {
+    term: "Shareholder",
+    slug: "shareholder",
+    category: "Investing",
+    definition:
+      "Someone who owns shares of a company and therefore owns a small piece of it. Shareholders may receive dividends and votes.",
+    related: ["share", "stock", "dividend"],
+  },
+  {
+    term: "IPO (Initial Public Offering)",
+    slug: "ipo",
+    category: "Investing",
+    definition:
+      "A company's first sale of shares to the public, letting anyone buy in. The letters stand for initial public offering.",
+    related: ["stock", "stock-exchange", "share"],
+  },
+
+  //                                                          Income
+  {
+    term: "Freelance",
+    slug: "freelance",
+    category: "Income",
+    definition:
+      "Working for yourself by taking on individual jobs or projects for different clients, rather than holding one steady job. Freelancers handle their own taxes and benefits.",
+    related: ["self-employment", "gig-work", "1099", "self-employment-tax"],
+  },
+  {
+    term: "Self-Employment Tax",
+    slug: "self-employment-tax",
+    category: "Income",
+    definition:
+      "The Social Security and Medicare tax that people who work for themselves pay, covering both the employee and employer shares. Regular employees split this with their employer.",
+    related: ["self-employment", "fica", "payroll-tax", "estimated-taxes"],
+  },
+  {
+    term: "Unemployment Benefits",
+    slug: "unemployment-benefits",
+    category: "Income",
+    definition:
+      "Temporary payments from a state program to people who lost a job through no fault of their own. The money partly replaces lost wages while they look for work.",
+    related: ["severance", "benefits", "income"],
+  },
+  {
+    term: "Promotion",
+    slug: "promotion",
+    category: "Income",
+    definition:
+      "A move to a higher position at work, usually with more responsibility and often more pay. It differs from a raise, which is more money in the same role.",
+    related: ["pay-raise", "salary", "wage"],
+  },
+  {
+    term: "Passive Income",
+    slug: "passive-income",
+    category: "Income",
+    definition:
+      "Money earned with little ongoing effort, such as interest, dividends, or rent. It contrasts with the active income you earn by working.",
+    related: ["dividend", "interest", "income"],
+  },
+  {
+    term: "Earned Income",
+    slug: "earned-income",
+    category: "Income",
+    definition:
+      "Money you get from working, including wages, salary, tips, and self-employment pay. Some tax credits depend on having earned income.",
+    related: ["gross-income", "wage", "salary", "tips"],
+  },
+  {
+    term: "Independent Contractor",
+    slug: "independent-contractor",
+    category: "Income",
+    definition:
+      "A worker hired to do specific jobs who is not an employee, so taxes are not withheld from their pay. They usually receive a 1099 form.",
+    related: ["1099", "self-employment", "freelance", "gig-work"],
+  },
+  {
+    term: "W-9",
+    slug: "w-9",
+    category: "Income",
+    definition:
+      "A form you give a client or company so they have your taxpayer information to report what they paid you. It is common for contractors and freelancers.",
+    related: ["1099", "independent-contractor", "self-employment"],
+  },
+  {
+    term: "Net Income",
+    slug: "net-income",
+    category: "Income",
+    definition:
+      "What is left from earnings after taxes and deductions are taken out. For a person it is take-home pay; for a business it is profit after costs.",
+    related: ["gross-income", "take-home-pay", "net-pay"],
+  },
+  {
+    term: "Back Pay",
+    slug: "back-pay",
+    category: "Income",
+    definition:
+      "Wages owed for past work that were not paid on time, paid later in a lump sum. It can come from a raise applied late or a legal ruling.",
+    related: ["wage", "pay-raise", "paycheck"],
+  },
+  {
+    term: "Living Wage",
+    slug: "living-wage",
+    category: "Income",
+    definition:
+      "An estimate of the income a worker needs to cover basic costs in a specific area. It is usually higher than the legal minimum wage.",
+    related: ["minimum-wage", "cost-of-living", "wage"],
+  },
+  {
+    term: "Royalty",
+    slug: "royalty",
+    category: "Income",
+    definition:
+      "A payment to a creator or owner each time their work or property is used, such as a song or a patent. It is a form of ongoing income.",
+    related: ["passive-income", "income"],
+  },
+  {
+    term: "1099-NEC",
+    slug: "1099-nec",
+    category: "Income",
+    definition:
+      "A 1099 form that reports nonemployee pay, like money earned as a contractor or freelancer. The payer also sends a copy to the IRS.",
+    related: ["1099", "independent-contractor", "self-employment"],
+  },
+
+  //                                                           Taxes
+  {
+    term: "Tax Liability",
+    slug: "tax-liability",
+    category: "Taxes",
+    definition:
+      "The total amount of tax you owe for the year before counting what you already paid through withholding or estimated payments. If payments fall short, you owe the difference.",
+    related: ["taxable-income", "withholding", "tax-refund", "tax-bracket"],
+  },
+  {
+    term: "1098-T",
+    slug: "1098-t",
+    category: "Taxes",
+    definition:
+      "A form colleges send showing the tuition you paid, used to claim education tax credits or deductions. The school sends a copy to the IRS too.",
+    related: ["1040", "tax-credit", "tuition"],
+  },
+  {
+    term: "1040",
+    slug: "1040",
+    category: "Taxes",
+    definition:
+      "The main federal form individuals use to file an income tax return each year. Other forms and schedules attach to it.",
+    related: ["tax-return", "irs", "taxable-income", "adjusted-gross-income"],
+  },
+  {
+    term: "Refundable Tax Credit",
+    slug: "refundable-tax-credit",
+    category: "Taxes",
+    definition:
+      "A tax credit that can lower your tax below zero, so you get the leftover amount back as a refund. It helps even if you owe little tax.",
+    related: ["tax-credit", "nonrefundable-tax-credit", "tax-refund"],
+  },
+  {
+    term: "Nonrefundable Tax Credit",
+    slug: "nonrefundable-tax-credit",
+    category: "Taxes",
+    definition:
+      "A tax credit that can reduce what you owe down to zero but no further, so it cannot create a refund on its own.",
+    related: ["tax-credit", "refundable-tax-credit", "tax-liability"],
+  },
+  {
+    term: "Tax Extension",
+    slug: "tax-extension",
+    category: "Taxes",
+    definition:
+      "Permission to file your tax return later than the usual deadline, typically six more months. It delays the paperwork, not the payment, which is still due on time.",
+    related: ["tax-deadline", "tax-return", "irs"],
+  },
+  {
+    term: "Tax-Deferred",
+    slug: "tax-deferred",
+    category: "Taxes",
+    definition:
+      "Money in certain accounts that is not taxed until you take it out later, often in retirement. Growth builds without yearly taxes along the way.",
+    related: ["traditional-ira", "401k", "ira", "retirement"],
+  },
+  {
+    term: "Pre-Tax",
+    slug: "pre-tax",
+    category: "Taxes",
+    definition:
+      "Money taken from your pay before income taxes are figured, such as some retirement or health contributions. It lowers your taxable income now.",
+    related: ["taxable-income", "401k", "health-savings-account", "withholding"],
+  },
+  {
+    term: "After-Tax",
+    slug: "after-tax",
+    category: "Taxes",
+    definition:
+      "Money that has already had taxes taken out, or a contribution made from such money. Roth retirement contributions are made with after-tax dollars.",
+    related: ["roth-ira", "take-home-pay", "net-pay"],
+  },
+  {
+    term: "Capital Gains Tax",
+    slug: "capital-gains-tax",
+    category: "Taxes",
+    definition:
+      "The tax you owe on the profit when you sell an investment for more than you paid. Holding longer than a year usually means a lower rate.",
+    related: ["capital-gain", "cost-basis", "taxable-income"],
+  },
+  {
+    term: "Exemption",
+    slug: "exemption",
+    category: "Taxes",
+    definition:
+      "An amount that reduces taxable income, historically claimed for yourself and dependents. Personal exemptions were paused by recent law, but the term still appears.",
+    related: ["dependent", "taxable-income", "deduction"],
+  },
+  {
+    term: "Progressive Tax",
+    slug: "progressive-tax",
+    category: "Taxes",
+    definition:
+      "A tax system where higher income is taxed at higher rates. U.S. federal income tax works this way through brackets.",
+    related: ["tax-bracket", "marginal-tax-rate", "income-tax"],
+  },
+  {
+    term: "Regressive Tax",
+    slug: "regressive-tax",
+    category: "Taxes",
+    definition:
+      "A tax that takes a larger share of income from people who earn less. Sales taxes are often described as regressive.",
+    related: ["sales-tax", "progressive-tax", "tax"],
+  },
+  {
+    term: "Earned Income Tax Credit",
+    slug: "earned-income-tax-credit",
+    category: "Taxes",
+    definition:
+      "A refundable tax credit for workers with low to moderate income, larger for those with children. It can mean a refund even if no tax is owed.",
+    related: ["refundable-tax-credit", "earned-income", "tax-credit"],
+  },
+
+  //                                                       Insurance
+  {
+    term: "Term Life Insurance",
+    slug: "term-life-insurance",
+    category: "Insurance",
+    definition:
+      "Life insurance that covers you for a set number of years and pays out only if you die during that time. It usually costs less than whole life.",
+    related: ["life-insurance", "whole-life-insurance", "premium", "beneficiary"],
+  },
+  {
+    term: "Whole Life Insurance",
+    slug: "whole-life-insurance",
+    category: "Insurance",
+    definition:
+      "Life insurance that lasts your whole life and builds a cash value you can borrow against. It costs more than term life.",
+    related: ["life-insurance", "term-life-insurance", "premium"],
+  },
+  {
+    term: "Claim Denial",
+    slug: "claim-denial",
+    category: "Insurance",
+    definition:
+      "When an insurer refuses to pay a claim, saying it is not covered or that rules were not met. You can usually appeal the decision.",
+    related: ["claim", "coverage", "policy"],
+  },
+  {
+    term: "Comprehensive Coverage",
+    slug: "comprehensive-coverage",
+    category: "Insurance",
+    definition:
+      "Car insurance that pays for damage not caused by a crash, such as theft, fire, or a fallen tree. It is optional unless a lender requires it.",
+    related: ["auto-insurance", "collision-coverage", "deductible-insurance"],
+  },
+  {
+    term: "Collision Coverage",
+    slug: "collision-coverage",
+    category: "Insurance",
+    definition:
+      "Car insurance that pays to repair your own vehicle after a crash, no matter who was at fault. It is separate from coverage for the other driver.",
+    related: ["auto-insurance", "comprehensive-coverage", "liability-insurance"],
+  },
+  {
+    term: "Umbrella Policy",
+    slug: "umbrella-policy",
+    category: "Insurance",
+    definition:
+      "Extra liability insurance that kicks in after your home or auto coverage runs out. It guards your savings against a large claim or lawsuit.",
+    related: ["liability-insurance", "auto-insurance", "renters-insurance"],
+  },
+  {
+    term: "Rider",
+    slug: "rider",
+    category: "Insurance",
+    definition:
+      "An add-on to an insurance policy that changes or expands what it covers, usually for an extra cost. It is also called an endorsement.",
+    related: ["policy", "coverage", "premium"],
+  },
+  {
+    term: "Explanation of Benefits (EOB)",
+    slug: "explanation-of-benefits",
+    category: "Insurance",
+    definition:
+      "A statement from a health insurer, not a bill, showing what a visit cost, what the plan paid, and what you may owe. Reviewing it helps catch errors.",
+    related: ["health-insurance", "claim", "copay", "coinsurance"],
+  },
+  {
+    term: "High-Deductible Health Plan",
+    slug: "high-deductible-health-plan",
+    category: "Insurance",
+    definition:
+      "A health plan with lower monthly premiums but a higher deductible you pay before coverage kicks in. It can be paired with a health savings account.",
+    related: ["health-insurance", "deductible-insurance", "health-savings-account", "premium"],
+  },
+  {
+    term: "Disability Insurance",
+    slug: "disability-insurance",
+    category: "Insurance",
+    definition:
+      "Insurance that replaces part of your income if an illness or injury keeps you from working. It can be short-term or long-term.",
+    related: ["coverage", "premium", "benefits"],
+  },
+  {
+    term: "Actual Cash Value",
+    slug: "actual-cash-value",
+    category: "Insurance",
+    definition:
+      "A way of paying a claim based on what an item is worth now, after wear and age, rather than the cost to buy new. It usually pays less than replacement cost.",
+    related: ["replacement-cost", "claim", "coverage"],
+  },
+  {
+    term: "Replacement Cost",
+    slug: "replacement-cost",
+    category: "Insurance",
+    definition:
+      "A way of paying a claim based on what it costs to replace an item with a new one, without subtracting for age or wear. It usually pays more than actual cash value.",
+    related: ["actual-cash-value", "claim", "renters-insurance"],
+  },
+  {
+    term: "Pre-Existing Condition",
+    slug: "pre-existing-condition",
+    category: "Insurance",
+    definition:
+      "A health issue you had before a new insurance plan started. Most health plans can no longer deny coverage or charge more because of one.",
+    related: ["health-insurance", "coverage", "open-enrollment"],
+  },
+  {
+    term: "Waiting Period",
+    slug: "waiting-period",
+    category: "Insurance",
+    definition:
+      "A set time after a policy starts before certain coverage begins. It is common with disability and some dental plans.",
+    related: ["coverage", "policy", "disability-insurance"],
+  },
+  {
+    term: "Policyholder",
+    slug: "policyholder",
+    category: "Insurance",
+    definition:
+      "The person who owns an insurance policy, pays the premium, and can make changes to it. The policyholder may differ from the person covered.",
+    related: ["policy", "premium", "beneficiary"],
+  },
+  {
+    term: "Group Health Insurance",
+    slug: "group-health-insurance",
+    category: "Insurance",
+    definition:
+      "Health coverage offered through an employer or organization to its members, usually cheaper than buying on your own. You often share the premium with the employer.",
+    related: ["health-insurance", "open-enrollment", "premium"],
+  },
+
+  //                                                   College & Aid
+  {
+    term: "Net Price Calculator",
+    slug: "net-price-calculator",
+    category: "College & Aid",
+    definition:
+      "An online tool on a college's website that estimates what a student will actually pay after grants and scholarships, not the sticker price. Results are estimates, not offers.",
+    related: ["net-price", "cost-of-attendance", "financial-aid"],
+  },
+  {
+    term: "Federal Student Loan",
+    slug: "federal-student-loan",
+    category: "College & Aid",
+    definition:
+      "A student loan made through the U.S. government, which sets the rates and offers protections like income-driven repayment. It differs from a private loan from a bank.",
+    related: ["student-loan", "private-student-loan", "subsidized-loan", "unsubsidized-loan"],
+  },
+  {
+    term: "Income-Driven Repayment",
+    slug: "income-driven-repayment",
+    category: "College & Aid",
+    definition:
+      "A federal student loan plan that sets the monthly payment based on your income and family size, often lowering it. Any balance left after many years may be forgiven.",
+    related: ["student-loan", "loan-forgiveness", "federal-student-loan", "discretionary-income"],
+  },
+  {
+    term: "Verification",
+    slug: "verification",
+    category: "College & Aid",
+    definition:
+      "A step where a school asks for documents to confirm the information on a FAFSA before releasing aid. Being selected is routine and not a sign of a problem.",
+    related: ["fafsa", "financial-aid", "student-aid-index"],
+  },
+  {
+    term: "Student Aid Report (SAR)",
+    slug: "student-aid-report",
+    category: "College & Aid",
+    definition:
+      "A summary the government sends after you file the FAFSA, listing your answers and aid eligibility figures. Newer versions are called the FAFSA Submission Summary.",
+    related: ["fafsa", "student-aid-index", "financial-aid"],
+  },
+  {
+    term: "PLUS Loan",
+    slug: "plus-loan",
+    category: "College & Aid",
+    definition:
+      "A federal loan that parents of undergraduates or graduate students can take out to cover college costs other aid does not. It requires a credit check.",
+    related: ["federal-student-loan", "student-loan", "cost-of-attendance"],
+  },
+  {
+    term: "Standard Repayment Plan",
+    slug: "standard-repayment-plan",
+    category: "College & Aid",
+    definition:
+      "The default federal student loan plan, with fixed monthly payments that pay off the loan in about ten years. It costs less in total interest than longer plans.",
+    related: ["student-loan", "loan-servicer", "federal-student-loan"],
+  },
+  {
+    term: "Student Loan Consolidation",
+    slug: "student-loan-consolidation",
+    category: "College & Aid",
+    definition:
+      "Combining several federal student loans into one new loan with a single monthly payment. It can simplify paying but may not lower the total interest.",
+    related: ["student-loan", "debt-consolidation", "loan-servicer", "federal-student-loan"],
+  },
+  {
+    term: "Satisfactory Academic Progress",
+    slug: "satisfactory-academic-progress",
+    category: "College & Aid",
+    definition:
+      "The grades and pace of completing courses a student must keep to stay eligible for financial aid. Falling below it can pause aid until it is fixed.",
+    related: ["financial-aid", "fafsa", "work-study"],
+  },
+  {
+    term: "Loan Grace Period",
+    slug: "loan-grace-period",
+    category: "College & Aid",
+    definition:
+      "The months after you leave school before student loan payments begin, often six months. Interest may still build during it on some loans.",
+    related: ["student-loan", "deferment", "federal-student-loan"],
+  },
+  {
+    term: "Entrance Counseling",
+    slug: "entrance-counseling",
+    category: "College & Aid",
+    definition:
+      "A required session that explains your rights and duties before you take a first federal student loan. It covers repayment and interest.",
+    related: ["federal-student-loan", "student-loan", "promissory-note"],
+  },
+  {
+    term: "Master Promissory Note",
+    slug: "master-promissory-note",
+    category: "College & Aid",
+    definition:
+      "A single signed agreement to repay all the federal student loans you take over time at a school. It saves signing a new note each year.",
+    related: ["promissory-note", "federal-student-loan", "student-loan"],
+  },
+  {
+    term: "Enrollment Status",
+    slug: "enrollment-status",
+    category: "College & Aid",
+    definition:
+      "Whether a student counts as full-time or part-time, based on course load. It affects aid amounts and when loan repayment starts.",
+    related: ["financial-aid", "work-study", "loan-grace-period"],
+  },
+  {
+    term: "Gift Aid",
+    slug: "gift-aid",
+    category: "College & Aid",
+    definition:
+      "Financial aid you do not repay, such as grants and scholarships, as opposed to loans. It is the most valuable kind of aid.",
+    related: ["grant", "scholarship", "financial-aid", "need-based-aid"],
+  },
+  {
+    term: "Self-Help Aid",
+    slug: "self-help-aid",
+    category: "College & Aid",
+    definition:
+      "Aid you earn or repay, such as work-study jobs and loans, as opposed to gift aid. It still lowers what you pay up front.",
+    related: ["work-study", "student-loan", "gift-aid"],
+  },
+
 ];
 
 /** The A-Z keys for the jump bar. */
