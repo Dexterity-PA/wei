@@ -1383,6 +1383,1381 @@ export const learnModules: LearnModule[] = [
       },
     ],
   },
+  {
+    slug: "checking-vs-savings-accounts",
+    title: "Checking vs Savings Accounts",
+    summary:
+      "Two accounts, two jobs: one for spending day to day, one for money you want to grow and leave alone.",
+    topic: "Banking",
+    level: "Beginner",
+    minutes: 6,
+    sections: [
+      {
+        heading: "Two accounts, two jobs",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A checking account is built for everyday spending. It is where your paycheck lands, where your debit card pulls from, and where you pay bills. Money moves in and out of it often.",
+          },
+          {
+            type: "paragraph",
+            text: "A savings account is built for money you want to set aside and not touch. It usually pays you a little extra, called interest, for keeping your money there. The idea is to leave it alone so it can grow.",
+          },
+        ],
+      },
+      {
+        heading: "What APY means",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "APY stands for annual percentage yield. It is the rate that tells you how much a savings account pays you over one year, including the effect of interest building on itself.",
+          },
+          {
+            type: "paragraph",
+            text: "Here is a simple example. If you keep 1,000 dollars in an account with a 4 percent APY and do not add or remove anything, you would have about 1,040 dollars after a year. Checking accounts usually pay very little or no APY, because they are made for spending, not growing.",
+          },
+          {
+            type: "callout",
+            title: "Higher APY, same dollars",
+            text: "Two savings accounts can hold the same money but pay different amounts, because their APYs differ. Comparing the APY is how you see which one pays more for the exact same balance.",
+          },
+        ],
+      },
+      {
+        heading: "Why keep a savings account at all",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Keeping savings separate from checking does two helpful things. It pays you interest on money you are not spending, and it puts a small wall between you and the cash so you are less likely to spend it by accident.",
+          },
+          {
+            type: "list",
+            items: [
+              "Money for an emergency fund fits well in savings, ready but out of the way.",
+              "Money for a goal months away, like a trip or a deposit, can grow there instead of sitting idle.",
+              "Day to day money stays in checking, where you can reach it with a card any time.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Moving money between them",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Most banks let you transfer money between your own checking and savings instantly through an app or website. So you do not lose access to your savings. You simply move it back to checking when you actually need to spend it.",
+          },
+          {
+            type: "paragraph",
+            text: "A common pattern is to keep enough in checking to cover the bills and spending you expect, and to keep the rest in savings where it earns interest. The split that fits one person will not match another, and that is normal.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "account-purpose",
+        prompt: "What is a checking account mainly built for?",
+        options: [
+          "Growing money you never touch",
+          "Everyday spending and paying bills",
+          "Storing money the bank will not let you access",
+          "Earning the highest possible interest",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Checking is the everyday account: your pay lands there and your debit card and bills pull from it. Savings is the account built to hold money and earn interest.",
+      },
+      {
+        id: "apy-meaning",
+        prompt: "What does APY tell you?",
+        options: [
+          "How many times you can use your card",
+          "How much an account pays you over a year",
+          "The fee for opening an account",
+          "How long the bank has existed",
+        ],
+        answerIndex: 1,
+        explanation:
+          "APY, annual percentage yield, is the yearly rate an account pays, including interest building on itself. Comparing APYs shows which account pays more for the same balance.",
+      },
+      {
+        id: "savings-access",
+        prompt: "If your money is in savings and you suddenly need it, what happens?",
+        options: [
+          "It is locked away until the end of the year",
+          "You usually transfer it to checking, often instantly",
+          "You lose it",
+          "You must close the account to reach it",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A savings account is not locked. Most banks let you move money to checking right away, so your savings stays available while still earning interest until you need it.",
+      },
+      {
+        id: "where-emergency",
+        prompt: "Which account is a common home for an emergency fund?",
+        options: [
+          "Checking, so it is spent quickly",
+          "Savings, where it earns interest and stays a bit out of reach",
+          "Neither; emergency money cannot be in a bank",
+          "Whichever has the lowest APY",
+        ],
+        answerIndex: 1,
+        explanation:
+          "An emergency fund fits well in savings. It earns interest and sits one small step away from daily spending, so it is ready but less tempting to dip into.",
+      },
+    ],
+  },
+  {
+    slug: "how-interest-works",
+    title: "How Interest Works",
+    summary:
+      "Interest is the price of using money. The same idea works for you when you save and against you when you borrow.",
+    topic: "Saving",
+    level: "Beginner",
+    minutes: 6,
+    sections: [
+      {
+        heading: "Interest is the price of using money",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Interest is what it costs to use money that belongs to someone else for a while. It is usually shown as a percent of the amount, charged or paid over a set period such as a year.",
+          },
+          {
+            type: "paragraph",
+            text: "The starting amount of money is called the principal. Interest is figured as a percent of that principal. So a 5 percent rate on 100 dollars of principal is 5 dollars over a year.",
+          },
+        ],
+      },
+      {
+        heading: "When interest works for you",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "When you put money in a savings account, you are lending it to the bank. In return, the bank pays you interest. Here you are the one earning, and a higher rate means more money paid to you.",
+          },
+          {
+            type: "paragraph",
+            text: "Say you keep 500 dollars in an account paying 4 percent a year. After a year you would have about 520 dollars without lifting a finger. The 20 dollars is interest the bank paid you for keeping your money there.",
+          },
+          {
+            type: "callout",
+            title: "Earning side: higher is better",
+            text: "When you are the one earning interest, such as in a savings account, a higher rate works in your favor. You compare rates to find where your money earns the most.",
+          },
+        ],
+      },
+      {
+        heading: "When interest works against you",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "When you borrow money, with a loan or a credit card, the lender charges you interest. Now you are the one paying. A higher rate means the borrowed money costs you more.",
+          },
+          {
+            type: "paragraph",
+            text: "For borrowing, the cost is often shown as an APR, the annual percentage rate. It is the yearly rate you pay to borrow. If you borrow 500 dollars at a 20 percent APR and do not pay it back for a year, the interest alone would be about 100 dollars on top of the 500 you owe.",
+          },
+        ],
+      },
+      {
+        heading: "Same idea, two directions",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Saving and borrowing are two sides of the same coin. In both, someone pays for the use of money over time. The only question is which side you are on.",
+          },
+          {
+            type: "list",
+            items: [
+              "Earning interest: you save or lend, and money is paid to you. Higher rates help you.",
+              "Paying interest: you borrow, and you pay the lender. Higher rates cost you more.",
+              "The longer money is borrowed or saved, the more interest adds up, in either direction.",
+            ],
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "principal-meaning",
+        prompt: "What is the principal?",
+        options: [
+          "The interest added on top",
+          "The starting amount of money before interest",
+          "A type of bank fee",
+          "The person who runs the bank",
+        ],
+        answerIndex: 1,
+        explanation:
+          "The principal is the original amount, the money you start with or borrow. Interest is figured as a percent of that principal.",
+      },
+      {
+        id: "saving-side",
+        prompt: "When you keep money in a savings account, who pays interest to whom?",
+        options: [
+          "You pay the bank",
+          "The bank pays you",
+          "No interest is involved",
+          "You pay another customer",
+        ],
+        answerIndex: 1,
+        explanation:
+          "In a savings account you are lending your money to the bank, so the bank pays you interest. On the earning side, a higher rate works in your favor.",
+      },
+      {
+        id: "apr-meaning",
+        prompt: "On a loan or credit card, what does the APR describe?",
+        options: [
+          "The yearly rate you pay to borrow",
+          "The yearly rate the bank pays you",
+          "A one-time signup gift",
+          "The number of payments allowed",
+        ],
+        answerIndex: 0,
+        explanation:
+          "APR, the annual percentage rate, is the yearly cost of borrowing. When you are paying interest, a higher APR means the borrowed money costs you more.",
+      },
+      {
+        id: "two-directions",
+        prompt: "Why are saving and borrowing called two sides of the same idea?",
+        options: [
+          "They both involve paying for the use of money over time",
+          "They both lower your taxes",
+          "They are both free",
+          "They both require a credit card",
+        ],
+        answerIndex: 0,
+        explanation:
+          "In both cases, someone pays for using money across time. The difference is direction: interest is paid to you when you save, and paid by you when you borrow.",
+      },
+    ],
+  },
+  {
+    slug: "needs-wants-and-spending-plans",
+    title: "Needs vs Wants and Spending Plans",
+    summary:
+      "A clear way to sort spending into needs and wants, then turn that into a plan that fits your real life.",
+    topic: "Budgeting",
+    level: "Beginner",
+    minutes: 6,
+    sections: [
+      {
+        heading: "What makes something a need",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A need is something that keeps your life running. Housing, basic food, transportation to work or school, and a phone you rely on are common needs. Without them, daily life gets hard fast.",
+          },
+          {
+            type: "paragraph",
+            text: "This is not about judging spending as good or bad. It is just a way to see which costs are doing essential work, so you know what has to be covered first.",
+          },
+        ],
+      },
+      {
+        heading: "Wants are not the enemy",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A want is something that makes life more enjoyable but is not required to keep things running. Eating out, games, streaming, and new clothes beyond what you need are wants.",
+          },
+          {
+            type: "paragraph",
+            text: "Wants matter. A life that is all needs and no wants is hard to keep up. The point of sorting them is not to delete every want, but to spend on the ones you care about and skip the ones you do not.",
+          },
+        ],
+      },
+      {
+        heading: "The gray area",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Many costs sit between a clear need and a clear want, and the line depends on your situation. A car is a need if it is the only way to get to work, and more of a want if good transit is right outside your door.",
+          },
+          {
+            type: "list",
+            items: [
+              "Ask what the cost is really for. Food is a need, but a fancy dinner out is partly a want.",
+              "Ask if a cheaper version covers the need. A phone plan can be a need while the most expensive plan is a want.",
+              "Be honest, not harsh. The goal is a clear picture, not guilt.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Turning it into a spending plan",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A spending plan is simply a list of where your money will go before it arrives. Once you have sorted needs from wants, the plan almost writes itself: cover the needs first, then decide how much of what is left goes to wants and to saving.",
+          },
+          {
+            type: "callout",
+            title: "A plan is a draft, not a cage",
+            text: "Your first plan will not be perfect, and it does not have to be. Adjust it as you learn what your real costs are. A plan you can actually follow beats a strict one you abandon.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "need-definition",
+        prompt: "Which best describes a need?",
+        options: [
+          "Anything you enjoy buying",
+          "Something that keeps your daily life running",
+          "Only the most expensive option",
+          "Whatever your friends buy",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A need keeps life running, such as housing, basic food, and a way to get to work or school. Sorting needs first shows what must be covered.",
+      },
+      {
+        id: "wants-role",
+        prompt: "Why not cut every want from a spending plan?",
+        options: [
+          "Wants are required by law",
+          "A plan with no wants is hard to stick to",
+          "Wants always cost more than needs",
+          "Cutting wants raises your taxes",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Wants make life enjoyable, and a plan that removes all of them is tough to follow. The aim is to spend on the wants you value and skip the ones you do not.",
+      },
+      {
+        id: "gray-area",
+        prompt: "Why can the same item be a need for one person and a want for another?",
+        options: [
+          "Prices change by the hour",
+          "It depends on the person's situation and what the cost is really for",
+          "Needs and wants mean the same thing",
+          "Only banks decide the difference",
+        ],
+        answerIndex: 1,
+        explanation:
+          "The line depends on context. A car is a need if it is the only way to get to work, and more of a want where good transit is available. Asking what the cost is for helps you decide.",
+      },
+      {
+        id: "spending-plan",
+        prompt: "What is a spending plan?",
+        options: [
+          "A list of where your money will go before it arrives",
+          "A record of past purchases only",
+          "A loan from the bank",
+          "A list of things you can never buy",
+        ],
+        answerIndex: 0,
+        explanation:
+          "A spending plan decides where money goes ahead of time: needs first, then wants and saving. It is a flexible draft you adjust, not a strict cage.",
+      },
+    ],
+  },
+  {
+    slug: "reading-a-bank-statement",
+    title: "Reading a Bank Statement",
+    summary:
+      "How to read the monthly summary of your account, spot fees, and catch errors before they cost you.",
+    topic: "Banking",
+    level: "Beginner",
+    minutes: 6,
+    sections: [
+      {
+        heading: "What a bank statement is",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A bank statement is a summary your bank sends, usually once a month, that lists everything that happened in your account. It shows money that came in, money that went out, and what is left.",
+          },
+          {
+            type: "paragraph",
+            text: "You can get it on paper or, more often now, in your bank app or website. Reading it regularly is one of the simplest ways to stay on top of your money.",
+          },
+        ],
+      },
+      {
+        heading: "The main line items",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Most statements share the same basic parts. Once you know what to look for, any statement becomes easy to read.",
+          },
+          {
+            type: "list",
+            items: [
+              "Opening balance: how much was in the account at the start of the period.",
+              "Deposits or credits: money that came in, like a paycheck or a transfer.",
+              "Withdrawals or debits: money that went out, like card purchases and bills.",
+              "Closing balance: how much was left at the end of the period.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Spotting fees",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Fees are charges the bank takes for certain services or events. They show up as withdrawals, often with a short label, and they are easy to miss if you do not look for them.",
+          },
+          {
+            type: "callout",
+            title: "Scan for small mystery charges",
+            text: "A monthly maintenance fee, an overdraft fee, or an out-of-network ATM fee can each be small on its own. Spotting them on the statement is the first step to asking the bank whether they can be avoided.",
+          },
+        ],
+      },
+      {
+        heading: "Catching errors and fraud",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Reading each line lets you catch two kinds of problems. An error is an honest mistake, like being charged twice for one purchase. Fraud is when someone uses your account without permission.",
+          },
+          {
+            type: "paragraph",
+            text: "If you see a charge you do not recognize, contact your bank promptly. Reporting a problem quickly usually gives you the strongest protection, so a fast look each month is worth the few minutes it takes.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "statement-what",
+        prompt: "What does a bank statement show?",
+        options: [
+          "Only your future spending",
+          "A summary of money in, money out, and what is left for a period",
+          "Your credit score",
+          "Other people's accounts",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A statement summarizes a period of activity: deposits in, withdrawals out, and the balances at the start and end. It is the simplest way to see what happened in your account.",
+      },
+      {
+        id: "debit-meaning",
+        prompt: "On a statement, what is a withdrawal or debit?",
+        options: [
+          "Money that came into the account",
+          "Money that went out of the account",
+          "The bank's profit",
+          "A type of interest",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Withdrawals, also called debits, are money leaving the account, such as card purchases and bills. Deposits, or credits, are money coming in.",
+      },
+      {
+        id: "find-fees",
+        prompt: "Why scan a statement for fees?",
+        options: [
+          "Fees are illegal and should be reported to police",
+          "Small fees are easy to miss but add up, and spotting them is the first step to avoiding them",
+          "Fees raise your credit score",
+          "Fees only appear once a year",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Fees show up as small withdrawals that are easy to overlook. Finding them lets you ask the bank whether they can be avoided, which can save real money over time.",
+      },
+      {
+        id: "unknown-charge",
+        prompt: "You see a charge you do not recognize. What is a sensible first step?",
+        options: [
+          "Ignore it and hope it goes away",
+          "Contact your bank promptly to ask about it",
+          "Close every account you own",
+          "Wait a full year before doing anything",
+        ],
+        answerIndex: 1,
+        explanation:
+          "An unfamiliar charge could be an error or fraud. Contacting the bank quickly usually gives you the strongest protection, which is why a fast monthly check matters.",
+      },
+    ],
+  },
+  {
+    slug: "avoiding-common-bank-fees",
+    title: "Avoiding Common Bank Fees",
+    summary:
+      "Overdraft, ATM, and minimum-balance fees are small on their own but add up. Here is how each works and how to dodge it.",
+    topic: "Banking",
+    level: "Beginner",
+    minutes: 6,
+    sections: [
+      {
+        heading: "Why fees matter",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A bank fee is a charge the bank takes for a service or for something that happens in your account. Any single fee can look small, but a few each month, repeated all year, can quietly become a real cost.",
+          },
+          {
+            type: "paragraph",
+            text: "The good news is that most common fees can be avoided once you know how they are triggered. Knowing the rules of your own account is most of the battle.",
+          },
+        ],
+      },
+      {
+        heading: "Overdraft fees",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "An overdraft happens when you spend more than you have in your account. The bank may cover the difference and then charge an overdraft fee for doing so. These fees are among the largest everyday charges.",
+          },
+          {
+            type: "list",
+            items: [
+              "Keep a small cushion in checking so a forgotten charge does not push you below zero.",
+              "Turn on low-balance alerts in your bank app so you get a warning before trouble.",
+              "Ask your bank about overdraft settings; some let you decline coverage so a card is simply declined instead of overdrawn.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "ATM fees",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "An ATM is a machine that dispenses cash. Using one that does not belong to your bank can trigger two charges at once: one from the machine's owner and one from your own bank for going out of network.",
+          },
+          {
+            type: "callout",
+            title: "Plan where you pull cash",
+            text: "Using your own bank's ATMs, or getting cash back at a store checkout when offered, usually avoids ATM fees entirely. A little planning beats paying to reach your own money.",
+          },
+        ],
+      },
+      {
+        heading: "Minimum-balance and monthly fees",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Some accounts charge a monthly maintenance fee just for being open. Many of these waive the fee if you meet a condition, such as keeping a minimum balance or setting up a direct deposit, which is your pay sent straight to the account.",
+          },
+          {
+            type: "paragraph",
+            text: "If an account charges a fee you keep paying, it is worth checking whether the bank offers an account with no monthly fee. Many do, especially for students and young people.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "fees-add-up",
+        prompt: "Why pay attention to small bank fees?",
+        options: [
+          "They are the largest cost most people have",
+          "Small fees, repeated each month, can add up to a real cost over a year",
+          "They improve your credit score",
+          "They are required for every account",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Any one fee looks small, but several a month across a year add up. Most can be avoided once you know what triggers them.",
+      },
+      {
+        id: "overdraft-trigger",
+        prompt: "What causes an overdraft fee?",
+        options: [
+          "Checking your balance too often",
+          "Spending more than you have in the account",
+          "Keeping too much money in savings",
+          "Using your own bank's ATM",
+        ],
+        answerIndex: 1,
+        explanation:
+          "An overdraft happens when you spend past your balance and the bank covers the gap. A small cushion and low-balance alerts help you avoid the fee.",
+      },
+      {
+        id: "atm-double",
+        prompt: "Why can an out-of-network ATM cost you twice?",
+        options: [
+          "The machine breaks your card",
+          "Both the machine's owner and your own bank may charge a fee",
+          "It counts as borrowing money",
+          "It lowers your APY",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Using an ATM that is not your bank's can bring two charges: one from the machine's owner and one from your bank for going out of network. Your own bank's ATMs usually avoid both.",
+      },
+      {
+        id: "waive-monthly",
+        prompt: "How do many accounts let you avoid a monthly maintenance fee?",
+        options: [
+          "By never using the account",
+          "By meeting a condition like a minimum balance or a direct deposit",
+          "By paying a larger one-time fee",
+          "There is no way to avoid it",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Many accounts waive the monthly fee if you meet a condition, such as a minimum balance or direct deposit. If you keep paying one, it is worth looking for an account with no monthly fee.",
+      },
+    ],
+  },
+  {
+    slug: "what-insurance-is",
+    title: "What Insurance Is and Why It Exists",
+    summary:
+      "Insurance is a way for many people to share the cost of rare, expensive events so no one person has to face them alone.",
+    topic: "Insurance",
+    level: "Core",
+    minutes: 7,
+    sections: [
+      {
+        heading: "Insurance is shared risk",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Insurance is an agreement where you pay a company a regular amount, and in return the company agrees to help pay for certain large, unexpected costs if they happen to you.",
+          },
+          {
+            type: "paragraph",
+            text: "It exists because some events, like a car crash or a serious illness, can cost far more than most people could pay at once. Insurance turns a rare, huge cost into a small, steady one you can plan for.",
+          },
+        ],
+      },
+      {
+        heading: "Premium and deductible",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Two words come up in almost every insurance plan. Knowing them makes any policy easier to understand.",
+          },
+          {
+            type: "list",
+            items: [
+              "Premium: the regular amount you pay to keep the insurance active, often monthly.",
+              "Deductible: the amount you pay yourself first, before the insurance starts covering a cost.",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "For example, if a plan has a 500 dollar deductible and you have a 2,000 dollar covered repair, you pay the first 500 and the insurance helps with the rest, based on the plan's terms.",
+          },
+        ],
+      },
+      {
+        heading: "How risk pooling works",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Risk pooling is the idea at the heart of insurance. Many people each pay a premium into a shared pool. In any given year, only a few of them will have a major event and draw money out of the pool.",
+          },
+          {
+            type: "callout",
+            title: "Many pay a little so a few can be covered a lot",
+            text: "Because most people stay healthy and crash-free in a given year, the pool can cover the few who do not. That is how a small premium can protect you against a cost you could never cover alone.",
+          },
+        ],
+      },
+      {
+        heading: "Common types in plain terms",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "You will run into several kinds of insurance as you go through life. They all follow the same shared-risk idea, just for different events.",
+          },
+          {
+            type: "list",
+            items: [
+              "Health insurance: helps pay for doctor visits, medicine, and hospital care.",
+              "Auto insurance: helps pay for damage or injury from a car crash, and is required to drive in most places.",
+              "Renters insurance: helps replace your belongings if they are stolen or damaged in a place you rent.",
+            ],
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "insurance-purpose",
+        prompt: "What problem does insurance solve?",
+        options: [
+          "It makes everyday purchases cheaper",
+          "It turns a rare, huge cost into a small, steady one you can plan for",
+          "It guarantees you will never get sick",
+          "It replaces the need for a budget",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Insurance exists because some events cost more than most people could pay at once. Paying a steady amount protects you from a rare cost you could not handle alone.",
+      },
+      {
+        id: "premium-meaning",
+        prompt: "What is a premium?",
+        options: [
+          "The amount you pay yourself before coverage starts",
+          "The regular amount you pay to keep the insurance active",
+          "A bonus the company pays you",
+          "A type of bank account",
+        ],
+        answerIndex: 1,
+        explanation:
+          "The premium is the regular payment, often monthly, that keeps your insurance active. The deductible is the separate amount you pay first before coverage kicks in.",
+      },
+      {
+        id: "deductible-meaning",
+        prompt: "A plan has a 500 dollar deductible and a 2,000 dollar covered cost. What do you pay first?",
+        options: [
+          "The full 2,000 dollars",
+          "Nothing",
+          "The first 500 dollars, then the plan helps with the rest",
+          "Only the premium",
+        ],
+        answerIndex: 2,
+        explanation:
+          "The deductible is what you pay before coverage helps. Here you pay the first 500 dollars, and the insurance helps with the remaining cost based on the plan's terms.",
+      },
+      {
+        id: "risk-pooling",
+        prompt: "How does risk pooling let a small premium cover a large event?",
+        options: [
+          "The company prints extra money",
+          "Many people pay in, but only a few have a major event in a given year",
+          "The government pays for everything",
+          "Premiums are returned in full each year",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Many people pay premiums into a shared pool, and only a few draw from it in any year. That is how the pool can cover the few who face a big cost.",
+      },
+    ],
+  },
+  {
+    slug: "renting-your-first-place",
+    title: "Renting Your First Place",
+    summary:
+      "What it costs to move in, what a lease really is, and what to read closely before you sign.",
+    topic: "Housing",
+    level: "Next steps",
+    minutes: 7,
+    sections: [
+      {
+        heading: "What it costs to move in",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Renting means paying to live in a place that someone else owns. The owner is called the landlord. The biggest surprise for first-time renters is how much cash is due up front, before you even move in.",
+          },
+          {
+            type: "list",
+            items: [
+              "First month's rent: the rent for your first month, usually due at signing.",
+              "Security deposit: money the landlord holds in case of damage or unpaid rent, often equal to about one month's rent, and meant to be returned when you leave.",
+              "Sometimes the last month's rent too, which means three rent-sized payments at once.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "What a lease is",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A lease is the written contract between you and the landlord. It sets the rent, how long you are agreeing to stay, and the rules for living there. Once you sign, both sides are bound by it.",
+          },
+          {
+            type: "paragraph",
+            text: "Most leases run for a set term, often one year. Leaving before the term ends can cost you, so the length of the lease is a real commitment, not just a formality.",
+          },
+        ],
+      },
+      {
+        heading: "What to read before signing",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A lease is a binding document, so it is worth reading every part before you sign. A few sections deserve extra attention.",
+          },
+          {
+            type: "list",
+            items: [
+              "The rent and when it is due, plus any late fee for paying after the due date.",
+              "What is included, like water, heat, or internet, and what you pay separately. These extra costs are called utilities.",
+              "The rules on pets, guests, and breaking the lease early.",
+              "How and when you can get your security deposit back.",
+            ],
+          },
+          {
+            type: "callout",
+            title: "Get promises in writing",
+            text: "If the landlord agrees to fix something or include a utility, make sure it appears in the lease. A spoken promise is hard to enforce later. What is written is what counts.",
+          },
+        ],
+      },
+      {
+        heading: "Getting your deposit back",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "The security deposit is your money, held by the landlord, and you can usually get it back when you move out if the place is in good shape. Normal wear from everyday living is expected; real damage is not.",
+          },
+          {
+            type: "paragraph",
+            text: "A simple habit protects you: take dated photos when you move in and again when you move out. They show the condition of the place and make it easier to get your deposit returned.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "move-in-cost",
+        prompt: "Why do first-time renters often need a lot of cash up front?",
+        options: [
+          "Rent must be paid two years ahead",
+          "Move-in can require first month's rent plus a security deposit, sometimes more",
+          "Landlords charge a tax",
+          "You must buy the building",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Moving in often means paying first month's rent and a security deposit at once, and sometimes last month's rent too. That can be several rent-sized payments together.",
+      },
+      {
+        id: "lease-meaning",
+        prompt: "What is a lease?",
+        options: [
+          "A receipt for one month of rent",
+          "The written contract setting rent, length of stay, and the rules",
+          "A type of deposit",
+          "A list of nearby apartments",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A lease is the binding contract between you and the landlord. It sets the rent, the term, and the rules, and both sides are held to it once signed.",
+      },
+      {
+        id: "utilities-meaning",
+        prompt: "In a lease, what are utilities?",
+        options: [
+          "The landlord's profit",
+          "Services like water, heat, or internet that may be included or paid separately",
+          "A penalty for late rent",
+          "The furniture in the unit",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Utilities are services such as water, heat, and internet. The lease should say which are included and which you pay on your own, since that changes your true monthly cost.",
+      },
+      {
+        id: "deposit-photos",
+        prompt: "How can dated move-in and move-out photos help you?",
+        options: [
+          "They lower your rent",
+          "They show the condition of the place and help you get your deposit back",
+          "They are required to sign a lease",
+          "They replace the need to pay rent",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Photos document the condition of the place over time. They make it easier to show the home was left in good shape and to get your security deposit returned.",
+      },
+    ],
+  },
+  {
+    slug: "buying-vs-leasing-a-car",
+    title: "Buying vs Leasing a Car",
+    summary:
+      "Two ways to drive a car you did not pay for all at once, and how to compare them by total cost, not the monthly payment.",
+    topic: "Life skills",
+    level: "Next steps",
+    minutes: 7,
+    sections: [
+      {
+        heading: "Two ways to get a car",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Few people pay the full price of a car in cash. The two common alternatives are buying with a loan and leasing. They feel similar month to month but lead to very different places.",
+          },
+          {
+            type: "paragraph",
+            text: "With a loan you are working toward owning the car. With a lease you are paying to use the car for a set time, then giving it back. Knowing which you want changes the math.",
+          },
+        ],
+      },
+      {
+        heading: "Buying with a loan",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "An auto loan lets you borrow the price of the car and pay it back over time, with interest. The interest rate is shown as an APR, the yearly cost of borrowing. When the loan is paid off, the car is yours.",
+          },
+          {
+            type: "callout",
+            title: "After the loan ends, the payments stop",
+            text: "Once a loan is fully paid, you own the car and can drive it with no monthly payment. A car often lasts well beyond the loan, so the years after payoff are where buying can save money.",
+          },
+        ],
+      },
+      {
+        heading: "Leasing a car",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A lease is like a long-term rental. You make monthly payments to use the car for a set period, often two or three years, and then return it. You usually never own it.",
+          },
+          {
+            type: "list",
+            items: [
+              "Monthly payments are often lower than a loan for the same car, which can be tempting.",
+              "Leases set a mileage limit, and going over it adds charges at the end.",
+              "When the lease ends you have no car and no value to show for the payments, so the cycle starts again.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Depreciation and total cost",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Depreciation is the drop in a car's value over time as it ages and gets used. A new car loses value fastest in its early years. This matters because it shapes the true cost of each path.",
+          },
+          {
+            type: "paragraph",
+            text: "The clearest way to compare is total cost over the whole time you will have the car, not the monthly payment alone. A lower monthly payment can still cost more in the long run if it never leads to ownership. Add up every payment, plus fees, to see the real picture.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "loan-vs-lease",
+        prompt: "What is the main difference between buying with a loan and leasing?",
+        options: [
+          "Leasing is always cheaper in total",
+          "A loan works toward owning the car; a lease pays to use it for a time, then return it",
+          "Only a lease charges interest",
+          "There is no real difference",
+        ],
+        answerIndex: 1,
+        explanation:
+          "With a loan you are paying to own the car. With a lease you pay to use it for a set period and give it back, usually never owning it.",
+      },
+      {
+        id: "after-payoff",
+        prompt: "What happens after an auto loan is fully paid off?",
+        options: [
+          "You must return the car",
+          "You own the car and can drive it with no monthly payment",
+          "The interest starts over",
+          "You owe a final lease fee",
+        ],
+        answerIndex: 1,
+        explanation:
+          "When a loan is paid off, the car is yours and the payments stop. Since cars often last well past the loan, those payment-free years are where buying can save money.",
+      },
+      {
+        id: "depreciation-meaning",
+        prompt: "What is depreciation?",
+        options: [
+          "A tax on new cars",
+          "The drop in a car's value over time as it ages and is used",
+          "The interest on a loan",
+          "A fee for leasing",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Depreciation is the loss of value as a car ages, fastest in its early years. It shapes the true cost of buying or leasing.",
+      },
+      {
+        id: "compare-total",
+        prompt: "What is the clearest way to compare buying and leasing?",
+        options: [
+          "Pick the lowest monthly payment",
+          "Compare total cost over the whole time you will have the car, including fees",
+          "Choose whichever is newer",
+          "Compare only the down payment",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A low monthly payment can still cost more overall if it never leads to ownership. Adding up every payment plus fees over the full period shows the real cost.",
+      },
+    ],
+  },
+  {
+    slug: "scams-and-protecting-your-money",
+    title: "Scams and Protecting Your Money",
+    summary:
+      "Most scams use the same few tricks. Learn the patterns and the red flags so you can spot them before they cost you.",
+    topic: "Safety",
+    level: "Core",
+    minutes: 7,
+    sections: [
+      {
+        heading: "How scams work",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A scam is a trick designed to get your money or your personal information. Most scams, no matter the story, lean on the same few pressures. Spotting the pressure is often easier than spotting the lie.",
+          },
+          {
+            type: "list",
+            items: [
+              "Urgency: act now or something bad happens. Rushing keeps you from thinking it through.",
+              "Secrecy: do not tell anyone. This stops you from getting a second opinion.",
+              "Unusual payment: pay with gift cards, wire transfers, or apps that are hard to reverse.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Phishing",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Phishing is a message, by email, text, or call, that pretends to be from a company or person you trust in order to get your passwords, card numbers, or other private details.",
+          },
+          {
+            type: "callout",
+            title: "Go to the source, not the link",
+            text: "If a message says there is a problem with your account, do not click its link. Open the company's app or type its real website address yourself. A real company will still be there; a fake link will not match.",
+          },
+        ],
+      },
+      {
+        heading: "Fake checks and overpayment",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "In a fake check scam, someone sends you a check for more than you are owed and asks you to send the extra back, often quickly. The check looks real at first, so your bank may show the money as available.",
+          },
+          {
+            type: "paragraph",
+            text: "Days later the check bounces, meaning it was never good, and the bank takes that money back out. By then you have already sent your own real money to the scammer. If someone overpays and asks for the difference back, treat it as a warning sign.",
+          },
+        ],
+      },
+      {
+        heading: "Payday traps and red flags",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Not every trap is outright fraud. A payday loan is a small, short-term loan meant to be repaid on your next payday, but it often carries an extremely high APR, the yearly cost of borrowing. Many borrowers cannot repay on time and take another loan to cover the first, sliding into a cycle of debt.",
+          },
+          {
+            type: "list",
+            items: [
+              "A guaranteed prize that asks you to pay a fee first is a red flag.",
+              "A request to pay only in gift cards or wire transfers is a red flag.",
+              "Pressure to act this minute and tell no one is a red flag.",
+              "When unsure, slow down, hang up, and check with someone you trust.",
+            ],
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "scam-pressures",
+        prompt: "Which pressures do most scams rely on?",
+        options: [
+          "Patience and transparency",
+          "Urgency, secrecy, and hard-to-reverse payments",
+          "Low prices and free shipping",
+          "Long contracts and fine print",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Most scams push urgency, secrecy, and unusual payments like gift cards or wires. Noticing the pressure is often easier than spotting the lie itself.",
+      },
+      {
+        id: "phishing-response",
+        prompt: "A text says your bank account has a problem and gives a link. What is safest?",
+        options: [
+          "Click the link and log in quickly",
+          "Open the bank's own app or type its real website yourself instead of using the link",
+          "Reply with your password",
+          "Forward it to your contacts",
+        ],
+        answerIndex: 1,
+        explanation:
+          "This is classic phishing. Do not use the message's link. Reach the company through its real app or website so you are not handing details to a fake page.",
+      },
+      {
+        id: "fake-check",
+        prompt: "Someone overpays you with a check and asks for the extra back fast. Why is this a warning sign?",
+        options: [
+          "Overpaying is always a generous gift",
+          "The check may later bounce, and by then your real money is gone",
+          "Checks cannot be used for payment",
+          "It raises your credit score",
+        ],
+        answerIndex: 1,
+        explanation:
+          "In a fake check scam the check looks good at first but bounces days later. The bank reclaims that money, while the real money you sent back is already gone.",
+      },
+      {
+        id: "payday-trap",
+        prompt: "Why are payday loans considered a trap for many borrowers?",
+        options: [
+          "They are free to repay",
+          "They often carry a very high APR and can lead to borrowing again to repay the first loan",
+          "They always build credit",
+          "They are illegal everywhere",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Payday loans often carry an extremely high yearly cost. Many borrowers cannot repay on time and take a new loan to cover the old one, sliding into a cycle of debt.",
+      },
+    ],
+  },
+  {
+    slug: "setting-financial-goals",
+    title: "Setting Financial Goals",
+    summary:
+      "How to turn a vague wish about money into a clear goal, then break it into steps small enough to actually take.",
+    topic: "Saving",
+    level: "Beginner",
+    minutes: 6,
+    sections: [
+      {
+        heading: "Why goals help",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A financial goal is a specific result you want your money to reach, like saving a certain amount or paying off a debt. A goal gives your saving a reason, which makes it far easier to keep going.",
+          },
+          {
+            type: "paragraph",
+            text: "Saving with no goal feels like effort for nothing. Saving toward something real, even a small thing, turns the same effort into visible progress.",
+          },
+        ],
+      },
+      {
+        heading: "Short term versus long term",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Goals come in different time frames, and sorting them by time helps you plan. The two main buckets are short term and long term.",
+          },
+          {
+            type: "list",
+            items: [
+              "Short term: something within roughly a year, like building a small emergency fund or saving for a laptop.",
+              "Long term: something years away, like a car, a move, or money set aside for the future.",
+            ],
+          },
+          {
+            type: "paragraph",
+            text: "You can work toward both at once. A common approach is a small steady amount toward a long-term goal while a short-term goal gets the rest.",
+          },
+        ],
+      },
+      {
+        heading: "Make a goal specific",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "A vague goal like save more is hard to act on because you cannot tell when you have done it. A specific goal names an amount and a date, so you always know where you stand.",
+          },
+          {
+            type: "callout",
+            title: "Amount plus date beats a wish",
+            text: "Save 600 dollars for a laptop by the end of the year is a goal you can plan around. Save more is just a hope. The amount and the date are what turn it into something you can measure.",
+          },
+        ],
+      },
+      {
+        heading: "Break it into steps",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Once a goal has an amount and a date, the math gives you the step. Divide the amount by the number of weeks or months you have, and you get the small, regular amount to set aside.",
+          },
+          {
+            type: "paragraph",
+            text: "For example, 600 dollars over 12 months is 50 dollars a month. A big number becomes a small, repeatable action. Automating that amount, so it moves to savings on its own, makes the steps even easier to keep.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "goal-purpose",
+        prompt: "Why does having a goal make saving easier?",
+        options: [
+          "It removes the need to save",
+          "It gives the saving a reason and turns effort into visible progress",
+          "It raises your pay",
+          "It lowers prices",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A goal gives saving a purpose. Working toward something real, even small, turns effort that felt pointless into progress you can see.",
+      },
+      {
+        id: "short-vs-long",
+        prompt: "Which is an example of a short-term goal?",
+        options: [
+          "Saving for a small emergency fund within a year",
+          "Money set aside for decades from now",
+          "A house bought ten years out",
+          "Any goal with no date at all",
+        ],
+        answerIndex: 0,
+        explanation:
+          "Short-term goals sit within roughly a year, like a small emergency fund or saving for a laptop. Long-term goals are years away.",
+      },
+      {
+        id: "specific-goal",
+        prompt: "What makes a goal specific enough to act on?",
+        options: [
+          "It sounds ambitious",
+          "It names an amount and a date",
+          "It is shared with friends",
+          "It involves a credit card",
+        ],
+        answerIndex: 1,
+        explanation:
+          "An amount and a date let you measure progress and know when you are done. Save more is a wish; save 600 dollars by year end is a goal you can plan.",
+      },
+      {
+        id: "break-into-steps",
+        prompt: "You want to save 600 dollars over 12 months. What is the monthly step?",
+        options: [
+          "600 dollars",
+          "50 dollars",
+          "12 dollars",
+          "It cannot be calculated",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Divide the amount by the time: 600 dollars over 12 months is 50 dollars a month. Splitting a goal this way turns a big number into a small, repeatable action.",
+      },
+    ],
+  },
+  {
+    slug: "giving-and-money",
+    title: "Giving and Money",
+    summary:
+      "What it means to give, how to give in a way you can trust, and how giving connects money to community.",
+    topic: "Giving",
+    level: "Next steps",
+    minutes: 6,
+    sections: [
+      {
+        heading: "What giving means",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Giving is choosing to use some of what you have to help others or support a cause you care about. It can be money, but it does not have to be. Many people give time and skills too.",
+          },
+          {
+            type: "paragraph",
+            text: "Giving is a personal choice, not a duty, and there is no required amount. The point of learning about it is so that when you do choose to give, you can do it in a way that is safe and effective.",
+          },
+        ],
+      },
+      {
+        heading: "Ways people give",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Giving takes many forms, and money is only one of them. Each form helps in a different way.",
+          },
+          {
+            type: "list",
+            items: [
+              "Money: a donation to a charity, which is an organization set up to help a cause.",
+              "Time: volunteering, where you give hours of help instead of cash.",
+              "Skills: using something you are good at, like tutoring or fixing things, to help others.",
+            ],
+          },
+        ],
+      },
+      {
+        heading: "Giving wisely",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Sadly, some scams pretend to be charities, especially after disasters when people most want to help. A few simple checks let you give with confidence.",
+          },
+          {
+            type: "callout",
+            title: "Look it up before you give",
+            text: "Before donating, search the organization's name and look it up on a charity-checking website. Give through the charity's own official site rather than a link in a message, and be wary of any group that pressures you to give right now.",
+          },
+        ],
+      },
+      {
+        heading: "Giving and community",
+        blocks: [
+          {
+            type: "paragraph",
+            text: "Giving is one of the ways money connects to the people around you. A small gift, joined with many others, can fund things no single person could pay for alone, much like the risk pooling that makes insurance work.",
+          },
+          {
+            type: "paragraph",
+            text: "This idea sits at the center of the Wealth Equity Initiative, the nonprofit behind this site. Its mission is to widen access to financial education, and its programs have reached more than 5,000 students across more than 40 schools. Learning how money works, and choosing to share what you can, are two parts of the same goal: a community where more people get a fair start.",
+          },
+        ],
+      },
+    ],
+    quiz: [
+      {
+        id: "giving-forms",
+        prompt: "Besides money, how else can a person give?",
+        options: [
+          "Only by donating cash",
+          "By giving time and skills, such as volunteering or tutoring",
+          "Giving must always be money",
+          "By spending more on themselves",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Giving takes many forms. Volunteering time and sharing skills like tutoring help in ways that money alone cannot, and they cost no cash.",
+      },
+      {
+        id: "charity-meaning",
+        prompt: "What is a charity?",
+        options: [
+          "A type of bank account",
+          "An organization set up to help a cause",
+          "A loan you repay with interest",
+          "A government tax",
+        ],
+        answerIndex: 1,
+        explanation:
+          "A charity is an organization created to support a cause. Donations to it are one common way people give money to help others.",
+      },
+      {
+        id: "give-safely",
+        prompt: "What is a smart step before donating money to an organization?",
+        options: [
+          "Send it immediately when pressured",
+          "Look the organization up and give through its official site",
+          "Only give through links in text messages",
+          "Pay in gift cards to be safe",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Some scams pose as charities. Looking up the group and giving through its official site, rather than a message link, helps make sure your gift reaches a real cause.",
+      },
+      {
+        id: "giving-community",
+        prompt: "How is giving similar to the risk pooling behind insurance?",
+        options: [
+          "Both are required by law",
+          "Many small contributions joined together can fund what no one person could alone",
+          "Both pay you interest",
+          "Neither involves other people",
+        ],
+        answerIndex: 1,
+        explanation:
+          "Like an insurance pool, giving gathers many small contributions into something larger. Together they can support things a single person could not fund on their own.",
+      },
+    ],
+  },
 ];
 
 /** Look up a single module by slug. */
