@@ -1,197 +1,306 @@
 "use client";
 
-import { useId, useMemo, useState } from "react";
-import { Reveal } from "@/components/Reveal";
-import { Container } from "@/components/layout/Container";
-import { Eyebrow } from "@/components/layout/Eyebrow";
-import { MAP, indiaOutline, project, schools } from "./schools";
+import { useId } from "react";
+import { schools } from "./schools";
+import {
+  MAIN_VIEW,
+  INSET_VIEW,
+  indiaOutlinePath,
+  stateBordersPath,
+  insetLandPath,
+  insetBorderPath,
+  clusterBox,
+  geoPins,
+} from "./india-geo";
 
 /**
- * The signature element of the Impact page: a stylized, minimal silhouette of
- * India with the twelve named schools plotted by region. The silhouette is a
- * brand shape, not a survey map, and the copy frames the twelve as a
- * representative sample rather than the full reach.
+ * The supporting map for the Impact section. It is decorative: the schools list
+ * is the accessible control, and this map mirrors its selection for sighted
+ * users (aria-hidden). Two panels:
  *
- * Interaction is driven from the labeled list, which is the accessible control.
- * The SVG pins mirror the selection for pointer users and are marked decorative.
- * Nothing here depends on motion: pins render in place and only the selected
- * state changes, so it reads correctly under prefers-reduced-motion.
+ *   - A full-India panel built from real GADM geometry (accurate national
+ *     boundary + state borders, pre-projected to static paths in india-geo.ts).
+ *     It carries the lone southern pin (Nagercoil) and a boxed detail region.
+ *   - A zoomed coastal-Andhra-Pradesh inset. The eleven clustered schools sit
+ *     so tightly that bare dots would merge, so each pin is tied by a hairline
+ *     leader to an evenly spaced index marker on the left or right rail. No two
+ *     markers can overlap, and the indices cross-reference the numbered list.
+ *
+ * Nothing depends on motion: everything renders in place and only the selected
+ * state changes color and weight, so it reads correctly under reduced motion.
  */
-export function SchoolsMap() {
-  const [selected, setSelected] = useState<number | null>(null);
-  const headingId = useId();
 
-  // The outline path is static; build it once.
-  const outlinePath = useMemo(() => {
-    const d = indiaOutline
-      .map(([lon, lat], i) => {
-        const [x, y] = project(lon, lat);
-        return `${i === 0 ? "M" : "L"}${x.toFixed(1)} ${y.toFixed(1)}`;
-      })
-      .join(" ");
-    return `${d} Z`;
-  }, []);
+type SchoolPin = (typeof geoPins)[number] & {
+  name: string;
+  location: string;
+  region: string;
+};
 
-  const points = useMemo(
-    () =>
-      schools.map((s) => {
-        const [x, y] = project(s.lon, s.lat);
-        return { ...s, x, y };
-      }),
-    [],
-  );
+const byN = new Map(schools.map((s) => [s.n, s]));
+const pins: SchoolPin[] = geoPins.map((g) => {
+  const s = byN.get(g.n)!;
+  return { ...g, name: s.name, location: s.location, region: s.region };
+});
 
-  const active = points.find((p) => p.n === selected) ?? null;
+const clusterPins = pins.filter((p) => p.inInset);
+const southPin = pins.find((p) => !p.inInset)!;
+
+// Deterministic leader-marker layout for the inset. West pins (Khammam) hang off
+// the left rail, the coastal Andhra group off the right rail, each sorted by
+// latitude into evenly spaced slots so the index markers never collide.
+const RAIL = {
+  top: 30,
+  bottom: INSET_VIEW.height - 22,
+  leftX: 15,
+  rightX: INSET_VIEW.width - 15,
+  split: 160,
+};
+
+type Chip = SchoolPin & { chipX: number; chipY: number; side: "left" | "right" };
+
+function layoutChips(): Chip[] {
+  const place = (arr: SchoolPin[], x: number, side: "left" | "right"): Chip[] =>
+    arr
+      .slice()
+      .sort((a, b) => a.insetY! - b.insetY!)
+      .map((p, i, a) => ({
+        ...p,
+        chipX: x,
+        chipY:
+          a.length === 1
+            ? (RAIL.top + RAIL.bottom) / 2
+            : RAIL.top + (i * (RAIL.bottom - RAIL.top)) / (a.length - 1),
+        side,
+      }));
+  return [
+    ...place(clusterPins.filter((p) => p.insetX! < RAIL.split), RAIL.leftX, "left"),
+    ...place(clusterPins.filter((p) => p.insetX! >= RAIL.split), RAIL.rightX, "right"),
+  ];
+}
+
+const chips = layoutChips();
+const pad2 = (n: number) => String(n).padStart(2, "0");
+
+type MapProps = {
+  selected: number | null;
+  onSelect: (n: number | null) => void;
+};
+
+export function SchoolsMap({ selected, onSelect }: MapProps) {
+  const uid = useId();
+  const active = pins.find((p) => p.n === selected) ?? null;
 
   return (
-    <section className="border-t border-wei-line bg-wei-paper-dim">
-      <Container className="py-wei-section-lg">
-        <div className="grid gap-x-wei-gutter gap-y-6 md:grid-cols-12">
-          <div className="md:col-span-4 lg:col-span-3">
-            <Reveal>
-              <Eyebrow index="02">Where the work lands</Eyebrow>
-            </Reveal>
-          </div>
-          <div className="md:col-span-8 md:max-w-2xl">
-            <Reveal>
-              <h2 id={headingId} className="text-wei-display font-semibold text-wei-ink">
-                Twelve schools we can name.
-              </h2>
-            </Reveal>
-            <Reveal delay={0.08}>
-              <p className="mt-5 text-wei-lg text-wei-ink/70">
-                A representative sample of the schools WEI has reached, not the
-                full list. The program began in India, clustered across coastal
-                Andhra Pradesh and Telangana with one school in the far south at
-                Nagercoil. The map is a stylized illustration, so positions are
-                approximate by region rather than exact.
-              </p>
-            </Reveal>
-          </div>
+    <figure className="m-0 border border-wei-line bg-wei-paper" aria-hidden="true">
+      {/* Readout header, echoing the instrument panels used elsewhere on the site. */}
+      <div className="flex items-stretch justify-between border-b border-wei-line">
+        <div className="px-4 py-3">
+          <span className="wei-eyebrow text-wei-ink/50">Where the work lands</span>
         </div>
+        <div className="flex min-w-0 items-center border-l border-wei-line px-4 py-2">
+          {active ? (
+            <span className="flex min-w-0 items-baseline gap-2">
+              <span className="wei-num shrink-0 text-wei-sm text-wei-emerald-deep">{pad2(active.n)}</span>
+              <span className="truncate text-wei-sm font-medium text-wei-ink">{active.name}</span>
+            </span>
+          ) : (
+            <span className="wei-eyebrow text-wei-ink/40">India</span>
+          )}
+        </div>
+      </div>
 
-        <div className="mt-12 grid gap-x-wei-gutter gap-y-10 lg:grid-cols-12">
-          {/* The stylized map */}
-          <Reveal className="lg:col-span-7">
-            <figure className="border border-wei-line bg-wei-paper p-4 sm:p-6">
-              <svg
-                viewBox={`0 0 ${MAP.width} ${MAP.height}`}
-                className="block h-auto w-full"
-                role="img"
-                aria-labelledby={`${headingId}-svg`}
-              >
-                <title id={`${headingId}-svg`}>
-                  Stylized outline of India with twelve school locations marked,
-                  clustered in coastal Andhra Pradesh and Telangana with one in
-                  southern Tamil Nadu.
-                </title>
+      <div className="grid gap-px bg-wei-line sm:grid-cols-2">
+        {/* Full-India panel */}
+        <div className="bg-wei-paper p-3 sm:p-4">
+          <svg
+            viewBox={`0 0 ${MAIN_VIEW.width} ${MAIN_VIEW.height}`}
+            className="mx-auto block h-auto w-full max-w-[22rem]"
+            role="presentation"
+          >
+            <path
+              d={indiaOutlinePath}
+              fill="var(--color-wei-paper-dim)"
+              stroke="var(--color-wei-ink)"
+              strokeWidth={1.1}
+              strokeLinejoin="round"
+            />
+            <path
+              d={stateBordersPath}
+              fill="none"
+              stroke="var(--color-wei-line-strong)"
+              strokeWidth={0.7}
+              strokeLinejoin="round"
+            />
 
-                <path
-                  d={outlinePath}
-                  fill="var(--color-wei-paper-dim)"
-                  stroke="var(--color-wei-line-strong)"
-                  strokeWidth={1.5}
-                  strokeLinejoin="round"
+            {/* Detail-region box, keyed to the inset */}
+            <rect
+              x={clusterBox.x}
+              y={clusterBox.y}
+              width={clusterBox.w}
+              height={clusterBox.h}
+              fill="none"
+              stroke="var(--color-wei-emerald)"
+              strokeWidth={1.25}
+              opacity={0.85}
+            />
+            <text
+              x={clusterBox.x + clusterBox.w + 8}
+              y={clusterBox.y + clusterBox.h - 2}
+              className="wei-num"
+              fontSize={13}
+              fill="var(--color-wei-emerald-deep)"
+            >
+              Detail
+            </text>
+
+            {/* Lone southern pin (Nagercoil) */}
+            <Pin
+              x={southPin.mainX}
+              y={southPin.mainY}
+              active={selected === southPin.n}
+              dim={selected !== null && selected !== southPin.n}
+              r={4.5}
+              onClick={() => onSelect(selected === southPin.n ? null : southPin.n)}
+            />
+            {selected === southPin.n ? (
+              <g>
+                <line
+                  x1={southPin.mainX}
+                  y1={southPin.mainY}
+                  x2={southPin.mainX - 14}
+                  y2={southPin.mainY + 24}
+                  stroke="var(--color-wei-emerald)"
+                  strokeWidth={1}
                 />
-
-                {points.map((p) => {
-                  const isActive = p.n === selected;
-                  return (
-                    <g
-                      key={p.n}
-                      aria-hidden="true"
-                      className="cursor-pointer"
-                      onClick={() => setSelected(isActive ? null : p.n)}
-                    >
-                      {/* generous invisible hit target for touch */}
-                      <circle cx={p.x} cy={p.y} r={16} fill="transparent" />
-                      {isActive ? (
-                        <circle
-                          cx={p.x}
-                          cy={p.y}
-                          r={13}
-                          fill="none"
-                          stroke="var(--color-wei-emerald)"
-                          strokeWidth={1.5}
-                          opacity={0.5}
-                        />
-                      ) : null}
-                      <circle
-                        cx={p.x}
-                        cy={p.y}
-                        r={isActive ? 6 : 4.5}
-                        fill="var(--color-wei-emerald)"
-                        stroke="var(--color-wei-paper)"
-                        strokeWidth={1.5}
-                      />
-                    </g>
-                  );
-                })}
-              </svg>
-
-              <figcaption className="mt-4 flex min-h-[2.5rem] items-center border-t border-wei-line pt-4">
-                {active ? (
-                  <span className="wei-eyebrow text-wei-emerald-deep">
-                    <span aria-hidden="true" className="text-wei-ink/40">
-                      {String(active.n).padStart(2, "0")}
-                    </span>{" "}
-                    {active.name}
-                    <span className="ml-2 normal-case tracking-normal text-wei-ink/55">
-                      {active.location}
-                    </span>
-                  </span>
-                ) : (
-                  <span className="text-wei-sm text-wei-ink/55">
-                    Select a school to highlight where it sits.
-                  </span>
-                )}
-              </figcaption>
-            </figure>
-          </Reveal>
-
-          {/* The selectable list */}
-          <Reveal delay={0.08} className="lg:col-span-5">
-            <h3 className="wei-eyebrow text-wei-ink/50">The twelve schools</h3>
-            <ul className="mt-4 max-h-[30rem] divide-y divide-wei-line overflow-y-auto border-y border-wei-line">
-              {points.map((p) => {
-                const isActive = p.n === selected;
-                return (
-                  <li key={p.n}>
-                    <button
-                      type="button"
-                      onClick={() => setSelected(isActive ? null : p.n)}
-                      aria-pressed={isActive}
-                      className={`flex w-full items-baseline gap-3 px-1 py-3 text-left transition-colors duration-[var(--duration-wei-fast)] ease-wei-out ${
-                        isActive ? "bg-wei-paper-dim" : "hover:bg-wei-paper-dim/60"
-                      }`}
-                    >
-                      <span
-                        className={`wei-num shrink-0 text-wei-sm ${
-                          isActive ? "text-wei-emerald-deep" : "text-wei-ink/40"
-                        }`}
-                      >
-                        {String(p.n).padStart(2, "0")}
-                      </span>
-                      <span className="min-w-0">
-                        <span className="block text-wei-base font-medium text-wei-ink">
-                          {p.name}
-                        </span>
-                        <span className="mt-0.5 block text-wei-xs text-wei-ink/55">
-                          {p.location}
-                        </span>
-                      </span>
-                    </button>
-                  </li>
-                );
-              })}
-            </ul>
-            <p className="mt-4 text-wei-xs text-wei-ink/50">
-              India is where WEI began. The mission is global; this toolkit is one
-              instance of it, with more schools and regions ahead.
-            </p>
-          </Reveal>
+                <text
+                  x={southPin.mainX - 16}
+                  y={southPin.mainY + 28}
+                  textAnchor="end"
+                  className="wei-num"
+                  fontSize={13}
+                  fill="var(--color-wei-emerald-deep)"
+                >
+                  {pad2(southPin.n)} Nagercoil
+                </text>
+              </g>
+            ) : null}
+          </svg>
         </div>
-      </Container>
-    </section>
+
+        {/* Zoomed coastal-AP inset with leader-line index markers */}
+        <div className="bg-wei-paper p-3 sm:p-4">
+          <svg
+            viewBox={`0 0 ${INSET_VIEW.width} ${INSET_VIEW.height}`}
+            className="block h-auto w-full"
+            role="presentation"
+          >
+            <clipPath id={`${uid}-clip`}>
+              <rect x={0} y={0} width={INSET_VIEW.width} height={INSET_VIEW.height} />
+            </clipPath>
+            <g clipPath={`url(#${uid}-clip)`}>
+              <path
+                d={insetLandPath}
+                fill="var(--color-wei-paper-dim)"
+                stroke="var(--color-wei-ink)"
+                strokeWidth={1}
+                strokeLinejoin="round"
+              />
+              <path
+                d={insetBorderPath}
+                fill="none"
+                stroke="var(--color-wei-line-strong)"
+                strokeWidth={0.9}
+                strokeDasharray="4 3"
+              />
+            </g>
+
+            {/* Leaders first, so markers and dots sit on top */}
+            {chips.map((c) => {
+              const isActive = c.n === selected;
+              const anchorX = c.side === "left" ? c.chipX + 12 : c.chipX - 12;
+              return (
+                <line
+                  key={`l-${c.n}`}
+                  x1={c.insetX!}
+                  y1={c.insetY!}
+                  x2={anchorX}
+                  y2={c.chipY}
+                  stroke={isActive ? "var(--color-wei-emerald)" : "var(--color-wei-line-strong)"}
+                  strokeWidth={isActive ? 1.25 : 0.75}
+                />
+              );
+            })}
+
+            {chips.map((c) => {
+              const isActive = c.n === selected;
+              const dim = selected !== null && !isActive;
+              return (
+                <g
+                  key={`p-${c.n}`}
+                  className="cursor-pointer"
+                  onClick={() => onSelect(isActive ? null : c.n)}
+                >
+                  {/* generous invisible hit target */}
+                  <circle cx={c.insetX!} cy={c.insetY!} r={12} fill="transparent" />
+                  <Pin x={c.insetX!} y={c.insetY!} active={isActive} dim={dim} r={3.75} />
+                  <text
+                    x={c.chipX}
+                    y={c.chipY}
+                    dy="0.34em"
+                    textAnchor={c.side === "left" ? "start" : "end"}
+                    className="wei-num"
+                    fontSize={14}
+                    fontWeight={isActive ? 600 : 400}
+                    fill="var(--color-wei-ink)"
+                    fillOpacity={isActive ? 1 : dim ? 0.32 : 0.7}
+                    style={isActive ? { fill: "var(--color-wei-emerald-deep)" } : undefined}
+                  >
+                    {pad2(c.n)}
+                  </text>
+                </g>
+              );
+            })}
+          </svg>
+        </div>
+      </div>
+
+      <figcaption className="flex flex-wrap items-center gap-x-5 gap-y-1 border-t border-wei-line px-4 py-3">
+        <span className="wei-eyebrow text-wei-ink/55">Coastal Andhra Pradesh detail, right</span>
+        <span className="wei-eyebrow ml-auto text-wei-ink/40">Boundaries: GADM India</span>
+      </figcaption>
+    </figure>
+  );
+}
+
+function Pin({
+  x,
+  y,
+  active,
+  dim,
+  r,
+  onClick,
+}: {
+  x: number;
+  y: number;
+  active: boolean;
+  dim: boolean;
+  r: number;
+  onClick?: () => void;
+}) {
+  return (
+    <g onClick={onClick} className={onClick ? "cursor-pointer" : undefined}>
+      {active ? (
+        <circle cx={x} cy={y} r={r + 6} fill="none" stroke="var(--color-wei-emerald)" strokeWidth={1.25} opacity={0.5} />
+      ) : null}
+      <circle
+        cx={x}
+        cy={y}
+        r={active ? r + 1.5 : r}
+        fill={dim ? "var(--color-wei-ink)" : "var(--color-wei-emerald)"}
+        fillOpacity={dim ? 0.3 : 1}
+        stroke="var(--color-wei-paper)"
+        strokeWidth={1.5}
+      />
+    </g>
   );
 }
