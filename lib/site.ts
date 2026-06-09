@@ -28,7 +28,7 @@ export type Stat = {
  */
 export const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "") ??
-  "https://wealthequityinitiative.com";
+  "https://www.wealthequityinitiative.com";
 
 /** Active contact address. Also the delivery target for the contact form. */
 export const contactEmail = "praneeth.a2027@gmail.com";

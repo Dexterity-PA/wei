@@ -42,21 +42,20 @@ export const metadata: Metadata = {
     "nonprofit",
     "wealth equity",
   ],
-  alternates: {
-    canonical: "/",
-  },
+  // No global canonical here: a canonical set on the root layout is inherited
+  // by every child route, which would point them all at "/". Each page sets
+  // its own canonical (see app/page.tsx for the home route).
   openGraph: {
     type: "website",
     siteName: site.name,
-    title: site.name,
-    description: site.description,
-    url: siteUrl,
     locale: "en_US",
+    // title/description intentionally omitted so each route's resolved title
+    // (with the "%s | Wealth Equity Initiative" template) and description flow
+    // through to og:title and og:description.
   },
   twitter: {
     card: "summary_large_image",
-    title: site.name,
-    description: site.description,
+    // title/description fall back to each route's resolved values.
   },
   robots: {
     index: true,
