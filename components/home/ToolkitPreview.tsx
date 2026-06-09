@@ -1,31 +1,21 @@
+import Link from "next/link";
 import { Reveal } from "@/components/Reveal";
 import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/layout/Eyebrow";
+import { tools as allTools } from "@/lib/tools";
 import { CtaLink } from "./CtaLink";
 
-type ToolTease = {
-  index: string;
-  name: string;
-  blurb: string;
-};
+// Three featured tools, one per category, sourced from the registry so the
+// names and copy never drift from the live toolkit.
+const featuredSlugs = ["budget-builder", "debt-payoff", "compound-interest"];
 
-const tools: ToolTease[] = [
-  {
-    index: "01",
-    name: "Budget builder",
-    blurb: "Map what comes in against what goes out, in minutes.",
-  },
-  {
-    index: "02",
-    name: "Savings goal",
-    blurb: "Set a target and see how small amounts add up over time.",
-  },
-  {
-    index: "03",
-    name: "Cost of borrowing",
-    blurb: "See what a loan really costs once interest is counted.",
-  },
-];
+const tools = featuredSlugs.map((slug, i) => {
+  const tool = allTools.find((t) => t.slug === slug);
+  if (!tool) {
+    throw new Error(`ToolkitPreview: unknown tool slug "${slug}"`);
+  }
+  return { ...tool, index: String(i + 1).padStart(2, "0") };
+});
 
 export function ToolkitPreview() {
   return (
@@ -47,37 +37,43 @@ export function ToolkitPreview() {
           </Reveal>
         </div>
 
-        {/* A clean index of what is coming. No invented numbers. */}
+        {/* A clean index into the live toolkit. No invented numbers. */}
         <div className="mt-12 border-y border-wei-line">
           {tools.map((tool, index) => (
             <Reveal
-              key={tool.name}
+              key={tool.slug}
               delay={0.1 + index * 0.06}
-              className={`grid grid-cols-1 items-baseline gap-x-wei-gutter gap-y-2 py-6 sm:grid-cols-12 ${
-                index > 0 ? "border-t border-wei-line" : ""
-              }`}
+              className={index > 0 ? "border-t border-wei-line" : ""}
             >
-              <div className="flex items-baseline gap-4 sm:col-span-5">
-                <span className="wei-num text-wei-sm text-wei-ink/35">
-                  {tool.index}
-                </span>
-                <h3 className="font-wei-display text-wei-lg font-semibold text-wei-ink">
-                  {tool.name}
-                </h3>
-              </div>
-              <p className="text-wei-sm text-wei-ink/70 sm:col-span-5">
-                {tool.blurb}
-              </p>
-              <div className="sm:col-span-2 sm:text-right">
-                <span className="wei-eyebrow text-wei-ink/40">In build</span>
-              </div>
+              <Link
+                href={`/tools/${tool.slug}`}
+                className="group grid grid-cols-1 items-baseline gap-x-wei-gutter gap-y-2 py-6 sm:grid-cols-12"
+              >
+                <div className="flex items-baseline gap-4 sm:col-span-5">
+                  <span className="wei-num text-wei-sm text-wei-ink/35">
+                    {tool.index}
+                  </span>
+                  <h3 className="font-wei-display text-wei-lg font-semibold text-wei-ink transition-colors group-hover:text-wei-emerald-deep">
+                    {tool.name}
+                  </h3>
+                </div>
+                <p className="text-wei-sm text-wei-ink/70 sm:col-span-5">
+                  {tool.blurb}
+                </p>
+                <div className="sm:col-span-2 sm:text-right">
+                  <span className="wei-eyebrow text-wei-ink/35 transition-colors group-hover:text-wei-emerald-deep">
+                    Open
+                  </span>
+                </div>
+              </Link>
             </Reveal>
           ))}
         </div>
 
         <Reveal delay={0.28} className="mt-6">
           <p className="text-wei-xs text-wei-ink/55">
-            A preview of what is coming. The full toolkit lands soon.
+            Three of nine. See the full toolkit for debt, credit, paychecks, and
+            more.
           </p>
         </Reveal>
       </Container>
