@@ -1,17 +1,28 @@
 import type { Metadata } from "next";
-import { PlaceholderPage } from "@/components/PlaceholderPage";
+import { AboutHero } from "@/components/about/AboutHero";
+import { ProblemSection } from "@/components/about/ProblemSection";
+import { MissionSection } from "@/components/about/MissionSection";
+import { WhatWeDoSection } from "@/components/about/WhatWeDoSection";
+import { FounderSection } from "@/components/about/FounderSection";
+import { HonestySection } from "@/components/about/HonestySection";
+import { InvolvementCta } from "@/components/about/InvolvementCta";
 
 export const metadata: Metadata = {
   title: "About",
   description:
-    "Who we are and why financial equity matters. The Wealth Equity Initiative is a student-founded nonprofit teaching financial literacy to underserved students.",
+    "Why the Wealth Equity Initiative exists. A student-founded nonprofit teaching free, plain-language financial literacy to students who would not otherwise get it.",
 };
 
 export default function AboutPage() {
   return (
-    <PlaceholderPage
-      title="About"
-      lead="The Wealth Equity Initiative is a student-founded nonprofit. We teach financial literacy to students who have been left out of the conversation, and we have already reached more than 5,000 students across 40 plus schools."
-    />
+    <>
+      <AboutHero />
+      <ProblemSection />
+      <MissionSection />
+      <WhatWeDoSection />
+      <FounderSection />
+      <HonestySection />
+      <InvolvementCta />
+    </>
   );
 }
