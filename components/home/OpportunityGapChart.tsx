@@ -3,6 +3,7 @@
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 import { motion } from "@/lib/animation/motion";
+import { prefersReducedMotion } from "@/lib/animation/reduced-motion";
 
 /*
   The compounding gap. The single mission-carrying graphic on the site.
@@ -83,10 +84,7 @@ export function OpportunityGapChart() {
     const reveal = revealRef.current;
     if (!svg || !reveal) return;
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    if (prefersReduced) return;
+    if (prefersReducedMotion()) return;
 
     // Reset to the start of the story before paint: nothing drawn, year 0.
     setYear(0);

@@ -1,11 +1,24 @@
 "use client";
 
-import { useEffect, useRef, type CSSProperties, type ReactNode } from "react";
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  type CSSProperties,
+  type ReactNode,
+} from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "@/lib/animation/motion";
+import { prefersReducedMotion } from "@/lib/animation/reduced-motion";
 
 gsap.registerPlugin(ScrollTrigger);
+
+// useLayoutEffect on the client so the reduced-motion snap to the visible final
+// state happens before paint (no frame stuck at opacity 0); useEffect on the
+// server to avoid the SSR warning.
+const useIsomorphicLayoutEffect =
+  typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 type RevealTrigger = "mount" | "scroll";
 
@@ -43,16 +56,12 @@ export function Reveal({
 }: RevealProps) {
   const ref = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
+  useIsomorphicLayoutEffect(() => {
     const el = ref.current;
     if (!el) return;
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
     // Under reduced motion, snap to the final visible state with no animation.
-    if (prefersReduced) {
+    if (prefersReducedMotion()) {
       gsap.set(el, { opacity: 1, y: 0, clearProps: "transform" });
       return;
     }

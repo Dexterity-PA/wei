@@ -4,6 +4,7 @@ import { useEffect, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "@/lib/animation/motion";
+import { prefersReducedMotion } from "@/lib/animation/reduced-motion";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -37,12 +38,8 @@ export function CountUp({
     const el = ref.current;
     if (!el) return;
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
     // Reduced motion: leave the final value (already server-rendered) in place.
-    if (prefersReduced) return;
+    if (prefersReducedMotion()) return;
 
     const counter = { value: 0 };
     el.textContent = format(0);

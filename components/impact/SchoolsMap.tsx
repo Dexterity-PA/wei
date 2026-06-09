@@ -4,6 +4,7 @@ import { useEffect, useId, useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { motion } from "@/lib/animation/motion";
+import { prefersReducedMotion } from "@/lib/animation/reduced-motion";
 import { schools } from "./schools";
 import {
   MAIN_VIEW,
@@ -117,7 +118,7 @@ export function SchoolsMap({ selected, onSelect }: MapProps) {
   useIsomorphicLayoutEffect(() => {
     const root = rootRef.current;
     if (!root) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    if (prefersReducedMotion()) return;
 
     const groups = gsap.utils.toArray<SVGGElement>("g[data-pin]", root);
     const leaders = gsap.utils.toArray<SVGLineElement>("line[data-pin]", root);
