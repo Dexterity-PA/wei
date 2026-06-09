@@ -8,6 +8,7 @@ import {
 } from "react";
 import gsap from "gsap";
 import { motion } from "@/lib/animation/motion";
+import { prefersReducedMotion } from "@/lib/animation/reduced-motion";
 
 // useLayoutEffect on the client so a settle starts from the last painted value
 // without a flash; useEffect on the server to avoid the SSR warning.
@@ -21,7 +22,10 @@ type AnimatedNumberProps = {
   value: number;
   /** Formats the number for display, e.g. a currency or percent formatter. */
   format?: (n: number) => string;
-  /** Settle duration in seconds. Short and mechanical by default. */
+  /**
+   * Settle duration in seconds. Short and mechanical by default so the
+   * cosmetic count-up never lingers on a wrong transient figure.
+   */
   durationSeconds?: number;
   className?: string;
   /** Element tag to render. Defaults to a span. */
@@ -42,7 +46,7 @@ type AnimatedNumberProps = {
 export function AnimatedNumber({
   value,
   format = defaultFormat,
-  durationSeconds = 0.5,
+  durationSeconds = 0.32,
   className,
   as: Tag = "span",
 }: AnimatedNumberProps) {
@@ -63,7 +67,7 @@ export function AnimatedNumber({
       return;
     }
 
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    if (prefersReducedMotion()) {
       el.textContent = format(value);
       return;
     }
