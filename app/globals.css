@@ -1,26 +1,158 @@
 @import "tailwindcss";
 
+/*
+  Wealth Equity Initiative design system.
+  All brand tokens are prefixed wei-* and exposed as Tailwind v4 @theme tokens,
+  which generate utilities such as bg-wei-emerald, text-wei-ink, font-wei-display,
+  py-wei-section, rounded-wei-md, shadow-wei-soft, and ease-wei-out.
+
+  Contrast (WCAG 2.1, computed):
+    emerald  #1f7a5c on paper #f6f3ec = 4.74:1  (AA for normal text)
+    emerald-deep #1a6b50 on paper     = 5.80:1  (AA, safe for small text and links)
+    paper    #f6f3ec on ink   #0b1f1c = 15.4:1  (AAA)
+  Use wei-emerald-deep for small text and inline links; wei-emerald for larger
+  accents and fills.
+*/
+
+@theme {
+  /* Palette */
+  --color-wei-ink: #0b1f1c;
+  --color-wei-paper: #f6f3ec;
+  --color-wei-emerald: #1f7a5c;
+  --color-wei-emerald-deep: #1a6b50;
+  --color-wei-amber: #d99a3f;
+
+  /* Surface helpers derived from the core palette */
+  --color-wei-paper-dim: #efeadf;
+  --color-wei-ink-soft: #16302b;
+  --color-wei-line: #dcd6c8;
+
+  /* Fonts (next/font sets --font-bricolage and --font-inter on <html>) */
+  --font-wei-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-wei-body: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+
+  /* Fluid type scale (clamp: min, preferred, max) */
+  --text-wei-xs: clamp(0.75rem, 0.72rem + 0.15vw, 0.8125rem);
+  --text-wei-xs--line-height: 1.5;
+  --text-wei-sm: clamp(0.875rem, 0.84rem + 0.18vw, 0.9375rem);
+  --text-wei-sm--line-height: 1.5;
+  --text-wei-base: clamp(1rem, 0.96rem + 0.2vw, 1.0625rem);
+  --text-wei-base--line-height: 1.65;
+  --text-wei-lg: clamp(1.125rem, 1.06rem + 0.3vw, 1.25rem);
+  --text-wei-lg--line-height: 1.55;
+  --text-wei-xl: clamp(1.375rem, 1.25rem + 0.6vw, 1.625rem);
+  --text-wei-xl--line-height: 1.4;
+  --text-wei-2xl: clamp(1.75rem, 1.5rem + 1.1vw, 2.25rem);
+  --text-wei-2xl--line-height: 1.2;
+  --text-wei-3xl: clamp(2.25rem, 1.85rem + 1.8vw, 3.25rem);
+  --text-wei-3xl--line-height: 1.1;
+  --text-wei-display: clamp(2.75rem, 2rem + 3.6vw, 4.75rem);
+  --text-wei-display--line-height: 1.02;
+  --text-wei-display--letter-spacing: -0.02em;
+
+  /* Section-rhythm spacing */
+  --spacing-wei-gutter: clamp(1rem, 0.7rem + 1.4vw, 2rem);
+  --spacing-wei-section: clamp(3.5rem, 2.5rem + 4vw, 6.5rem);
+  --spacing-wei-section-lg: clamp(5rem, 3.5rem + 6vw, 9rem);
+
+  /* Tight radii */
+  --radius-wei-sm: 0.25rem;
+  --radius-wei-md: 0.5rem;
+  --radius-wei-lg: 0.875rem;
+  --radius-wei-pill: 999px;
+
+  /* Soft shadows */
+  --shadow-wei-soft: 0 1px 2px rgba(11, 31, 28, 0.04),
+    0 8px 24px -12px rgba(11, 31, 28, 0.12);
+  --shadow-wei-lift: 0 2px 6px rgba(11, 31, 28, 0.06),
+    0 18px 40px -16px rgba(11, 31, 28, 0.22);
+
+  /* Motion easing (mirrored in lib/animation/motion.ts) */
+  --ease-wei-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-wei-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-wei-emphasis: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/*
+  Motion timing and z-layer scale as plain custom properties.
+  Durations are mirrored in lib/animation/motion.ts for JS consumers.
+  Reference in markup with arbitrary values, e.g. duration-[var(--duration-wei-base)]
+  or z-[var(--z-wei-nav)].
+*/
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --duration-wei-fast: 300ms;
+  --duration-wei-base: 600ms;
+  --duration-wei-slow: 900ms;
+
+  --z-wei-base: 0;
+  --z-wei-raised: 10;
+  --z-wei-sticky: 30;
+  --z-wei-nav: 50;
+  --z-wei-overlay: 70;
+  --z-wei-modal: 90;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  body {
+    background-color: var(--color-wei-paper);
+    color: var(--color-wei-ink);
+    font-family: var(--font-wei-body);
+    font-size: var(--text-wei-base);
+    line-height: 1.65;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-wei-display);
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--color-wei-ink);
+  }
+
+  ::selection {
+    background: color-mix(in srgb, var(--color-wei-emerald) 24%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-wei-emerald-deep);
+    outline-offset: 2px;
+    border-radius: var(--radius-wei-sm);
+  }
+
+  /*
+    Lenis smooth scroll hooks. When the provider mounts it adds the .lenis
+    classes; under prefers-reduced-motion the provider never mounts Lenis and
+    native scrolling is used. Note: do NOT set height:100% on html here, it
+    desyncs the Lenis ResizeObserver against font-swap reflow.
+  */
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: clip;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }

@@ -1,65 +1,48 @@
-import Image from "next/image";
+import { Reveal } from "@/components/Reveal";
+import { site, stats } from "@/lib/site";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <section className="mx-auto max-w-6xl px-wei-gutter py-wei-section-lg">
+      <div className="max-w-3xl">
+        <Reveal>
+          <p className="text-wei-sm font-semibold uppercase tracking-[0.18em] text-wei-emerald-deep">
+            {site.shortName}
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        </Reveal>
+
+        <Reveal delay={0.05}>
+          <h1 className="mt-5 font-wei-display text-wei-display font-semibold text-wei-ink">
+            Financial knowledge is a first step toward equity.
+          </h1>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <p className="mt-6 max-w-2xl text-wei-lg text-wei-ink/80">
+            {site.mission} We are a student-founded nonprofit building
+            plain-language guides and everyday money tools for students across
+            the country.
+          </p>
+        </Reveal>
+      </div>
+
+      <Reveal delay={0.15}>
+        <dl className="mt-14 grid grid-cols-1 gap-px overflow-hidden rounded-wei-lg border border-wei-line bg-wei-line shadow-wei-soft sm:grid-cols-2">
+          {stats.map((stat) => (
+            <div key={stat.label} className="bg-wei-paper px-7 py-8">
+              <dt className="sr-only">{stat.label}</dt>
+              <dd>
+                <span className="block font-wei-display text-wei-3xl font-semibold text-wei-emerald-deep">
+                  {stat.value}
+                </span>
+                <span className="mt-1 block text-wei-base text-wei-ink/70">
+                  {stat.label}
+                </span>
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </Reveal>
+    </section>
   );
 }
