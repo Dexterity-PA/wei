@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 /*
   Directional credit-score teaching model.
@@ -252,7 +253,12 @@ export function CreditSimulator() {
                 Illustrative score
               </span>
               <p className="wei-num mt-2 text-wei-3xl font-semibold leading-none text-wei-ink">
-                ~{score}
+                ~
+                <AnimatedNumber
+                  value={score}
+                  format={(n) => `${Math.round(n)}`}
+                  as="span"
+                />
               </p>
               <p className="mt-2 text-wei-sm text-wei-ink/70">{band(score)}</p>
               <div className="mt-4 inline-flex items-center gap-2">

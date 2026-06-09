@@ -2,8 +2,10 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
 import { nav, site } from "@/lib/site";
+import { motion } from "@/lib/animation/motion";
 import { useLenis } from "@/components/providers/SmoothScrollProvider";
 
 function isActive(pathname: string, href: string): boolean {
@@ -15,6 +17,8 @@ export function Nav() {
   const pathname = usePathname();
   const lenis = useLenis();
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const menuRef = useRef<HTMLUListElement | null>(null);
 
   // Close the mobile menu whenever the route changes. Resetting during render
   // when the tracked value changes is the React-recommended pattern and avoids
@@ -24,6 +28,17 @@ export function Nav() {
     setTrackedPath(pathname);
     setOpen(false);
   }
+
+  // The hairline and surface only appear once the page has scrolled, so the nav
+  // sits flush against the masthead at the top and firms up over content. Plain
+  // window scroll works whether or not Lenis is active (it scrolls the real
+  // page), and stays correct under reduced motion where Lenis never mounts.
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   // Scroll-lock while the mobile menu is open. Stop Lenis when present and also
   // pin the body, so the lock holds under prefers-reduced-motion (Lenis null).
@@ -46,9 +61,35 @@ export function Nav() {
     };
   }, [open, lenis]);
 
+  // Choreograph the mobile menu links in when the panel opens: a tight rise and
+  // fade, item by item. Reduced motion is respected, so links simply appear.
+  useEffect(() => {
+    if (!open) return;
+    const ul = menuRef.current;
+    if (!ul) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+    const ctx = gsap.context(() => {
+      gsap.from(ul.children, {
+        opacity: 0,
+        y: 10,
+        duration: motion.duration.fast,
+        ease: motion.gsapEase.out,
+        stagger: motion.stagger.item,
+      });
+    }, ul);
+    return () => ctx.revert();
+  }, [open]);
+
+  const solid = scrolled || open;
+
   return (
     <header
-      className="sticky top-0 border-b border-wei-line/70 bg-wei-paper/85 backdrop-blur-md"
+      className={`sticky top-0 border-b backdrop-blur-md transition-[background-color,border-color] duration-[var(--duration-wei-base)] ease-wei-out ${
+        solid
+          ? "border-wei-line/70 bg-wei-paper/85"
+          : "border-transparent bg-wei-paper/0"
+      }`}
       style={{ zIndex: "var(--z-wei-nav)" }}
     >
       <nav
@@ -72,7 +113,7 @@ export function Nav() {
                 <Link
                   href={link.href}
                   aria-current={active ? "page" : undefined}
-                  className={`text-wei-sm font-medium transition-colors hover:text-wei-emerald-deep ${
+                  className={`wei-link text-wei-sm font-medium transition-colors hover:text-wei-emerald-deep ${
                     active ? "text-wei-emerald-deep" : "text-wei-ink/75"
                   }`}
                 >
@@ -118,7 +159,10 @@ export function Nav() {
         hidden={!open}
         className="border-t border-wei-line/70 bg-wei-paper md:hidden"
       >
-        <ul className="mx-auto flex max-w-6xl flex-col gap-1 px-wei-gutter py-4">
+        <ul
+          ref={menuRef}
+          className="mx-auto flex max-w-6xl flex-col gap-1 px-wei-gutter py-4"
+        >
           {nav.map((link) => {
             const active = isActive(pathname, link.href);
             return (

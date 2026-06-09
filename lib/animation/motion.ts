@@ -40,12 +40,44 @@ export const gsapEase = {
   emphasis: "expo.out",
 } as const;
 
+/**
+ * Stagger offsets in seconds. The whole site uses one cadence so every
+ * sequenced entrance reads as part of a single system rather than ad-hoc
+ * delays. `line` is the tight beat between rising headline lines; `item` is
+ * the slightly looser beat between sequenced blocks (eyebrow, headline,
+ * subcopy, supporting). Kept inside the brief's 40-80ms window.
+ */
+export const stagger = {
+  line: 0.06,
+  item: 0.08,
+} as const;
+
+/**
+ * Travel distances in pixels for the fade-and-rise entrance. Short on purpose
+ * (the brief calls for 8-16px): motion that nudges, never throws. `line` is the
+ * extra travel a masked headline line covers beneath its clip.
+ */
+export const distance = {
+  sm: 8,
+  base: 12,
+  lg: 16,
+} as const;
+
+/** Durations for the headline line-rise, tuned a touch quicker than `base`. */
+export const headline = {
+  duration: 0.7,
+  stagger: stagger.line,
+} as const;
+
 export const motion = {
   duration,
   durationMs,
   easeCss,
   easeArray,
   gsapEase,
+  stagger,
+  distance,
+  headline,
 } as const;
 
 export type MotionTokens = typeof motion;

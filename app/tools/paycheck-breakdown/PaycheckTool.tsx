@@ -11,6 +11,7 @@ import {
   type PayFrequency,
 } from "./taxes";
 import { BreakdownBar, type Segment } from "./BreakdownBar";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 const usd = new Intl.NumberFormat("en-US", {
   style: "currency",
@@ -182,26 +183,45 @@ export function PaycheckTool() {
             <span className="wei-eyebrow text-wei-paper/60">
               Estimated take-home per paycheck
             </span>
-            <p className="wei-num mt-3 text-wei-3xl font-semibold text-wei-paper">
-              {usd.format(result.perPeriodTakeHome)}
-            </p>
+            <AnimatedNumber
+              as="p"
+              className="wei-num mt-3 text-wei-3xl font-semibold text-wei-paper"
+              value={result.perPeriodTakeHome}
+              format={(n) => usd.format(n)}
+            />
             <p className="mt-2 text-wei-sm text-wei-paper/70">
-              From {usd.format(result.perPeriodGross)} gross. That is about{" "}
-              <span className="wei-num">
-                {usd0.format(result.annualTakeHome)}
-              </span>{" "}
+              From{" "}
+              <AnimatedNumber
+                value={result.perPeriodGross}
+                format={(n) => usd.format(n)}
+              />{" "}
+              gross. That is about{" "}
+              <AnimatedNumber
+                className="wei-num"
+                value={result.annualTakeHome}
+                format={(n) => usd0.format(n)}
+              />{" "}
               a year after an estimated{" "}
               <span className="wei-num">
-                {Math.round(result.effectiveRate * 100)}%
+                <AnimatedNumber
+                  value={result.effectiveRate * 100}
+                  format={(n) => `${Math.round(n)}`}
+                />
+                %
               </span>{" "}
               in taxes.
             </p>
 
             <div className="wei-hairgrid wei-hairgrid-ink mt-6 grid grid-cols-2">
-              <DarkStat label="Annual gross" value={usd0.format(result.annualGross)} />
+              <DarkStat
+                label="Annual gross"
+                value={result.annualGross}
+                format={(n) => usd0.format(n)}
+              />
               <DarkStat
                 label="Annual take-home"
-                value={usd0.format(result.annualTakeHome)}
+                value={result.annualTakeHome}
+                format={(n) => usd0.format(n)}
                 accent
               />
             </div>
@@ -226,35 +246,41 @@ export function PaycheckTool() {
         <div className="divide-y divide-wei-line">
           <LineRow
             name="Federal income tax"
-            amount={usd.format(result.perPeriodFederal)}
+            amount={result.perPeriodFederal}
+            format={(n) => usd.format(n)}
             explain={`Tax on your income after the ${TAX_YEAR} standard deduction of ${usd0.format(
               standardDeduction(status),
             )}. Simplified ${TAX_YEAR} brackets are used; your real withholding depends on your W-4 and more.`}
           />
           <LineRow
             name="Social Security"
-            amount={usd.format(result.perPeriodSocialSecurity)}
+            amount={result.perPeriodSocialSecurity}
+            format={(n) => usd.format(n)}
             explain={`6.2% of pay, up to a yearly wage cap (${usd0.format(
               168600,
             )} for ${TAX_YEAR}). It funds Social Security retirement and disability benefits.`}
           />
           <LineRow
             name="Medicare"
-            amount={usd.format(result.perPeriodMedicare)}
+            amount={result.perPeriodMedicare}
+            format={(n) => usd.format(n)}
             explain="1.45% of all pay, with no wage cap. It funds Medicare health coverage. (A small extra Medicare tax can apply to high earners and is not included here.)"
           />
           <LineRow
             name="State income tax"
-            amount={usd.format(result.perPeriodState)}
+            amount={result.perPeriodState}
+            format={(n) => usd.format(n)}
             explain={`A simplified flat ${Math.round(
               stateOption.flatRate * 100,
             )}% stand-in. Real state taxes vary widely and many use brackets and deductions.`}
           />
           <div className="flex items-baseline justify-between gap-4 bg-wei-paper-dim px-4 py-4">
             <span className="font-semibold text-wei-ink">Take-home pay</span>
-            <span className="wei-num text-wei-lg font-medium text-wei-emerald-deep">
-              {usd.format(result.perPeriodTakeHome)}
-            </span>
+            <AnimatedNumber
+              className="wei-num text-wei-lg font-medium text-wei-emerald-deep"
+              value={result.perPeriodTakeHome}
+              format={(n) => usd.format(n)}
+            />
           </div>
         </div>
       </div>
@@ -270,22 +296,24 @@ export function PaycheckTool() {
 function DarkStat({
   label,
   value,
+  format,
   accent = false,
 }: {
   label: string;
-  value: string;
+  value: number;
+  format: (n: number) => string;
   accent?: boolean;
 }) {
   return (
     <div className="px-5 py-4">
       <span className="wei-eyebrow block text-wei-paper/55">{label}</span>
-      <span
+      <AnimatedNumber
         className={`wei-num mt-1.5 block text-wei-lg font-medium ${
           accent ? "text-wei-emerald" : "text-wei-paper"
         }`}
-      >
-        {value}
-      </span>
+        value={value}
+        format={format}
+      />
     </div>
   );
 }
@@ -293,19 +321,23 @@ function DarkStat({
 function LineRow({
   name,
   amount,
+  format,
   explain,
 }: {
   name: string;
-  amount: string;
+  amount: number;
+  format: (n: number) => string;
   explain: string;
 }) {
   return (
     <div className="px-4 py-4">
       <div className="flex items-baseline justify-between gap-4">
         <span className="font-semibold text-wei-ink">{name}</span>
-        <span className="wei-num shrink-0 text-wei-base text-wei-ink">
-          {amount}
-        </span>
+        <AnimatedNumber
+          className="wei-num shrink-0 text-wei-base text-wei-ink"
+          value={amount}
+          format={format}
+        />
       </div>
       <p className="mt-1.5 text-wei-sm text-wei-ink/65">{explain}</p>
     </div>

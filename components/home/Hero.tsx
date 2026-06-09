@@ -1,7 +1,9 @@
 import { Reveal } from "@/components/Reveal";
+import { SplitReveal } from "@/components/SplitReveal";
 import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/layout/Eyebrow";
 import { site } from "@/lib/site";
+import { motion } from "@/lib/animation/motion";
 import { CtaLink } from "./CtaLink";
 import { OpportunityGapChart } from "./OpportunityGapChart";
 
@@ -25,13 +27,16 @@ export function Hero() {
               <Eyebrow>{site.name}</Eyebrow>
             </Reveal>
 
-            <Reveal as="h1" delay={0.05} className="mt-7">
-              <span className="text-wei-hero font-semibold text-wei-ink">
-                Money knowledge belongs to every student, not just a lucky few.
-              </span>
-            </Reveal>
+            <SplitReveal
+              as="h1"
+              trigger="mount"
+              delay={motion.stagger.item}
+              className="mt-7 text-wei-hero font-semibold text-wei-ink"
+            >
+              Money knowledge belongs to every student, not just a lucky few.
+            </SplitReveal>
 
-            <Reveal as="p" delay={0.12} className="mt-7 max-w-xl">
+            <Reveal as="p" delay={motion.stagger.item * 3} className="mt-7 max-w-xl">
               <span className="block text-wei-base text-wei-ink/75">
                 The Wealth Equity Initiative is a student-founded nonprofit
                 bringing practical financial literacy to the classrooms that have
@@ -40,7 +45,10 @@ export function Hero() {
               </span>
             </Reveal>
 
-            <Reveal delay={0.18} className="mt-8 flex flex-wrap items-center gap-4">
+            <Reveal
+              delay={motion.stagger.item * 4}
+              className="mt-8 flex flex-wrap items-center gap-4"
+            >
               <CtaLink href="/tools">Explore the toolkit</CtaLink>
               <CtaLink href="/about" variant="secondary">
                 Why we exist

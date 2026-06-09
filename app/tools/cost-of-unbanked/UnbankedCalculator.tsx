@@ -2,6 +2,7 @@
 
 import { useEffect, useId, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 /*
   The cost-of-being-unbanked instrument.
@@ -183,12 +184,19 @@ export function UnbankedCalculator() {
           <span className="wei-eyebrow text-wei-paper/55">
             What these fees cost in a year
           </span>
-          <p className="wei-num mt-3 text-wei-3xl font-semibold leading-none text-wei-amber">
-            {usd0(annual)}
-          </p>
+          <AnimatedNumber
+            value={annual}
+            format={usd0}
+            as="p"
+            className="wei-num mt-3 text-wei-3xl font-semibold leading-none text-wei-amber"
+          />
           <p className="mt-3 text-wei-sm text-wei-paper/70">
             About{" "}
-            <span className="wei-num text-wei-paper">{usd2(monthly.total)}</span>{" "}
+            <AnimatedNumber
+              value={monthly.total}
+              format={usd2}
+              className="wei-num text-wei-paper"
+            />{" "}
             a month. A free or low-fee bank account would handle these same
             tasks for close to{" "}
             <span className="wei-num text-wei-paper">$0</span>.
@@ -197,17 +205,17 @@ export function UnbankedCalculator() {
           <div className="wei-hairgrid wei-hairgrid-ink mt-6 grid grid-cols-1 sm:grid-cols-3">
             <Breakdown
               label="Check cashing"
-              value={usd2(monthly.checkFee)}
+              value={monthly.checkFee}
               note="per month"
             />
             <Breakdown
               label="Prepaid card"
-              value={usd2(monthly.prepaid)}
+              value={monthly.prepaid}
               note="per month"
             />
             <Breakdown
               label="Money orders"
-              value={usd2(monthly.moneyOrders)}
+              value={monthly.moneyOrders}
               note="per month"
             />
           </div>
@@ -273,15 +281,17 @@ function Breakdown({
   note,
 }: {
   label: string;
-  value: string;
+  value: number;
   note: string;
 }) {
   return (
     <div className="px-4 py-3">
       <span className="wei-eyebrow block text-wei-paper/45">{label}</span>
-      <span className="wei-num mt-2 block text-wei-lg font-medium text-wei-paper">
-        {value}
-      </span>
+      <AnimatedNumber
+        value={value}
+        format={usd2}
+        className="wei-num mt-2 block text-wei-lg font-medium text-wei-paper"
+      />
       <span className="wei-eyebrow mt-1 block text-wei-paper/35">{note}</span>
     </div>
   );
@@ -467,9 +477,11 @@ function GrowthChart({
               <span className="wei-eyebrow block text-wei-ink/45">
                 {p.years} {p.years === 1 ? "year" : "years"}
               </span>
-              <span className="wei-num mt-1 block text-wei-base font-medium text-wei-ink">
-                {usd0(p.grown)}
-              </span>
+              <AnimatedNumber
+                value={p.grown}
+                format={usd0}
+                className="wei-num mt-1 block text-wei-base font-medium text-wei-ink"
+              />
               <span className="wei-eyebrow mt-1 block text-wei-ink/35">
                 paid in {usd0(p.saved)}
               </span>

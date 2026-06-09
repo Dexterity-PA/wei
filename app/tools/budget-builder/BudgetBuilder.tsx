@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useMemo, useState } from "react";
+import { AnimatedNumber } from "@/components/AnimatedNumber";
 
 /*
   Budget builder.
@@ -177,11 +178,17 @@ export function BudgetBuilder() {
             <SummaryCell
               label="Allocated"
               value={usd(totalAllocated)}
+              valueNumber={totalAllocated}
+              valueFormat={usd}
               sub={pct(totalPercent)}
+              subNumber={totalPercent}
+              subFormat={pct}
             />
             <SummaryCell
               label={over ? "Over budget" : "Left to allocate"}
               value={usd(Math.abs(remaining))}
+              valueNumber={Math.abs(remaining)}
+              valueFormat={usd}
               tone={over ? "warn" : remaining > 0.5 ? "default" : "good"}
               span
             />
@@ -441,13 +448,23 @@ function ModeToggle({
 function SummaryCell({
   label,
   value,
+  valueNumber,
+  valueFormat,
   sub,
+  subNumber,
+  subFormat,
   tone = "default",
   span = false,
 }: {
   label: string;
   value: string;
+  /** When provided, the value readout settles to this number on change. */
+  valueNumber?: number;
+  valueFormat?: (n: number) => string;
   sub?: string;
+  /** When provided, the sub readout settles to this number on change. */
+  subNumber?: number;
+  subFormat?: (n: number) => string;
   tone?: "default" | "warn" | "good";
   span?: boolean;
 }) {
@@ -460,13 +477,29 @@ function SummaryCell({
   return (
     <div className={`bg-wei-paper px-4 py-4 ${span ? "col-span-2" : ""}`}>
       <span className="wei-eyebrow block text-wei-ink/50">{label}</span>
-      <span className={`wei-num mt-2 block text-wei-2xl font-medium ${valueColor}`}>
-        {value}
-      </span>
-      {sub ? (
-        <span className="wei-num mt-1 block text-wei-sm text-wei-ink/45">
-          {sub}
+      {valueNumber !== undefined && valueFormat ? (
+        <AnimatedNumber
+          value={valueNumber}
+          format={valueFormat}
+          className={`wei-num mt-2 block text-wei-2xl font-medium ${valueColor}`}
+        />
+      ) : (
+        <span className={`wei-num mt-2 block text-wei-2xl font-medium ${valueColor}`}>
+          {value}
         </span>
+      )}
+      {sub ? (
+        subNumber !== undefined && subFormat ? (
+          <AnimatedNumber
+            value={subNumber}
+            format={subFormat}
+            className="wei-num mt-1 block text-wei-sm text-wei-ink/45"
+          />
+        ) : (
+          <span className="wei-num mt-1 block text-wei-sm text-wei-ink/45">
+            {sub}
+          </span>
+        )
       ) : null}
     </div>
   );
