@@ -1,25 +1,29 @@
 /**
- * The twelve schools WEI has reached that we can name with confidence. This is a
- * representative sample, not the full list of every school the work has touched.
- * Positions are approximate regional placements for a stylized map, not precise
- * coordinates, and should not be read as exact locations.
+ * The twelve schools WEI can name with confidence. This is a representative
+ * sample, never the full list of every school the work has reached.
  *
- * Pins cluster in coastal northeast Andhra Pradesh (Srikakulam, Vizianagaram),
- * interior Telangana (Khammam), and one in the far south at Nagercoil, Tamil
- * Nadu. The lon/lat values are only used to place dots on the stylized outline.
+ * The lon/lat values are the source coordinates used by the offline map
+ * generator (.tmp-geo/generate.mjs) to pre-project each pin onto the accurate
+ * India outline. They are approximate placements for an illustrative map, not
+ * exact survey points. The projected screen coordinates live in india-geo.ts,
+ * keyed to these schools by `n`.
+ *
+ * Pins cluster in coastal northeast Andhra Pradesh (Srikakulam, Vizianagaram)
+ * and interior Telangana (Khammam), with one school in the far south at
+ * Nagercoil, Tamil Nadu.
  */
 
 export type School = {
-  /** Sequence number matching the on-page list. */
+  /** Sequence number matching the on-page list and the map index markers. */
   n: number;
   name: string;
-  /** Human-readable location line, set in the mono label. */
+  /** Full human-readable location line, set in the mono label. */
   location: string;
-  /** Grouping label used by the region legend. */
+  /** Short region grouping with its present-day state. */
   region: string;
-  /** Approximate longitude for stylized placement only. */
+  /** Approximate longitude, source coordinate for the map generator only. */
   lon: number;
-  /** Approximate latitude for stylized placement only. */
+  /** Approximate latitude, source coordinate for the map generator only. */
   lat: number;
 };
 
@@ -123,73 +127,12 @@ export const schools: School[] = [
 ];
 
 /**
- * Stylized India outline as a clockwise list of approximate [lon, lat] vertices,
- * traced from the north of Kashmir down both coasts to the southern tip and back
- * up through Gujarat. Low resolution on purpose: this is a brand silhouette, not
- * a survey boundary.
+ * Region groupings in display order, used by the map legend. Counts are derived
+ * from the data, never hard-coded, so they stay honest if the sample changes.
  */
-export const indiaOutline: [number, number][] = [
-  [75.0, 36.5],
-  [78.5, 33.5],
-  [80.5, 30.5],
-  [83.5, 29.0],
-  [85.8, 28.0],
-  [88.0, 27.2],
-  [89.5, 27.4],
-  [92.0, 27.8],
-  [95.2, 27.0],
-  [97.3, 28.0],
-  [96.8, 27.3],
-  [96.2, 25.0],
-  [94.6, 24.0],
-  [93.3, 22.2],
-  [92.0, 23.7],
-  [91.0, 23.2],
-  [89.1, 22.0],
-  [87.0, 21.5],
-  [85.0, 19.8],
-  [83.5, 18.3],
-  [82.3, 16.9],
-  [80.8, 15.8],
-  [80.3, 13.3],
-  [79.9, 11.5],
-  [79.2, 9.6],
-  [78.1, 8.6],
-  [77.5, 8.05],
-  [76.5, 8.9],
-  [75.9, 10.8],
-  [74.8, 13.0],
-  [74.1, 15.4],
-  [73.1, 17.6],
-  [72.8, 19.0],
-  [72.7, 20.8],
-  [72.0, 21.6],
-  [70.4, 20.9],
-  [69.0, 22.3],
-  [68.2, 23.6],
-  [68.8, 24.3],
-  [70.6, 27.9],
-  [72.5, 29.0],
-  [74.0, 31.0],
-  [74.6, 32.6],
-];
-
-/** Projection bounds for the stylized map, in degrees. */
-export const MAP = {
-  lonMin: 67,
-  lonMax: 98,
-  latMin: 6,
-  latMax: 37.5,
-  width: 600,
-  height: 660,
-  margin: 28,
-} as const;
-
-/** Project an approximate [lon, lat] into the stylized SVG coordinate space. */
-export function project(lon: number, lat: number): [number, number] {
-  const innerW = MAP.width - MAP.margin * 2;
-  const innerH = MAP.height - MAP.margin * 2;
-  const x = MAP.margin + ((lon - MAP.lonMin) / (MAP.lonMax - MAP.lonMin)) * innerW;
-  const y = MAP.margin + ((MAP.latMax - lat) / (MAP.latMax - MAP.latMin)) * innerH;
-  return [x, y];
-}
+export const regions = [
+  "Srikakulam, Andhra Pradesh",
+  "Vizianagaram, Andhra Pradesh",
+  "Khammam, Telangana",
+  "Nagercoil, Tamil Nadu",
+] as const;
