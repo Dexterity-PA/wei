@@ -1,12 +1,10 @@
 import { Reveal } from "@/components/Reveal";
 import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/layout/Eyebrow";
-import { stats } from "@/lib/site";
+import { impactDetails, stats } from "@/lib/site";
 
 /**
- * What the reach adds up to. Sits on the dark ink band and ties the two verified
- * figures (the only statistics permitted on the site) to what they mean for the
- * students behind them. Numbers are set in tabular mono. No invented metrics.
+ * Ties WEI's reach and curriculum adoption to what they mean for students.
  */
 export function MissionImpact() {
   return (
@@ -29,10 +27,7 @@ export function MissionImpact() {
             </Reveal>
             <Reveal delay={0.08}>
               <p className="mt-5 text-wei-lg text-wei-paper/75">
-                The twelve schools on the map are the part we can name. Behind
-                them sits a wider body of work, and two figures we are willing to
-                stand behind. We do not inflate them, and we do not claim more
-                than we have done.
+                The twelve schools on the map show part of WEI’s reach. {impactDetails}
               </p>
             </Reveal>
           </div>

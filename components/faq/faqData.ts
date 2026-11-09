@@ -1,9 +1,10 @@
+import { impactDetails, stats } from "@/lib/site";
+
 /**
  * FAQ content for the Wealth Equity Initiative. Grouped so the page reads like a
  * reference document rather than one long list. Copy rules: education framing
- * only, never positioned as regulated financial guidance; only the two verified
- * figures (5,000+ students, 40+ schools) may appear; no invented claims; no em
- * dashes.
+ * only, never positioned as regulated financial guidance. Use the documented
+ * impact figures in lib/site.ts. No invented claims or em dashes.
  *
  * Answers are arrays of paragraphs.
  */
@@ -151,7 +152,7 @@ export const faqGroups: FaqGroup[] = [
       {
         q: "Can I trust the figures WEI cites?",
         a: [
-          "We hold ourselves to citing only what we can stand behind. The two figures you will see on the site, 5,000+ students and 40+ schools, are the verified numbers. We would rather under-claim than inflate, so we leave it at those.",
+          `WEI has reached ${stats[0].value} students across ${stats[1].value} schools. ${impactDetails}`,
         ],
       },
       {

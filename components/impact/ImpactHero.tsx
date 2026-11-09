@@ -5,9 +5,8 @@ import { stats } from "@/lib/site";
 
 /**
  * Opening statement for the Impact page. Anchors the page in the mission and in
- * an honest account of where WEI actually started, then leads with weight: the
- * two verified figures (the only statistics permitted on the site) set large in
- * tabular mono and framed as the current footprint, with more ahead.
+ * an account of where WEI started, then shows headline reach figures in
+ * tabular mono.
  */
 export function ImpactHero() {
   return (

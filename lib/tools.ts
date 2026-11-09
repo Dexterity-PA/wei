@@ -9,7 +9,7 @@
  * Authoring rules (match lib/site.ts and lib/learn.ts):
  *   - Plain English aimed at a student with no background. Define jargon.
  *   - Teaching, not personalized money guidance. No "advice/advisor".
- *   - No em dashes. Only the two approved figures may ever be cited.
+ *   - No em dashes. Use the documented impact figures in lib/site.ts.
  */
 
 /** How the toolkit is grouped on the hub. Order here is the display order. */

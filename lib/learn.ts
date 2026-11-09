@@ -9,7 +9,7 @@
  * Authoring rules (match lib/site.ts):
  *   - Plain English aimed at a student with no background.
  *   - No em dashes. Teaching, not personalized money guidance.
- *   - Only the two approved figures (5,000+ students, 40+ schools) may be cited.
+ *   - Use the documented impact figures in lib/site.ts when citing WEI's reach.
  */
 
 /** Where a module sits in a learner's path. */

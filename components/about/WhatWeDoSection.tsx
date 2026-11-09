@@ -1,6 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { Container } from "@/components/layout/Container";
 import { SectionHeader } from "@/components/layout/SectionHeader";
+import { impactDetails, stats } from "@/lib/site";
 
 type Offering = {
   index: string;
@@ -62,15 +63,15 @@ export function WhatWeDoSection() {
 
       <Reveal delay={0.15}>
         <p className="mt-8 max-w-2xl text-wei-base text-wei-ink/80">
-          Today that work reaches more than{" "}
+          WEI has reached{" "}
           <span className="wei-num font-semibold text-wei-emerald-deep">
-            5,000+
+            {stats[0].value}
           </span>{" "}
           students across{" "}
           <span className="wei-num font-semibold text-wei-emerald-deep">
-            40+
+            {stats[1].value}
           </span>{" "}
-          schools. That is where we are now, not where we are stopping.
+          schools. {impactDetails}
         </p>
       </Reveal>
     </Container>

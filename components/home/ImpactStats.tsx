@@ -1,7 +1,7 @@
 import { Reveal } from "@/components/Reveal";
 import { Container } from "@/components/layout/Container";
 import { Eyebrow } from "@/components/layout/Eyebrow";
-import { stats } from "@/lib/site";
+import { impactDetails, stats } from "@/lib/site";
 import { CountUp } from "./CountUp";
 
 /** Split a stat string like "5,000+" into its number and trailing suffix. */
@@ -26,8 +26,7 @@ export function ImpactStats() {
           <div className="md:col-span-8 md:max-w-xl">
             <Reveal delay={0.06}>
               <p className="text-wei-base text-wei-paper/70">
-                Two figures, both verified. Everything else is the work still
-                ahead of us.
+                {impactDetails}
               </p>
             </Reveal>
           </div>

@@ -6,7 +6,7 @@
  * Copy rules for this project:
  *   - WEI provides financial literacy education only. Never frame it as a
  *     regulated money-guidance service. It teaches, it does not counsel.
- *   - Only two verified figures may be cited: 5,000+ students and 40+ schools.
+ *   - Use the impact figures documented below when describing WEI's reach.
  *   - No em dashes in copy.
  */
 
@@ -160,11 +160,14 @@ export const footerGroups: FooterGroup[] = [
 /** The contact link, surfaced on its own in nav and the footer. */
 export const contactLink: NavLink = pages.contact;
 
-/** Headline figures. These are the only statistics permitted in copy. */
+/** Headline reach figures. */
 export const stats: Stat[] = [
   { value: "5,000+", label: "students reached" },
-  { value: "40+", label: "partner schools" },
+  { value: "40+", label: "schools reached" },
 ];
+
+export const impactDetails =
+  "WEI’s financial literacy lessons have been adopted in 12+ curricula across 3 Indian states. A 15-person team supports the work.";
 
 export const site = {
   name: "Wealth Equity Initiative",
